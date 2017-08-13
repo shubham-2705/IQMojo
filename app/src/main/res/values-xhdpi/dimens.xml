@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="form_textsize">15sp</dimen>
+    <dimen name="app_text_size">14sp</dimen>
+    <dimen name="expiry_text_size">13sp</dimen>
+    <dimen name="profile_name_text_size">24sp</dimen>
+    <dimen name="drawer_text_size">18sp</dimen>
+</resources>
