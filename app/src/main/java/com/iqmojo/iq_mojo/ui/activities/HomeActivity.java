@@ -47,13 +47,11 @@ public class HomeActivity extends AppCompatActivity implements DrawerLayout.Draw
 
     @Override
     public void onDrawerOpened(View drawerView) {
-
         container.setElevation(30f);
     }
 
     @Override
     public void onDrawerClosed(View drawerView) {
-
         container.setElevation(10f);
     }
 
