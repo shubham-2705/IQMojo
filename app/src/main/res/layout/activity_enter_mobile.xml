@@ -4,18 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:animateLayoutChanges="true"
     android:background="@drawable/gradient_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        >
 
 
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            style="@android:style/Widget.Holo.ProgressBar.Small"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/padding_120"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/txvGetOtp"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:visibility="visible"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/padding_120"
@@ -26,7 +39,7 @@
             android:paddingRight="@dimen/padding_50"
             android:text="@string/get_otp"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_15sp" />
+            android:textSize="@dimen/app_text_size" />
 
         <EditText
             android:id="@+id/edtMobile"
