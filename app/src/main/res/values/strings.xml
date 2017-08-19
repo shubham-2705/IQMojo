@@ -5,4 +5,7 @@
     <string name="log_in_with_google">Log in with Google</string>
     <string name="get_otp">Get OTP</string>
     <string name="enter_your_mobile_number">Enter your Mobile Number</string>
+
+    /*fb app id*/
+    <string name="facebook_app_id">111749099509872</string>
 </resources>
