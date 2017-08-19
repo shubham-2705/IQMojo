@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    mavenCentral() // jcenter() works as well because it pulls from Maven Central
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -38,4 +42,6 @@ dependencies {
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile 'com.android.support:support-v4:25.2.0'
+
+    compile 'nl.psdcompany:duo-navigation-drawer:2.0.6'
 }

@@ -13,12 +13,15 @@
 
     <application
         android:name=".base.application.BaseApplication"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".iq_mojo.ui.HomeActivity">
+        <activity android:name=".iq_mojo.ui.activities.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +38,11 @@
                     android:scheme="iqmojo" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".iq_mojo.ui.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

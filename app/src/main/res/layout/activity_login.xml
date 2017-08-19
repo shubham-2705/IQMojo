@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg">
+
+    <ImageView
+        android:id="@+id/imvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/padding_60"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/iqmojo_logo" />
+
+    <RelativeLayout
+        android:id="@+id/rlyFb"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:elevation="@dimen/padding_3"
+        android:layout_below="@id/imvLogo"
+        android:layout_marginLeft="@dimen/padding_50"
+        android:layout_marginRight="@dimen/padding_50"
+        android:layout_marginTop="@dimen/padding_140"
+        android:background="@drawable/white_shape">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:drawablePadding="@dimen/margin_10"
+            android:textColor="@android:color/holo_purple"
+            android:text="@string/join_us_with_facebook"
+            android:drawableLeft="@drawable/fb_72"
+            android:drawableStart="@drawable/fb_72"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlyLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlyFb"
+        android:layout_marginBottom="@dimen/margin_8"
+        android:layout_marginLeft="@dimen/padding_45"
+        android:layout_marginRight="@dimen/padding_45"
+        android:layout_marginTop="@dimen/margin_8">
+
+        <TextView
+            android:id="@+id/txvOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/transparent"
+            android:text="@string/or"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_7"
+            android:layout_toLeftOf="@+id/txvOr"
+            android:layout_toStartOf="@+id/txvOr"
+            android:background="@color/white" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_7"
+            android:layout_toEndOf="@+id/txvOr"
+            android:layout_toRightOf="@+id/txvOr"
+            android:background="@color/white" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rlyGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:elevation="@dimen/padding_3"
+        android:layout_below="@id/rlyLine"
+        android:layout_marginLeft="@dimen/padding_50"
+        android:layout_marginRight="@dimen/padding_50"
+        android:background="@drawable/white_shape">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:drawablePadding="@dimen/margin_25dp"
+            android:textColor="@android:color/holo_red_light"
+            android:text="@string/log_in_with_google"
+            android:drawableLeft="@drawable/google_72"
+            android:drawableStart="@drawable/google_72"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
