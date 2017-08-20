@@ -44,4 +44,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
 
     compile 'nl.psdcompany:duo-navigation-drawer:2.0.6'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 }
+
