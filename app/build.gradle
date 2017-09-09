@@ -45,5 +45,8 @@ dependencies {
 
     compile 'nl.psdcompany:duo-navigation-drawer:2.0.6'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.google.android.gms:play-services-auth:9.8.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
 

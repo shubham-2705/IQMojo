@@ -14,18 +14,48 @@
         >
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingRight="@dimen/margin_10"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/padding_60"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/margin_10"
+                android:paddingBottom="@dimen/margin_10"
+                android:textSize="@dimen/app_text_size"
+                android:text="Didn't get the code ? "/>
+
+            <TextView
+                android:id="@+id/txvResend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/otp_button"
+                android:paddingTop="@dimen/margin_10"
+                android:paddingBottom="@dimen/margin_10"
+                android:textSize="@dimen/app_text_size"
+                android:text=" Resend code"/>
+
+        </LinearLayout>
         <ProgressBar
             android:id="@+id/pbLoading"
             style="@android:style/Widget.Holo.ProgressBar.Small"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/padding_120"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/txvGetOtp"
+            android:id="@+id/txvDone"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:visibility="visible"
@@ -37,7 +67,7 @@
             android:gravity="center"
             android:paddingLeft="@dimen/padding_50"
             android:paddingRight="@dimen/padding_50"
-            android:text="@string/get_otp"
+            android:text="Done"
             android:textColor="@color/white"
             android:textSize="@dimen/app_text_size" />
 
@@ -48,26 +78,27 @@
             android:layout_marginBottom="@dimen/padding_20"
             android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
             android:layout_marginRight="@dimen/left_right_margin_for_edittext"
-            android:layout_above="@id/txvGetOtp"
+            android:layout_above="@id/txvDone"
             >
 
             <ImageView
                 android:id="@+id/imvMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_2"
                 android:padding="@dimen/margin_5"
-                android:src="@drawable/mobile_72"/>
+                android:src="@drawable/otp_72"/>
 
 
             <EditText
-                android:id="@+id/edtMobile"
+                android:id="@+id/edtOTP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:layout_toRightOf="@+id/imvMobile"
                 android:backgroundTint="@null"
                 android:gravity="center"
-                android:hint="@string/enter_your_mobile_number"
+                android:hint="@string/enter_otp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="@dimen/form_textsize" />
@@ -77,7 +108,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_line"
-                android:layout_below="@id/edtMobile"
+                android:layout_below="@id/edtOTP"
                 android:background="@color/white"/>
 
         </RelativeLayout>

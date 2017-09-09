@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "681782354637",
+    "project_id": "iqmojo-177208"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681782354637:android:6da9947bc3a11324",
+        "android_client_info": {
+          "package_name": "com.iqmojo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681782354637-j74nv0l08vsvb3408ou7uuu1rpunvh4b.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "681782354637-t1bvpra4e6gub0pu01ei6hvara9rqbs8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iqmojo",
+            "certificate_hash": "546a1498e65d619d85210535d524e14e312747bc"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP0ooTJdXPbgIQydujNHeBfGF-GRSgxBc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

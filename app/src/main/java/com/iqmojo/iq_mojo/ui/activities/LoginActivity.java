@@ -3,6 +3,7 @@ package com.iqmojo.iq_mojo.ui.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +18,17 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.iqmojo.base.utils.ShowLog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,12 +39,14 @@ import java.util.Arrays;
  * Created by himanshu on 19/8/17.
  */
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
     Toolbar mToolbar;
     RelativeLayout RlFbLogin, RlsGoogleLogin;
     CallbackManager callbackManager;
     Context context;
+    GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,24 +56,35 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         context = LoginActivity.this;
         callbackManager = CallbackManager.Factory.create();
         RlFbLogin = (RelativeLayout) findViewById(R.id.rlyFb);
+        RlsGoogleLogin = (RelativeLayout) findViewById(R.id.rlyGoogle);
         RlFbLogin.setOnClickListener(this);
+        RlsGoogleLogin.setOnClickListener(this);
+
+        // google sign in
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestIdToken(getString(R.string.google_signin_server_client_id))
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this , this )
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+
+        // fb sign in
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-
                         Toast.makeText(context, "succ", Toast.LENGTH_SHORT).show();
-
-
                         GraphRequest request = GraphRequest.newMeRequest(
                                 loginResult.getAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {
                                     @Override
                                     public void onCompleted(JSONObject object, GraphResponse response) {
-                                        Log.v("LoginActivity", response.toString());
-
-
+                                        ShowLog.v("LoginActivity", response.toString());
                                     }
                                 });
 
@@ -72,9 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         request.setParameters(parameters);
                         request.executeAsync();
 
-
                     }
-
                     @Override
                     public void onCancel() {
                         // App code
@@ -91,16 +110,51 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
 
         switch(v.getId()){
-
             case R.id.rlyFb:
                 LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
                 break;
+            case R.id.rlyGoogle:
+                signIn();
+                break;
         }
+    }
+
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+        else
+        {
+            // for fb
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    // for google sign in (google client)
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        ShowLog.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        ShowLog.d(TAG, "handleSignInResult:" + result.isSuccess());
+        if (result.isSuccess()) {
+            // Signed in successfully, show authenticated UI.
+            GoogleSignInAccount acct = result.getSignInAccount();
+            ShowLog.d(TAG, "handleSignInResult:" + acct.getDisplayName());
+        } else {
+            // Signed out, show unauthenticated UI.
+        }
     }
 }
