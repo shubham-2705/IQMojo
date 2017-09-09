@@ -7,12 +7,15 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import com.iqmojo.base.utils.PermissionUtil;
 
 
 @SuppressLint("Registered")
@@ -103,6 +106,12 @@ public class BaseActivity extends AppCompatActivity {
 
     public void showProgressdialog(String message) {
         showProgressdialog(message, false);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionUtil.with(this).onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void showProgressdialog(String message, boolean isCancelable) {

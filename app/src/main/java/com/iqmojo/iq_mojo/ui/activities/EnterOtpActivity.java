@@ -1,5 +1,6 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
+import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
+import com.iqmojo.base.utils.PermissionUtil;
 
 public class EnterOtpActivity extends BaseActivity implements View.OnClickListener {
 
@@ -71,6 +73,13 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
             case R.id.txvDone:
                 break;
             case R.id.txvResend:
+                PermissionUtil.with(EnterOtpActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                    @Override
+                    public void onPermissionResult(boolean isGranted, int requestCode) {
+                        if (isGranted) {
+                        }
+                    }
+                }).validate(Manifest.permission.READ_PHONE_STATE);
                 break;
 
         }

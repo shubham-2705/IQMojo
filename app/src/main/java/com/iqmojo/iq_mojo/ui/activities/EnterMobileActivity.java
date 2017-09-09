@@ -1,5 +1,6 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.iqmojo.base.listeners.onUpdateViewListener;
 import com.iqmojo.base.network.NetworkEngine;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ConnectivityUtils;
+import com.iqmojo.base.utils.PermissionUtil;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
@@ -77,7 +79,14 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
             case R.id.txvGetOtp:
                 if(validateNumber())
                 {
-                    hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+                    PermissionUtil.with(this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                        @Override
+                        public void onPermissionResult(boolean isGranted, int requestCode) {
+                            if (isGranted) {
+                                hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+                            }
+                        }
+                    }).validate(Manifest.permission.READ_PHONE_STATE);
                 }
                 break;
 
