@@ -77,6 +77,7 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onPermissionResult(boolean isGranted, int requestCode) {
                         if (isGranted) {
+                            // permission is granted
                         }
                     }
                 }).validate(Manifest.permission.READ_PHONE_STATE);

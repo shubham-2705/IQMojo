@@ -23,18 +23,18 @@ public class HomeActivity extends AppCompatActivity implements DrawerLayout.Draw
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_mobile);
+        setContentView(R.layout.activity_home);
 
-//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        container = (FrameLayout) findViewById(R.id.container);
-//        setSupportActionBar(mToolbar);
-//        DuoDrawerLayout drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
-//        DuoDrawerToggle drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar,
-//                R.string.navigation_drawer_open,
-//                R.string.navigation_drawer_close);
-//
-//        drawerLayout.setDrawerListener(this);
-//        drawerToggle.syncState();
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        container = (FrameLayout) findViewById(R.id.container);
+        setSupportActionBar(mToolbar);
+        DuoDrawerLayout drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
+        DuoDrawerToggle drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.setDrawerListener(this);
+        drawerToggle.syncState();
 
 
 

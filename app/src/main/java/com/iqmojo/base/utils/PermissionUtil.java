@@ -93,24 +93,26 @@ public class PermissionUtil {
         }
     }
 
-    public void validate(final String permission) {
-        if (activity.get()!=null && ActivityCompat.checkSelfPermission(activity.get(), permission) != PackageManager.PERMISSION_GRANTED) {
-            // permission has not been granted.
-            if (ActivityCompat.shouldShowRequestPermissionRationale(((Activity)activity.get()), permission)) {
-                //This is called if user has denied the permission before
-                Snackbar.make(((Activity)activity.get()).findViewById(android.R.id.content), message, Snackbar.LENGTH_INDEFINITE)
-                        .setAction("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ActivityCompat.requestPermissions(((Activity)activity.get()), new String[]{permission}, mRequestCode);
-                            }
-                        })
-                        .show();
+    public void validate(final String... permissions) {
+        for (final String permission : permissions) {
+            if (activity.get() != null && ActivityCompat.checkSelfPermission(activity.get(), permission) != PackageManager.PERMISSION_GRANTED) {
+                // permission has not been granted.
+                if (ActivityCompat.shouldShowRequestPermissionRationale(((Activity) activity.get()), permission)) {
+                    //This is called if user has denied the permission before
+                    Snackbar.make(((Activity) activity.get()).findViewById(android.R.id.content), message, Snackbar.LENGTH_INDEFINITE)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ActivityCompat.requestPermissions(((Activity) activity.get()), permissions, mRequestCode);
+                                }
+                            })
+                            .show();
+                } else {
+                    ActivityCompat.requestPermissions(((Activity) activity.get()), permissions, mRequestCode);
+                }
             } else {
-                ActivityCompat.requestPermissions(((Activity)activity.get()), new String[]{permission}, mRequestCode);
+                updateResult(true);
             }
-        } else {
-            updateResult(true);
         }
     }
 

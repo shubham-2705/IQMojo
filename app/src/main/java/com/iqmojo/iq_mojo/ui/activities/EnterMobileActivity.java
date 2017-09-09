@@ -29,6 +29,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     private EditText edtMobile;
     private TextView txvGetOtp;
     private ProgressBar pbLoading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +46,9 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()>0)
-                {
+                if (s.length() > 0) {
                     edtMobile.setLetterSpacing(0.5f);
-                }
-                else
-                {
+                } else {
                     edtMobile.setLetterSpacing(0f);
                 }
 
@@ -63,42 +61,37 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    public void getView()
-    {
-        edtMobile=(EditText)findViewById(R.id.edtMobile);
-        txvGetOtp=(TextView) findViewById(R.id.txvGetOtp);
-        pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
+    public void getView() {
+        edtMobile = (EditText) findViewById(R.id.edtMobile);
+        txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
+        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
     }
 
     @Override
     public void onClick(View v) {
-        int id=v.getId();
+        int id = v.getId();
 
-        switch (id)
-        {
+        switch (id) {
             case R.id.txvGetOtp:
-                if(validateNumber())
-                {
-                    PermissionUtil.with(this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                if (validateNumber()) {
+                    PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
                         @Override
                         public void onPermissionResult(boolean isGranted, int requestCode) {
                             if (isGranted) {
+                                // permission is granted
                                 hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
                             }
                         }
-                    }).validate(Manifest.permission.READ_PHONE_STATE);
+                    }).validate(Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE);
                 }
                 break;
-
         }
     }
 
-    public boolean validateNumber()
-    {
+    public boolean validateNumber() {
 
-        if(!CommonFunctionsUtil.validateMobileNumber(edtMobile.getText().toString().trim()))
-        {
-            ToastUtil.showShortToast(this,"Enter vaild mobile number");
+        if (!CommonFunctionsUtil.validateMobileNumber(edtMobile.getText().toString().trim())) {
+            ToastUtil.showShortToast(this, "Enter vaild mobile number");
             return false;
         }
 
@@ -109,19 +102,21 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         try {
             // register
             if (!ConnectivityUtils.isNetworkEnabled(this)) {
-                ToastUtil.showShortToast(this,getString(R.string.error_network_not_available));
+                ToastUtil.showShortToast(this, getString(R.string.error_network_not_available));
                 return;
             }
 
             Class clasz = null;
-            String url="";
+            String url = "";
             showProgressdialog("Verifying...");
 
             switch (reqType) {
                 case ApiConstants.REQUEST_TYPE.REGISTER_USER:
 
                     clasz = RegisterResponse.class;
-                    url=ApiConstants.Urls.REGISTER_USER+"?";
+
+                    // api request
+                    url = ApiConstants.Urls.REGISTER_USER + "?";
 
                     break;
 
@@ -149,7 +144,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
             } else {
                 switch (reqType) {
                     case ApiConstants.REQUEST_TYPE.REGISTER_USER:
-                        RegisterResponse vpaInfoResponseModel = (RegisterResponse) responseObject;
+                        RegisterResponse registerResponse = (RegisterResponse) responseObject;
                         try {
                             // ------- write your code here
 //                            if () {
