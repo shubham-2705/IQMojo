@@ -11,7 +11,11 @@ public interface AppConstants {
     String DEVICES_EXTRAS = "devices_extras";
     String PRODUCT_DETAIL = "product_detail";
 
-
+    //Intent keys
+    String LOCATION = "fb_location";
+    String EMAIL_ID = "email_id";
+    String FB_ID = "fb_id";
+    String DEVICE_TOKEN= "Device_Token";
 
     //Toolbar Change
 

@@ -1,11 +1,15 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.iqmojo.BuildConfig;
 import com.iqmojo.R;
 import com.iqmojo.base.listeners.onUpdateViewListener;
 import com.iqmojo.base.network.NetworkEngine;
@@ -21,6 +26,7 @@ import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.PermissionUtil;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
+import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 
@@ -29,6 +35,8 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     private EditText edtMobile;
     private TextView txvGetOtp;
     private ProgressBar pbLoading;
+    private String email, location, id, gcmId;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,21 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_enter_mobile);
 
         getView();
+
+        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
+            email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
+        else email = "";
+
+        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
+            id = getIntent().getExtras().getString(AppConstants.FB_ID);
+        else id = "";
+
+        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
+            location = getIntent().getExtras().getString(AppConstants.LOCATION);
+        else location = "";
+        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
+            gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
+        else gcmId = "";
 
 
         edtMobile.addTextChangedListener(new TextWatcher() {
@@ -62,9 +85,11 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void getView() {
+        context = EnterMobileActivity.this;
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+        txvGetOtp.setOnClickListener(this);
     }
 
     @Override
@@ -91,7 +116,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     public boolean validateNumber() {
 
         if (!CommonFunctionsUtil.validateMobileNumber(edtMobile.getText().toString().trim())) {
-            ToastUtil.showShortToast(this, "Enter vaild mobile number");
+            ToastUtil.showShortToast(this, "Enter valid mobile number");
             return false;
         }
 
@@ -116,8 +141,14 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                     clasz = RegisterResponse.class;
 
                     // api request
-                    url = ApiConstants.Urls.REGISTER_USER + "?";
-
+                    url = ApiConstants.Urls.REGISTER_USER + "?" + "msisdn="+edtMobile.getText().toString().trim()+"&email="+email
+                            +"&country="+location +"&appVersion="+ BuildConfig.VERSION_NAME+"&deviceName="+android.os.Build.MODEL+
+                            "&deviceId="+CommonFunctionsUtil.getDeviceImei(context)+"&deviceType=android"+"&deviceToken="+ gcmId
+                            +"&androidVersion="+ Build.VERSION.RELEASE+"&androidId="+CommonFunctionsUtil.getVersionName()+ "&networkType="+
+                            CommonFunctionsUtil.getNetworkInfo(context)+"&utm_Source="+""+"&utm_Medium="+""+"&googlePlayerId="+""+"&googleId="+""+
+                            "&googleName="+""+"&googleToken="+""+"&googlePicture="+""+"&fBPlayerId="+id;
+                     url = url.replace(" ", "%20");
+                    Log.v("url-->> ",url);
                     break;
 
                 default:

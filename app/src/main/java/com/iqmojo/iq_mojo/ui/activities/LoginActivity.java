@@ -2,9 +2,11 @@ package com.iqmojo.iq_mojo.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,10 @@ import com.iqmojo.base.ui.activity.BaseActivity;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.iqmojo.base.utils.ShowLog;
+import com.iqmojo.base.utils.ToastUtil;
+import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.iqmojo.iq_mojo.utils.GCMHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +53,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     Context context;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
+    String strEmail, strId, strLocation, gcmRegID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +78,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 .build();
 
 
-
+        GetGCM();
         // fb sign in
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -84,12 +91,39 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                 new GraphRequest.GraphJSONObjectCallback() {
                                     @Override
                                     public void onCompleted(JSONObject object, GraphResponse response) {
-                                        ShowLog.v("LoginActivity", response.toString());
+                                        try {
+
+
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("id"))){
+
+                                                strId = response.getJSONObject().getString("id");
+                                            }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("email"))){
+
+                                                strEmail = response.getJSONObject().getString("email");
+                                            }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
+
+                                                strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
+                                            }
+
+                                           Log.v("devicetoken---->>>", gcmRegID);
+
+                                            Intent i = new Intent(context, EnterMobileActivity.class);
+                                            i.putExtra(AppConstants.EMAIL_ID, strEmail);
+                                            i.putExtra(AppConstants.LOCATION, strLocation);
+                                            i.putExtra(AppConstants.FB_ID, strId);
+                                            i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
+                                            startActivity(i);
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 });
 
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location");
+                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}");
                         request.setParameters(parameters);
                         request.executeAsync();
 
@@ -111,7 +145,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
         switch(v.getId()){
             case R.id.rlyFb:
-                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
                 break;
             case R.id.rlyGoogle:
                 signIn();
@@ -157,4 +191,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             // Signed out, show unauthenticated UI.
         }
     }
+
+    private void GetGCM() {
+
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    GCMHelper  gcmRegistrationHelper = new GCMHelper(
+                            getApplicationContext());
+                     gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
+
+                } catch (Exception bug) {
+                    bug.printStackTrace();
+                }
+
+            }
+        });
+
+        thread.start();
+    }
+
+
 }

@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 
 repositories {
-    mavenCentral() // jcenter() works as well because it pulls from Maven Central
+    mavenCentral()
+    maven {
+        url "https://maven.google.com"
+    }// jcenter() works as well because it pulls from Maven Central
 }
 
 android {
@@ -46,6 +49,8 @@ dependencies {
     compile 'nl.psdcompany:duo-navigation-drawer:2.0.6'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-auth:9.8.0'
+    compile 'com.google.android.gms:play-services-drive:9.8.0'
+    compile "com.google.android.gms:play-services-gcm:9.8.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

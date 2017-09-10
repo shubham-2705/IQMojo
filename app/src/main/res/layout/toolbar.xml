@@ -60,7 +60,7 @@
         android:paddingBottom="@dimen/padding_3"
         android:paddingLeft="@dimen/padding_13"
         android:paddingRight="@dimen/padding_13"
-        android:background="@drawable/login_button_bg"/>
+     />
 
     <ImageView
         android:id="@+id/logout"
