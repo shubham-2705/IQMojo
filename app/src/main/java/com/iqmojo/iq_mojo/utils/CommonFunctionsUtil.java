@@ -5,28 +5,40 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.android.gms.iid.InstanceID;
 
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 
 
 public class CommonFunctionsUtil {
 
+
+    final static  String gcm_defaultSenderId = "681782354637";
     final static String mobileNoPattern = "[0-9]+";
     //    final static String emailPattern = "[A-Z0-9a-z\\\\!#$%&'*+-/=?^_`{|}~]+@([A-Za-z0-9-]+\\\\.)+[A-Za-z]{2,4}";
 //
@@ -259,4 +271,62 @@ public class CommonFunctionsUtil {
 
 
     }
+
+    public static String getDeviceId(Context context){
+      return (""+ Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
+    }
+
+    public static String getDeviceImei(Context context) {
+
+        TelephonyManager mTelephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+        return (""+mTelephonyManager.getDeviceId());
+    }
+
+    public static  String getDeviceName(){
+        return ""+Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName();
+    }
+
+    public static  String getVersionName(){
+        Field[] fields = Build.VERSION_CODES.class.getFields();
+        return ""+fields[Build.VERSION.SDK_INT + 1].getName();
+    }
+
+    public static String getNetworkInfo(Context context){
+
+        final ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if( wifi.isAvailable() && wifi.getDetailedState() == NetworkInfo.DetailedState.CONNECTED){
+            return "Wifi";
+        }
+        else if( mobile.isAvailable() && mobile.getDetailedState() == NetworkInfo.DetailedState.CONNECTED ){
+            return "Mobile 3G";
+        }
+
+        return "No Network";
+    }
+
+
+    public static String getDeviceToken(Context context){
+        String token="";
+
+        try {
+            InstanceID instanceID = InstanceID.getInstance(context);
+
+            token = instanceID.getToken(gcm_defaultSenderId, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+
+            Log.i("devicetoken", "GCM Registration Token: " + token);
+
+        }catch (Exception e) {
+            Log.d("devicetoken", "Failed to complete token refresh", e);
+        }
+
+        return token;
+    }
+
+
+
 }
