@@ -1,4 +1,4 @@
-package com.iqmojo.iq_mojo.ui;
+package com.iqmojo.iq_mojo.ui.activities;
 
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
@@ -10,12 +10,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.iqmojo.R;
+import com.iqmojo.base.ui.activity.BaseActivity;
 
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 
 
-public class HomeActivity extends AppCompatActivity implements DrawerLayout.DrawerListener {
+public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerListener {
 
     FrameLayout container;
     Toolbar mToolbar;
