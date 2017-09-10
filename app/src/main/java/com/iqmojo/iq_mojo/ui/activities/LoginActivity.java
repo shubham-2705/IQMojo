@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     Context context;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
-    String strEmail, strId, strLocation, gcmRegID;
+    String strEmail="", strId="", strLocation="", gcmRegID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,15 +94,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                         try {
 
 
-                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("id"))){
+                                            if(response.getJSONObject().getString("id")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("id"))){
 
                                                 strId = response.getJSONObject().getString("id");
                                             }
-                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("email"))){
+                                            if(response.getJSONObject().getString("email")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("email"))){
 
                                                 strEmail = response.getJSONObject().getString("email");
                                             }
-                                            if(!TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
+                                            if(response.getJSONObject().getString("location")!=null && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
 
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
                                             }
