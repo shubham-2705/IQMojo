@@ -6,8 +6,7 @@ import android.os.Handler;
 
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
-import com.iqmojo.iq_mojo.ui.HomeActivity;
-
+import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
 /**
  * Created by shubhamlamba on 18/08/17.
  */

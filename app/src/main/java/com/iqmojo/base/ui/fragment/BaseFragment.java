@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import com.iqmojo.base.listeners.IEvent;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
-import com.iqmojo.iq_mojo.ui.HomeActivity;
+import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
 
 
 public abstract class BaseFragment extends Fragment implements IEvent {
