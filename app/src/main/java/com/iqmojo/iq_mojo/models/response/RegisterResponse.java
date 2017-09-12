@@ -10,6 +10,7 @@ public class RegisterResponse {
     private String otp;
     private String coins;
     private String respText;
+    private String newUser;
 
     public String getCoins() {
         return coins;
@@ -21,6 +22,14 @@ public class RegisterResponse {
 
     public String getOtp() {
         return otp;
+    }
+
+    public String getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(String newUser) {
+        this.newUser = newUser;
     }
 
     public void setOtp(String otp) {
