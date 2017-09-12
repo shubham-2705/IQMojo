@@ -6,35 +6,12 @@ package com.iqmojo.iq_mojo.models.response;
 
 public class RegisterResponse {
 
-    private String userId;
-    private String otp;
-    private String coins;
+
     private String respText;
-    private String newUser;
-
-    public String getCoins() {
-        return coins;
-    }
-
-    public void setCoins(String coins) {
-        this.coins = coins;
-    }
-
-    public String getOtp() {
-        return otp;
-    }
-
-    public String getNewUser() {
-        return newUser;
-    }
-
-    public void setNewUser(String newUser) {
-        this.newUser = newUser;
-    }
-
-    public void setOtp(String otp) {
-        this.otp = otp;
-    }
+    private Integer userId;
+    private Long otp;
+    private Long coins;
+    private Boolean newUser;
 
     public String getRespText() {
         return respText;
@@ -44,11 +21,35 @@ public class RegisterResponse {
         this.respText = respText;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Long getOtp() {
+        return otp;
+    }
+
+    public void setOtp(Long otp) {
+        this.otp = otp;
+    }
+
+    public Long getCoins() {
+        return coins;
+    }
+
+    public void setCoins(Long coins) {
+        this.coins = coins;
+    }
+
+    public Boolean getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(Boolean newUser) {
+        this.newUser = newUser;
     }
 }

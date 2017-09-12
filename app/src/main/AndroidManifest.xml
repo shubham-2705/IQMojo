@@ -61,6 +61,9 @@
         <activity android:name=".iq_mojo.ui.activities.EnterOtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-    </application>
 
+        <activity android:name=".iq_mojo.ui.activities.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+    </application>
 </manifest>

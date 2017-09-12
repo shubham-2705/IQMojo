@@ -72,13 +72,22 @@ public class IqMojoPrefrences {
     }
 
     public long getLong(String key) {
-        return sharedPreferences.getLong(key, 0);
+        return sharedPreferences.getLong(key, -1);
     }
 
     /*public void logOut() {
         Map<String, ?> allEntries = sharedPreferences.getAll();
         removeKey(allEntries);
     }*/
+
+
+    public void setInteger(String key, int value) {
+        sharedPreferences.edit().putInt(key, value).apply();
+    }
+
+    public int getInteger(String key) {
+        return sharedPreferences.getInt(key, -1);
+    }
 
     public void logOut() {
         String[] prefsList = {

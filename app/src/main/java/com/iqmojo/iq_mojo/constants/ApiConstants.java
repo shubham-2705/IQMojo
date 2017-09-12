@@ -14,14 +14,15 @@ public interface ApiConstants {
 
 
         String REGISTER_USER = BASE_URL + "saveUserReg/";
-
-
-
+        String LOGIN = BASE_URL + "login/";
+        String RESEND = BASE_URL + "sendOtp/";
     }
 
     interface REQUEST_TYPE
     {
         int REGISTER_USER=0;
+        int LOGIN = 1;
+        int RESEND = 3;
     }
 
 

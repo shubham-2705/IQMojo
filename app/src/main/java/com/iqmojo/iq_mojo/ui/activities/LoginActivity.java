@@ -33,6 +33,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 import com.iqmojo.iq_mojo.utils.GCMHelper;
 
@@ -107,7 +108,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
                                             }
 
-                                           Log.v("devicetoken---->>>", gcmRegID);
+                                            Log.v("devicetoken---->>>", gcmRegID);
+
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
+
 
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
@@ -201,7 +206,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 try {
                     GCMHelper  gcmRegistrationHelper = new GCMHelper(
                             getApplicationContext());
-                     gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
+                    gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
 
                 } catch (Exception bug) {
                     bug.printStackTrace();

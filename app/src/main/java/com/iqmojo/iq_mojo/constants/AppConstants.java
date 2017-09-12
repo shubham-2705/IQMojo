@@ -16,6 +16,7 @@ public interface AppConstants {
     String EMAIL_ID = "email_id";
     String FB_ID = "fb_id";
     String DEVICE_TOKEN= "Device_Token";
+    String MOBILE = "mobile";
 
     //Toolbar Change
 
@@ -43,8 +44,11 @@ public interface AppConstants {
 
     String FORGOT_PASSWORD_URL="https://mysurfline.surflinegh.com/Selfcare/reset.php";
 
-
-
-
-
+    //Shared Preferences Keys
+    String KEY_COINS = "coins";
+    String KEY_USER_ID = "user_id";
+    String KEY_NEW_USER = "new_user";
+    String KEY_EMAIL_ID = "email_id";
+    String KEY_OTP = "otp";
+    String KEY_GCM_ID = "gcm_id";
 }
