@@ -14,6 +14,7 @@ public interface ApiConstants {
 
 
         String REGISTER_USER = BASE_URL + "saveUserReg/";
+        String GAME_LIST = BASE_URL + "games";
 
 
 
@@ -22,6 +23,7 @@ public interface ApiConstants {
     interface REQUEST_TYPE
     {
         int REGISTER_USER=0;
+        int GAME_LIST=3;
     }
 
 

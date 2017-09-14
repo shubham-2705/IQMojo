@@ -8,6 +8,13 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="error_network_not_available">Communication Failure with server. \nPlease Check GPRS Settings in Handset.</string>
 
+    <string-array name="pager_">
+        <item>Home</item>
+        <item>Winner</item>
+        <item>Contest</item>
+        <item>FAQs</item>
+    </string-array>
+
     /*fb app id*/
     <string name="facebook_app_id">111749099509872</string>
     <string name="google_signin_server_client_id">681782354637-j74nv0l08vsvb3408ou7uuu1rpunvh4b.apps.googleusercontent.com</string>

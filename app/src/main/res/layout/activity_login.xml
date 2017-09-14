@@ -27,12 +27,15 @@
         android:background="@drawable/white_shape">
 
         <TextView
+            android:id="@+id/txvfb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
             android:drawablePadding="@dimen/margin_10"
-            android:textColor="@android:color/holo_purple"
+            android:textColor="#3b5998"
             android:text="@string/join_us_with_facebook"
             android:drawableLeft="@drawable/fb_72"
             android:drawableStart="@drawable/fb_72"
@@ -92,20 +95,20 @@
         android:layout_marginRight="@dimen/left_right_margin_for_edittext"
         android:background="@drawable/white_shape">
         <TextView
+            android:id="@+id/txvgoogle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:drawablePadding="@dimen/margin_25dp"
-            android:textColor="@android:color/holo_red_light"
+            android:background="?attr/selectableItemBackground"
+            android:drawablePadding="@dimen/margin_22"
+            android:textColor="#f34a38"
+            android:clickable="true"
             android:text="@string/log_in_with_google"
             android:drawableLeft="@drawable/google_72"
             android:drawableStart="@drawable/google_72"
             />
     </RelativeLayout>
 
-    <com.facebook.login.widget.LoginButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>

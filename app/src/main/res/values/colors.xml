@@ -7,5 +7,9 @@
     <color name="transparent">#00000000</color>
     <color name="semi_transparent">#99000000</color>
     <color name="black_color">#000000</color>
-    <color name="otp_button">#280805</color>
+    <color name="otp_button">#360000</color>
+    <color name="grey_text_color">#727272</color>
+    <color name="dark_grey_text">#2E2E2E</color>
+
+
 </resources>

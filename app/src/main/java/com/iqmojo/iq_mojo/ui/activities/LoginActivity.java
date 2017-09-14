@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -26,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.vision.text.Text;
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.facebook.FacebookSdk;
@@ -34,6 +36,7 @@ import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.iqmojo.iq_mojo.utils.FontHelper;
 import com.iqmojo.iq_mojo.utils.GCMHelper;
 
 import org.json.JSONException;
@@ -59,6 +62,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        TextView txvgoogle= (TextView)findViewById(R.id.txvgoogle);
+        TextView txvfb= (TextView)findViewById(R.id.txvfb);
+        TextView txvOr= (TextView)findViewById(R.id.txvOr);
+        FontHelper.applyFont(this,txvfb,"fonts/medium.OTF");
+        FontHelper.applyFont(this,txvgoogle,"fonts/medium.OTF");
+        FontHelper.applyFont(this,txvOr,"fonts/medium.OTF");
 
         context = LoginActivity.this;
         callbackManager = CallbackManager.Factory.create();

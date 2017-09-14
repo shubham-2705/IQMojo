@@ -15,7 +15,7 @@ public interface AppConstants {
     String LOCATION = "fb_location";
     String EMAIL_ID = "email_id";
     String FB_ID = "fb_id";
-    String DEVICE_TOKEN= "Device_Token";
+    String DEVICE_TOKEN = "Device_Token";
 
     //Toolbar Change
 
@@ -28,23 +28,15 @@ public interface AppConstants {
 
     //Menu
 
-    int my_profile = 0;
-    int Store_locator = 1;
-    int Retailer =2;
-    int Bundles = 3;
-    int Devices = 4;
-    int Extras = 5;
-    int Data_Calculator = 6;
-    int Company = 7;
 
-    String WEBVIEW_URL="webview_url";
-    String WEBVIEW_HEADER="webview_header";
+    String WEBVIEW_URL = "webview_url";
+    String WEBVIEW_HEADER = "webview_header";
 
 
-    String FORGOT_PASSWORD_URL="https://mysurfline.surflinegh.com/Selfcare/reset.php";
-
-
-
+    int HOME = 0;
+    int WINNER = 1;
+    int CONTEST = 2;
+    int FAQ = 3;
 
 
 }
