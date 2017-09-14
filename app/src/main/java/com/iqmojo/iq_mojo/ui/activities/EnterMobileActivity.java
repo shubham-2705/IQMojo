@@ -31,6 +31,7 @@ import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.iqmojo.iq_mojo.utils.FontHelper;
 
 public class EnterMobileActivity extends BaseActivity implements View.OnClickListener, onUpdateViewListener {
 
@@ -90,6 +91,8 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         context = EnterMobileActivity.this;
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
+        FontHelper.applyFont(this,txvGetOtp,"fonts/sub_heading.OTF");
+        FontHelper.applyFont(this,edtMobile,"fonts/sub_heading.OTF");
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
         txvGetOtp.setOnClickListener(this);
     }

@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.iqmojo.BuildConfig;
@@ -37,6 +39,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
     int userid;
     long otp;
     Context context;
+    private ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
         setContentView(R.layout.activity_splash);
 
         context = SplashActivity.this;
+        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 
         try {
 
@@ -58,17 +62,22 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                         if (isGranted) {
                             // permission is granted
                             hitApiRequest(ApiConstants.REQUEST_TYPE.LOGIN);
-                        }
+                        } else
+                            finish();
                     }
                 }).validate(Manifest.permission.READ_PHONE_STATE);
-            }else {
+            } else {
 
-                Intent i = new Intent(context, LoginActivity.class);
-                startActivity(i);
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(context, LoginActivity.class);
+                        startActivity(i);
 
-
+                    }
+                }, 2000);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -83,18 +92,17 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
 
             Class clasz = null;
             String url = "";
-            showProgressdialog("Verifying...");
 
             switch (reqType) {
                 case ApiConstants.REQUEST_TYPE.LOGIN:
 
                     clasz = LoginResponse.class;
 
-                    url = ApiConstants.Urls.LOGIN + "?" + "email=" +IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_EMAIL_ID) +"&deviceId=" + CommonFunctionsUtil.getDeviceImei(SplashActivity.this) + "&deviceToken=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_GCM_ID) +
+                    url = ApiConstants.Urls.LOGIN + "?" + "email=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_EMAIL_ID) + "&deviceId=" + CommonFunctionsUtil.getDeviceImei(SplashActivity.this) + "&deviceToken=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_GCM_ID) +
                             "&UserId=" + IqMojoPrefrences.getInstance(SplashActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&Otp=" + IqMojoPrefrences.getInstance(SplashActivity.this).getLong(AppConstants.KEY_OTP);
 
                     url = url.replace(" ", "%20");
-                    Log.v("url-->> ",url);
+                    Log.v("url-->> ", url);
                     break;
 
 
@@ -103,6 +111,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
 
             }
 
+            pbLoading.setVisibility(View.VISIBLE);
             NetworkEngine.with(this).setClassType(clasz).setUrl(url).setRequestType(reqType).setHttpMethodType(Request.Method.GET).setUpdateViewListener(this).build();
 
 
@@ -115,7 +124,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
     @Override
     public void updateView(Object responseObject, boolean isSuccess, int reqType) {
         try {
-            hideProgressDialog();
+            pbLoading.setVisibility(View.GONE);
             if (!isSuccess) {
 //                buildAndComm.showOkDialog(UpiCreateVpaActivity.this, (String) responseObject);
             } else {

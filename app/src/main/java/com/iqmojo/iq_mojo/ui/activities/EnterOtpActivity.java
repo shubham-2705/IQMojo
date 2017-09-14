@@ -27,11 +27,12 @@ import com.iqmojo.iq_mojo.models.response.LoginResponse;
 import com.iqmojo.iq_mojo.models.response.ResendResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.iqmojo.iq_mojo.utils.FontHelper;
 
 public class EnterOtpActivity extends BaseActivity implements View.OnClickListener, onUpdateViewListener {
 
     private EditText edtOTP;
-    private TextView txvDone,txvResend;
+    private TextView txvDone,txvResend,txvgetCode;
     private ProgressBar pbLoading;
     private Context context;
     private String mobileNo;
@@ -79,7 +80,13 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         edtOTP=(EditText)findViewById(R.id.edtOTP);
         txvDone=(TextView) findViewById(R.id.txvDone);
         txvResend=(TextView) findViewById(R.id.txvResend);
+        txvgetCode=(TextView) findViewById(R.id.txvgetCode);
         pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
+
+        FontHelper.applyFont(this,edtOTP,"fonts/sub_heading.OTF");
+        FontHelper.applyFont(this,txvDone,"fonts/sub_heading.OTF");
+        FontHelper.applyFont(this,txvResend,"fonts/sub_heading.OTF");
+        FontHelper.applyFont(this,txvgetCode,"fonts/sub_heading.OTF");
 
         txvDone.setOnClickListener(this);
         edtOTP.setText(""+IqMojoPrefrences.getInstance(context).getLong(AppConstants.KEY_OTP));

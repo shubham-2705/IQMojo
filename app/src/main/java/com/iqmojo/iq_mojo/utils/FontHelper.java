@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.iqmojo.base.utils.ShowLog;
@@ -18,7 +19,9 @@ public class FontHelper {
         try {
             if (view instanceof Button) {
                 ((Button) view).setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
-            } else if (view instanceof TextView)
+            } else if (view instanceof EditText)
+                ((TextView) view).setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
+            else if (view instanceof TextView)
                 ((TextView) view).setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
         } catch (Exception e) {
             ShowLog.e("Font Helper", String.format("Error occured when trying to apply %s font for %s view", fontName, view));
