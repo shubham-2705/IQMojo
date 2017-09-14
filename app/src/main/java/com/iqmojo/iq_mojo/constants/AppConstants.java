@@ -15,6 +15,7 @@ public interface AppConstants {
     String LOCATION = "fb_location";
     String EMAIL_ID = "email_id";
     String FB_ID = "fb_id";
+    String MOBILE = "mobile";
     String DEVICE_TOKEN = "Device_Token";
 
     //Toolbar Change
@@ -39,4 +40,12 @@ public interface AppConstants {
     int FAQ = 3;
 
 
+
+    //Shared Preferences Keys
+    String KEY_COINS = "coins";
+    String KEY_USER_ID = "user_id";
+    String KEY_NEW_USER = "new_user";
+    String KEY_EMAIL_ID = "email_id";
+    String KEY_OTP = "otp";
+    String KEY_GCM_ID = "gcm_id";
 }

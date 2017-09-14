@@ -15,14 +15,15 @@ public interface ApiConstants {
 
         String REGISTER_USER = BASE_URL + "saveUserReg/";
         String GAME_LIST = BASE_URL + "games";
-
-
-
+        String LOGIN = BASE_URL + "login/";
+        String RESEND = BASE_URL + "sendOtp/";
     }
 
     interface REQUEST_TYPE
     {
         int REGISTER_USER=0;
+        int LOGIN = 1;
+        int RESEND = 2;
         int GAME_LIST=3;
     }
 
@@ -32,9 +33,9 @@ public interface ApiConstants {
 
         interface ResponseCodes {
 
-            String SUCCESS="2000";
-            String FAILURE="4004";
-            String SERVER_ERROR="5000";
+//            String SUCCESS="2000";
+//            String FAILURE="4004";
+//            String SERVER_ERROR="5000";
 
         }
 

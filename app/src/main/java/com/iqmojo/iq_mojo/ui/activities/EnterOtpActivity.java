@@ -1,30 +1,49 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.iqmojo.R;
+import com.iqmojo.base.listeners.onUpdateViewListener;
+import com.iqmojo.base.network.NetworkEngine;
 import com.iqmojo.base.ui.activity.BaseActivity;
+import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.PermissionUtil;
+import com.iqmojo.base.utils.ToastUtil;
+import com.iqmojo.iq_mojo.constants.ApiConstants;
+import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.models.response.LoginResponse;
+import com.iqmojo.iq_mojo.models.response.ResendResponse;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 
-public class EnterOtpActivity extends BaseActivity implements View.OnClickListener {
+public class EnterOtpActivity extends BaseActivity implements View.OnClickListener, onUpdateViewListener {
 
     private EditText edtOTP;
     private TextView txvDone,txvResend;
     private ProgressBar pbLoading;
+    private Context context;
+    private String mobileNo;
+    private int attempt = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_otp);
 
+        context = EnterOtpActivity.this;
+        mobileNo = getIntent().getStringExtra(AppConstants.MOBILE);
         getView();
 
         edtOTP.addTextChangedListener(new TextWatcher() {
@@ -61,6 +80,10 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         txvDone=(TextView) findViewById(R.id.txvDone);
         txvResend=(TextView) findViewById(R.id.txvResend);
         pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
+
+        txvDone.setOnClickListener(this);
+        edtOTP.setText(""+IqMojoPrefrences.getInstance(context).getLong(AppConstants.KEY_OTP));
+
     }
 
     @Override
@@ -71,18 +94,96 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         switch (id)
         {
             case R.id.txvDone:
+
+                Intent i = new Intent(context, HomeActivity.class);
+                startActivity(i);
+
                 break;
             case R.id.txvResend:
+
+/*
+                http://108.161.135.146:9397/iqm/api/v1/user/sendOtp/?msisdn=
+
+                include parameters msisdn, deviceId, googleMail and attempt*/
+
                 PermissionUtil.with(EnterOtpActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
                     @Override
                     public void onPermissionResult(boolean isGranted, int requestCode) {
                         if (isGranted) {
-                            // permission is granted
+
+                            hitApiRequest(ApiConstants.REQUEST_TYPE.RESEND);
                         }
                     }
                 }).validate(Manifest.permission.READ_PHONE_STATE);
                 break;
 
         }
+    }
+
+
+    private void hitApiRequest(int reqType) {
+        try {
+            // register
+            if (!ConnectivityUtils.isNetworkEnabled(this)) {
+                ToastUtil.showShortToast(this, getString(R.string.error_network_not_available));
+                return;
+            }
+
+            Class clasz = null;
+            String url = "";
+            showProgressdialog("Verifying...");
+
+            switch (reqType) {
+                case ApiConstants.REQUEST_TYPE.RESEND:
+
+                    clasz = ResendResponse.class;
+
+                    url = ApiConstants.Urls.RESEND + "?" + "msisdn=" + getIntent().getStringExtra(AppConstants.MOBILE) +"&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&googleMail=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_EMAIL_ID) +
+                            "&attempt=" + attempt;
+                    url = url.replace(" ", "%20");
+                    Log.v("url-->> ",url);
+                    break;
+
+
+                default:
+                    break;
+
+            }
+
+            NetworkEngine.with(this).setClassType(clasz).setUrl(url).setRequestType(reqType).setHttpMethodType(Request.Method.GET).setUpdateViewListener(this).build();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @Override
+    public void updateView(Object responseObject, boolean isSuccess, int reqType) {
+
+        try {
+            hideProgressDialog();
+            if (!isSuccess) {
+//                buildAndComm.showOkDialog(UpiCreateVpaActivity.this, (String) responseObject);
+            } else {
+                switch (reqType) {
+                    case ApiConstants.REQUEST_TYPE.RESEND:
+                        ResendResponse resendResponse = (ResendResponse) responseObject;
+                        try {
+
+                        } catch (Exception e) {
+                            hideProgressDialog();
+                        }
+                        break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }

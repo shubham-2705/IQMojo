@@ -29,6 +29,7 @@ import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 
 public class EnterMobileActivity extends BaseActivity implements View.OnClickListener, onUpdateViewListener {
@@ -148,7 +149,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                             +"&androidVersion="+ Build.VERSION.RELEASE+"&androidId="+CommonFunctionsUtil.getVersionName()+ "&networkType="+
                             CommonFunctionsUtil.getNetworkInfo(context)+"&utm_Source="+""+"&utm_Medium="+""+"&googlePlayerId="+""+"&googleId="+""+
                             "&googleName="+""+"&googleToken="+""+"&googlePicture="+""+"&fBPlayerId="+id;
-                     url = url.replace(" ", "%20");
+                    url = url.replace(" ", "%20");
                     Log.v("url-->> ",url);
                     break;
 
@@ -178,12 +179,19 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                     case ApiConstants.REQUEST_TYPE.REGISTER_USER:
                         RegisterResponse registerResponse = (RegisterResponse) responseObject;
                         try {
-                            // ------- write your code here
-//                            if () {
-//
-//                            } else {
-//                                hideProgressDialog();
-//                            }
+                            if (!TextUtils.isEmpty(registerResponse.getRespText())) {
+
+                                IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, registerResponse.getUserId());
+                                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, registerResponse.getCoins());
+                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, email);
+                                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, registerResponse.getOtp());
+
+
+                                Intent i = new Intent(context, EnterOtpActivity.class);
+                                i.putExtra(AppConstants.MOBILE, edtMobile.getText().toString().trim());
+                                startActivity(i);
+
+                            }
                         } catch (Exception e) {
                             hideProgressDialog();
                         }
