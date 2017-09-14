@@ -4,6 +4,7 @@
     <dimen name="app_text_size">11sp</dimen>
     <dimen name="expiry_text_size">10sp</dimen>
     <dimen name="profile_name_text_size">19sp</dimen>
+    <dimen name="profile_name">17sp</dimen>
     <dimen name="drawer_text_size">15sp</dimen>
 
 </resources>

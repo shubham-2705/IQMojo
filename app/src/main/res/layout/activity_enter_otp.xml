@@ -97,9 +97,10 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:layout_toRightOf="@+id/imvMobile"
-                android:backgroundTint="@null"
+                android:layout_centerVertical="true"
                 android:gravity="center"
                 android:hint="@string/enter_otp"
+                android:background="@null"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:textSize="@dimen/form_textsize" />
@@ -109,7 +110,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_line"
-                android:layout_below="@id/edtOTP"
+                android:layout_below="@id/imvMobile"
                 android:background="@color/white"/>
 
         </RelativeLayout>

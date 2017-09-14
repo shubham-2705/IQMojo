@@ -15,6 +15,15 @@
         <item>FAQs</item>
     </string-array>
 
+    <string-array name="menu_">
+        <item>My Points</item>
+        <item>My Profile</item>
+        <item>Transactions</item>
+        <item>Referral</item>
+        <item>Terms of Usage and Privacy Policy</item>
+        <item>Contact Us</item>
+    </string-array>
+
     /*fb app id*/
     <string name="facebook_app_id">111749099509872</string>
     <string name="google_signin_server_client_id">681782354637-j74nv0l08vsvb3408ou7uuu1rpunvh4b.apps.googleusercontent.com</string>

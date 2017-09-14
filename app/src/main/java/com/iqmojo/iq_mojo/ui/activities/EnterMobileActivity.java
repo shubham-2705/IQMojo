@@ -25,6 +25,7 @@ import com.iqmojo.base.network.NetworkEngine;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.PermissionUtil;
+import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
@@ -38,7 +39,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     private EditText edtMobile;
     private TextView txvGetOtp;
     private ProgressBar pbLoading;
-    private String email="", location="", id="", gcmId="";
+    private String email = "", location = "", id = "", gcmId = "";
     Context context;
 
     @Override
@@ -48,18 +49,18 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
         getView();
 
-        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
             email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
         else email = "";
 
-        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
             id = getIntent().getExtras().getString(AppConstants.FB_ID);
         else id = "";
 
-        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
             location = getIntent().getExtras().getString(AppConstants.LOCATION);
         else location = "";
-        if(!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
             gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
         else gcmId = "";
 
@@ -91,8 +92,8 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         context = EnterMobileActivity.this;
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
-        FontHelper.applyFont(this,txvGetOtp,"fonts/sub_heading.OTF");
-        FontHelper.applyFont(this,edtMobile,"fonts/sub_heading.OTF");
+        FontHelper.applyFont(this, txvGetOtp, "fonts/sub_heading.OTF");
+        FontHelper.applyFont(this, edtMobile, "fonts/sub_heading.OTF");
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
         txvGetOtp.setOnClickListener(this);
     }
@@ -146,14 +147,14 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                     clasz = RegisterResponse.class;
 
                     // api request
-                    url = ApiConstants.Urls.REGISTER_USER + "?" + "msisdn="+edtMobile.getText().toString().trim()+"&email="+email
-                            +"&country="+location +"&appVersion="+ BuildConfig.VERSION_NAME+"&deviceName="+android.os.Build.MODEL+
-                            "&deviceId="+CommonFunctionsUtil.getDeviceImei(context)+"&deviceType=android"+"&deviceToken="+ gcmId
-                            +"&androidVersion="+ Build.VERSION.RELEASE+"&androidId="+CommonFunctionsUtil.getVersionName()+ "&networkType="+
-                            CommonFunctionsUtil.getNetworkInfo(context)+"&utm_Source="+""+"&utm_Medium="+""+"&googlePlayerId="+""+"&googleId="+""+
-                            "&googleName="+""+"&googleToken="+""+"&googlePicture="+""+"&fBPlayerId="+id;
+                    url = ApiConstants.Urls.REGISTER_USER + "?" + "msisdn=" + edtMobile.getText().toString().trim() + "&email=" + email
+                            + "&country=" + location + "&appVersion=" + BuildConfig.VERSION_NAME + "&deviceName=" + android.os.Build.MODEL +
+                            "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=android" + "&deviceToken=" + gcmId
+                            + "&androidVersion=" + Build.VERSION.RELEASE + "&androidId=" + CommonFunctionsUtil.getVersionName() + "&networkType=" +
+                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + "" +
+                            "&googleName=" + "" + "&googleToken=" + "" + "&googlePicture=" + "" + "&fBPlayerId=" + id;
                     url = url.replace(" ", "%20");
-                    Log.v("url-->> ",url);
+                    ShowLog.v("url-->> ", url);
                     break;
 
                 default:
@@ -182,19 +183,17 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                     case ApiConstants.REQUEST_TYPE.REGISTER_USER:
                         RegisterResponse registerResponse = (RegisterResponse) responseObject;
                         try {
-                            if (!TextUtils.isEmpty(registerResponse.getRespText())) {
 
-                                IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, registerResponse.getUserId());
-                                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, registerResponse.getCoins());
-                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, email);
-                                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, registerResponse.getOtp());
+                            IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, registerResponse.getUserId());
+                            IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, registerResponse.getCoins());
+                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, email);
+                            IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, registerResponse.getOtp());
 
 
-                                Intent i = new Intent(context, EnterOtpActivity.class);
-                                i.putExtra(AppConstants.MOBILE, edtMobile.getText().toString().trim());
-                                startActivity(i);
+                            Intent i = new Intent(context, EnterOtpActivity.class);
+                            i.putExtra(AppConstants.MOBILE, edtMobile.getText().toString().trim());
+                            startActivity(i);
 
-                            }
                         } catch (Exception e) {
                             hideProgressDialog();
                         }

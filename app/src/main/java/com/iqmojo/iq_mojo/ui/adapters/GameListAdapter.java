@@ -2,6 +2,7 @@ package com.iqmojo.iq_mojo.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,18 +29,16 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     private ArrayList<GameItemResponse> gameItemResponses;
     private HomeFragment homeFragment;
 
-    public GameListAdapter(Context context,ArrayList<GameItemResponse> list, HomeFragment fragment)
-    {
-        mcontext=context;
-        gameItemResponses=list;
-        homeFragment=fragment;
+    public GameListAdapter(Context context, ArrayList<GameItemResponse> list, HomeFragment fragment) {
+        mcontext = context;
+        gameItemResponses = list;
+        homeFragment = fragment;
     }
 
-    public void setData(Context context,ArrayList<GameItemResponse> list, HomeFragment fragment)
-    {
-        mcontext=context;
-        gameItemResponses=list;
-        homeFragment=fragment;
+    public void setData(Context context, ArrayList<GameItemResponse> list, HomeFragment fragment) {
+        mcontext = context;
+        gameItemResponses = list;
+        homeFragment = fragment;
         notifyDataSetChanged();
     }
 
@@ -53,20 +52,20 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(GameListAdapter.ViewHolder holder, int position) {
 
-        try
-        {
+        try {
 
             final GameItemResponse gameItemResponse = gameItemResponses.get(position);
 
             holder.txvDesc.setText(gameItemResponse.getShortDesc());
             holder.txvHeading.setText(gameItemResponse.getName());
 
-            FontHelper.applyFont(mcontext,holder.txvDesc,"fonts/sub_heading.OTF");
-            FontHelper.applyFont(mcontext,holder.txvHeading,"fonts/heading.OTF");
-            FontHelper.applyFont(mcontext,holder.txvStart,"fonts/sub_heading.OTF");
+            FontHelper.applyFont(mcontext, holder.txvDesc, "fonts/sub_heading.OTF");
+            FontHelper.applyFont(mcontext, holder.txvHeading, "fonts/heading.OTF");
+            FontHelper.applyFont(mcontext, holder.txvStart, "fonts/sub_heading.OTF");
 
             String decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
-            Picasso.with(mcontext).load(decoded_url).into(holder.imvGameLogo);
+            if (decoded_url != null && !TextUtils.isEmpty(decoded_url))
+                Picasso.with(mcontext).load(decoded_url).into(holder.imvGameLogo);
 
             holder.txvHeading.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,9 +74,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 }
             });
 
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -91,8 +88,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         return 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView txvHeading, txvDesc, txvStart;
         ImageView imvGameLogo;
 

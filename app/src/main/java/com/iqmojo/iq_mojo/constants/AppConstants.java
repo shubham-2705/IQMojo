@@ -34,12 +34,21 @@ public interface AppConstants {
     String WEBVIEW_HEADER = "webview_header";
 
 
+    // Home tabs
     int HOME = 0;
     int WINNER = 1;
     int CONTEST = 2;
     int FAQ = 3;
 
 
+
+    // Hamburger Menu options
+    int My_Points=0;
+    int My_Profile=1;
+    int Transactions=2;
+    int Referral=3;
+    int Terms_And_Conditions=4;
+    int Contact_Us=5;
 
     //Shared Preferences Keys
     String KEY_COINS = "coins";

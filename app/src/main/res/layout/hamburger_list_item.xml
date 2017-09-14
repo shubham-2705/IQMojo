@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlyParent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingTop="@dimen/padding_5"
+    >
+
+    <TextView
+        android:id="@+id/txvMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/padding_12"
+        android:layout_marginLeft="@dimen/padding_5"
+        android:layout_marginTop="@dimen/padding_2"
+        android:layout_marginBottom="@dimen/padding_2"
+        android:layout_marginStart="@dimen/padding_5"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
+        android:textColor="@color/white"
+        android:textSize="@dimen/drawer_text_size" />
+
+
+
+</RelativeLayout>

@@ -1,10 +1,13 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.ViewDragHelper;
@@ -14,14 +17,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.ui.adapters.MenuAdapter;
 import com.iqmojo.iq_mojo.ui.fragments.ContestsFragment;
 import com.iqmojo.iq_mojo.ui.fragments.FaqFragment;
 import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
@@ -41,7 +47,11 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     Toolbar mToolbar;
     ViewPager viewPager;
     TabLayout tabs;
+    private ListView listView;
+    private MenuAdapter menuAdapter;
     private int active_position = 0;
+    DuoDrawerLayout drawerLayout;
+    DuoDrawerToggle drawerToggle;
     private static int[] tab_list = {AppConstants.HOME, AppConstants.WINNER,
             AppConstants.CONTEST, AppConstants.FAQ};
 
@@ -52,30 +62,62 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         getView();
         setupDrawer_Toolbar();
+        setupHamburgerList();
 
     }
 
     public void setupDrawer_Toolbar() {
         setSupportActionBar(mToolbar);
-        DuoDrawerLayout drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
-        DuoDrawerToggle drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
+        drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
+        drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawerLayout.setDrawerListener(this);
         drawerToggle.syncState();
+    }
+
+    private void setupHamburgerList()
+    {
+        menuAdapter = new MenuAdapter(this);
+        listView.setAdapter(menuAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                closeDrawer();
+                switch (position) {
+                    case AppConstants.My_Points:
+                        break;
+                    case AppConstants.My_Profile:
+                        break;
+                    case AppConstants.Transactions:
+                        break;
+                    case AppConstants.Referral:
+                        break;
+                    case AppConstants.Terms_And_Conditions:
+                        break;
+                    case AppConstants.Contact_Us:
+                        break;
+
+                }
+            }
+        });
     }
 
     public void getView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 //        container = (FrameLayout) findViewById(R.id.container);
         viewPager = (ViewPager) findViewById(R.id.pager);
+        listView = (ListView) findViewById(R.id.listView);
         setupViewPager(viewPager);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         setupTabIcons();
+
+
     }
 
     public void setupViewPager(ViewPager viewPager) {
@@ -86,6 +128,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         adapter.addFrag(new FaqFragment(), "Four");
         viewPager.setAdapter(adapter);
     }
+
 
     private void setupTabIcons() {
 
@@ -210,5 +253,9 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerStateChanged(int newState) {
 
 
+    }
+
+    public void closeDrawer() {
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
