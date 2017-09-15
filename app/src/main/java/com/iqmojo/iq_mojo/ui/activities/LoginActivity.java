@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     RelativeLayout RlFbLogin, RlsGoogleLogin;
     CallbackManager callbackManager;
     Context context;
+    TextView txvgoogle,txvfb;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
     String strEmail="", strId="", strLocation="", gcmRegID="";
@@ -64,8 +65,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        TextView txvgoogle= (TextView)findViewById(R.id.txvgoogle);
-        TextView txvfb= (TextView)findViewById(R.id.txvfb);
+        txvgoogle= (TextView)findViewById(R.id.txvgoogle);
+        txvfb= (TextView)findViewById(R.id.txvfb);
         TextView txvOr= (TextView)findViewById(R.id.txvOr);
 //        FontHelper.applyFont(this,txvfb,"fonts/medium.OTF");
 //        FontHelper.applyFont(this,txvgoogle,"fonts/medium.OTF");
@@ -77,6 +78,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         RlsGoogleLogin = (RelativeLayout) findViewById(R.id.rlyGoogle);
         RlFbLogin.setOnClickListener(this);
         RlsGoogleLogin.setOnClickListener(this);
+        txvgoogle.setOnClickListener(this);
+        txvfb.setOnClickListener(this);
 
         // google sign in
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -163,6 +166,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
                 break;
             case R.id.rlyGoogle:
+                signIn();
+                break;
+            case R.id.txvfb:
+                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
+                break;
+            case R.id.txvgoogle:
                 signIn();
                 break;
         }

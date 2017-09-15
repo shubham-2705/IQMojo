@@ -33,7 +33,6 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
 
     private EditText edtOTP;
     private TextView txvDone,txvResend,txvgetCode;
-    private ProgressBar pbLoading;
     private Context context;
     private String mobileNo;
     private int attempt = 1;
@@ -81,7 +80,7 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         txvDone=(TextView) findViewById(R.id.txvDone);
         txvResend=(TextView) findViewById(R.id.txvResend);
         txvgetCode=(TextView) findViewById(R.id.txvgetCode);
-        pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
+//        pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
 
 
 

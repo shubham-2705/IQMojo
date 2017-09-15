@@ -5,113 +5,125 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg">
 
-    <ImageView
-        android:id="@+id/imvLogo"
+
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/padding_60"
-        android:contentDescription="@string/app_name"
-        android:scaleType="center"
-        android:src="@drawable/iqmojo_logo" />
+        android:layout_centerInParent="true"
+        >
 
-    <RelativeLayout
-        android:id="@+id/rlyFb"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:elevation="@dimen/padding_3"
-        android:layout_below="@id/imvLogo"
-        android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
-        android:layout_marginRight="@dimen/left_right_margin_for_edittext"
-        android:layout_marginTop="@dimen/padding_140"
-        android:background="@drawable/white_shape">
-
-        <TextView
-            android:id="@+id/txvfb"
+        <ImageView
+            android:id="@+id/imvLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
+            android:src="@drawable/iqmojo_logo" />
+
+        <RelativeLayout
+            android:id="@+id/rlyFb"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+            android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+            android:layout_below="@id/imvLogo"
+            android:layout_marginTop="@dimen/padding_100"
+            android:background="@drawable/white_shape"
             android:clickable="true"
-            android:typeface="sans"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="@dimen/margin_10"
-            android:textColor="#3b5998"
-            android:text="@string/join_us_with_facebook"
-            android:drawableLeft="@drawable/fb_72"
-            android:drawableStart="@drawable/fb_72"
-            />
+            android:elevation="@dimen/padding_3">
+
+            <TextView
+                android:id="@+id/txvfb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawableLeft="@drawable/fb_72"
+                android:drawablePadding="@dimen/margin_10"
+                android:drawableStart="@drawable/fb_72"
+                android:gravity="center"
+                android:text="@string/join_us_with_facebook"
+                android:textColor="#3b5998"
+                android:typeface="sans" />
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/rlyLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rlyFb"
-        android:layout_marginBottom="@dimen/margin_8"
-        android:layout_marginLeft="@dimen/padding_45"
-        android:layout_marginRight="@dimen/padding_45"
-        android:layout_marginTop="@dimen/margin_8">
-
-        <TextView
-            android:id="@+id/txvOr"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlyLine"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@color/transparent"
-            android:text="@string/or"
-            android:typeface="sans"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:layout_below="@id/rlyFb"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginLeft="@dimen/padding_45"
+            android:layout_marginRight="@dimen/padding_45"
+            android:layout_marginTop="@dimen/margin_8">
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="@dimen/margin_7"
-            android:layout_toLeftOf="@+id/txvOr"
-            android:layout_toStartOf="@+id/txvOr"
-            android:background="@color/white" />
+            <TextView
+                android:id="@+id/txvOr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@color/transparent"
+                android:text="@string/or"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:typeface="sans" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_centerVertical="true"
-            android:layout_margin="@dimen/margin_7"
-            android:layout_toEndOf="@+id/txvOr"
-            android:layout_toRightOf="@+id/txvOr"
-            android:background="@color/white" />
-    </RelativeLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_7"
+                android:layout_toLeftOf="@+id/txvOr"
+                android:layout_toStartOf="@+id/txvOr"
+                android:background="@color/white" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0.5dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_7"
+                android:layout_toEndOf="@+id/txvOr"
+                android:layout_toRightOf="@+id/txvOr"
+                android:background="@color/white" />
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/rlyGoogle"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:elevation="@dimen/padding_3"
-        android:layout_below="@id/rlyLine"
-        android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
-        android:layout_marginRight="@dimen/left_right_margin_for_edittext"
-        android:background="@drawable/white_shape">
-        <TextView
-            android:id="@+id/txvgoogle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackground"
-            android:drawablePadding="@dimen/margin_22"
-            android:textColor="#f34a38"
-            android:typeface="sans"
+        <RelativeLayout
+            android:id="@+id/rlyGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rlyLine"
+            android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+            android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+            android:background="@drawable/white_shape"
             android:clickable="true"
-            android:text="@string/log_in_with_google"
-            android:drawableLeft="@drawable/google_72"
-            android:drawableStart="@drawable/google_72"
-            />
-    </RelativeLayout>
+            android:elevation="@dimen/padding_3">
 
+            <TextView
+                android:id="@+id/txvgoogle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:drawableLeft="@drawable/google_72"
+                android:drawablePadding="@dimen/margin_22"
+                android:drawableStart="@drawable/google_72"
+                android:gravity="center"
+                android:text="@string/log_in_with_google"
+                android:textColor="#f34a38"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

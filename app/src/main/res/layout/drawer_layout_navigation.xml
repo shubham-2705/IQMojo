@@ -3,7 +3,7 @@
     android:id="@+id/drawer_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#a31818"
+    android:background="@drawable/gradient_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -12,7 +12,6 @@
         android:id="@+id/drawer_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:layout_marginTop="@dimen/margin_15"
         android:padding="@dimen/padding_10">

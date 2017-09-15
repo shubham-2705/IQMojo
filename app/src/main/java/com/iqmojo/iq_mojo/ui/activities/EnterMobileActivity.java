@@ -38,7 +38,6 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
     private EditText edtMobile;
     private TextView txvGetOtp;
-    private ProgressBar pbLoading;
     private String email = "", location = "", id = "", gcmId = "";
     Context context;
 
@@ -92,7 +91,6 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         context = EnterMobileActivity.this;
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
-        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
         txvGetOtp.setOnClickListener(this);
     }
 

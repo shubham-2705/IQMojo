@@ -3,135 +3,127 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:animateLayoutChanges="true"
-    android:background="@drawable/gradient_bg">
+    android:background="@drawable/gradient_bg"
+    android:fillViewport="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        >
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:paddingLeft="@dimen/margin_10"
-            android:paddingRight="@dimen/margin_10"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/padding_60"
-            >
-
-            <TextView
-                android:id="@+id/txvgetCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:paddingTop="@dimen/margin_10"
-                android:paddingBottom="@dimen/margin_10"
-                android:textSize="@dimen/app_text_size"
-                android:typeface="monospace"
-                android:text="Didn't get the code ? "/>
-
-            <TextView
-                android:id="@+id/txvResend"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/otp_button"
-                android:paddingTop="@dimen/margin_10"
-                android:typeface="monospace"
-                android:paddingBottom="@dimen/margin_10"
-                android:textSize="@dimen/app_text_size"
-                android:text=" Resend code"/>
-
-        </LinearLayout>
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            style="@android:style/Widget.Holo.ProgressBar.Small"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/padding_120"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txvDone"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:visibility="visible"
-            android:typeface="monospace"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/padding_120"
-            android:background="@drawable/get_otp_bg"
-            android:elevation="@dimen/padding_5"
-            android:gravity="center"
-            android:paddingLeft="@dimen/padding_50"
-            android:paddingRight="@dimen/padding_50"
-            android:text="Done"
-            android:textColor="@color/white"
-            android:textSize="@dimen/app_text_size" />
+        android:animateLayoutChanges="true">
 
         <RelativeLayout
-            android:id="@+id/rlyMobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_20"
-            android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
-            android:layout_marginRight="@dimen/left_right_margin_for_edittext"
-            android:layout_above="@id/txvDone"
-            >
-
-            <ImageView
-                android:id="@+id/imvMobile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_2"
-                android:padding="@dimen/margin_5"
-                android:src="@drawable/otp_72"/>
-
-
-            <EditText
-                android:id="@+id/edtOTP"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:typeface="monospace"
-                android:layout_toRightOf="@+id/imvMobile"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:hint="@string/enter_otp"
-                android:background="@null"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="@dimen/form_textsize" />
-
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_line"
-                android:layout_below="@id/imvMobile"
-                android:background="@color/white"/>
-
-        </RelativeLayout>
-
-
-        <ImageView
-            android:id="@+id/imvLogo"
+            android:id="@+id/main_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/rlyMobile"
-            android:layout_marginBottom="@dimen/padding_100"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/app_name"
-            android:scaleType="center"
-            android:src="@drawable/iqmojo_logo" />
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/imvLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="center"
+                android:src="@drawable/iqmojo_logo" />
 
 
+            <RelativeLayout
+                android:id="@+id/rlyMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imvLogo"
+                android:layout_marginBottom="@dimen/padding_20"
+                android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                android:layout_marginTop="@dimen/padding_150">
+
+                <ImageView
+                    android:id="@+id/imvMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_2"
+                    android:padding="@dimen/margin_5"
+                    android:src="@drawable/otp_72" />
+
+
+                <EditText
+                    android:id="@+id/edtOTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imvMobile"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="@string/enter_otp"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="monospace" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_line"
+                    android:layout_below="@id/imvMobile"
+                    android:background="@color/white" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/txvDone"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_below="@id/rlyMobile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_30dp"
+                android:background="@drawable/get_otp_bg"
+                android:elevation="@dimen/padding_5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/padding_50"
+                android:paddingRight="@dimen/padding_50"
+                android:text="Done"
+                android:textColor="@color/white"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="monospace"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txvDone"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/txvgetCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:paddingTop="@dimen/margin_10"
+                    android:text="Didn't get the code ? "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/txvResend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:paddingTop="@dimen/margin_10"
+                    android:text=" Resend code"
+                    android:textColor="@color/otp_button"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>
