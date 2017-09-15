@@ -14,25 +14,29 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
+        android:layout_marginTop="@dimen/margin_15"
         android:padding="@dimen/padding_10">
 
 
 
         <ImageView
             android:id="@+id/imvProfilePic"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
+            android:layout_width="70dp"
+            android:src="@drawable/profile_pic"
+            android:layout_height="65dp"
+            android:background="@drawable/profile_bg"
             android:layout_margin="@dimen/margin_10"
             />
 
         <TextView
             android:id="@+id/txvUserName"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/padding_30"
+            android:layout_marginTop="@dimen/padding_23"
             android:layout_marginLeft="@dimen/padding_10"
             android:layout_marginStart="@dimen/padding_10"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
+            android:typeface="serif"
             android:text="Shubham Lamba"
             android:layout_toRightOf="@id/imvProfilePic"
             android:layout_toEndOf="@id/imvProfilePic"
@@ -47,7 +51,7 @@
             android:layout_marginLeft="@dimen/padding_10"
             android:layout_marginStart="@dimen/padding_10"
             android:layout_height="wrap_content"
-            android:text="shubham.lba@gmail.com"
+            android:typeface="monospace"
             android:layout_marginTop="@dimen/margin_7"
             android:textColor="@color/white"
             android:layout_below="@id/txvUserName"
@@ -64,9 +68,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/padding_5"
-        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_10"
         android:layout_below="@id/drawer_header"
         android:dividerHeight="0dp"
+        android:divider="@color/transparent"
         />
 
 

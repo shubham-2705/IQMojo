@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.InputQueue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,11 @@ import com.iqmojo.base.ui.fragment.BasePagerFragment;
 import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
+import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.GameItemResponse;
 import com.iqmojo.iq_mojo.models.response.GameListResponse;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.ui.adapters.GameListAdapter;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 
@@ -125,7 +128,7 @@ public class HomeFragment extends BasePagerFragment implements onUpdateViewListe
                     clasz = GameListResponse.class;
 
                     // api request
-                    url = ApiConstants.Urls.GAME_LIST + "?" + "userId=";
+                    url = ApiConstants.Urls.GAME_LIST + "?" + "userId="+ IqMojoPrefrences.getInstance(getBaseActivity()).getInteger(AppConstants.KEY_USER_ID);
                     url = url.replace(" ", "%20");
                     Log.v("url-->> ",url);
                     break;

@@ -23,10 +23,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.vision.text.Text;
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.ui.adapters.MenuAdapter;
 import com.iqmojo.iq_mojo.ui.fragments.ContestsFragment;
 import com.iqmojo.iq_mojo.ui.fragments.FaqFragment;
@@ -34,6 +36,7 @@ import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
 import com.iqmojo.iq_mojo.ui.fragments.WinnerFragment;
 import com.iqmojo.iq_mojo.utils.FontHelper;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private ListView listView;
     private MenuAdapter menuAdapter;
     private int active_position = 0;
+    private TextView txvUserEmail,txvCoins,txvUserName;
     DuoDrawerLayout drawerLayout;
     DuoDrawerToggle drawerToggle;
     private static int[] tab_list = {AppConstants.HOME, AppConstants.WINNER,
@@ -67,49 +71,72 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     }
 
     public void setupDrawer_Toolbar() {
-        setSupportActionBar(mToolbar);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        txvCoins=(TextView)mToolbar.findViewById(R.id.txvCoins);
+
+        mToolbar.setLogo(R.drawable.iqmojo_toolbar);
+
+        txvCoins.setText((""+new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+
         drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
         drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
+        drawerToggle.setDrawerIndicatorEnabled(false);
+        drawerToggle.setHomeAsUpIndicator(R.drawable.hamburger);
         drawerLayout.setDrawerListener(this);
         drawerToggle.syncState();
+
+
+        drawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
     }
 
     private void setupHamburgerList()
     {
+        txvUserEmail.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_EMAIL_ID));
+        txvUserName.setText("");
         menuAdapter = new MenuAdapter(this);
         listView.setAdapter(menuAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                closeDrawer();
-                switch (position) {
-                    case AppConstants.My_Points:
-                        break;
-                    case AppConstants.My_Profile:
-                        break;
-                    case AppConstants.Transactions:
-                        break;
-                    case AppConstants.Referral:
-                        break;
-                    case AppConstants.Terms_And_Conditions:
-                        break;
-                    case AppConstants.Contact_Us:
-                        break;
-
-                }
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                ShowLog.d("---","close");
+//                closeDrawer();
+//                switch (position) {
+//                    case AppConstants.My_Points:
+//                        break;
+//                    case AppConstants.My_Profile:
+//                        break;
+//                    case AppConstants.Transactions:
+//                        break;
+//                    case AppConstants.Referral:
+//                        break;
+//                    case AppConstants.Terms_And_Conditions:
+//                        break;
+//                    case AppConstants.Contact_Us:
+//                        break;
+//
+//                }
+//            }
+//        });
     }
 
     public void getView() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
 //        container = (FrameLayout) findViewById(R.id.container);
         viewPager = (ViewPager) findViewById(R.id.pager);
         listView = (ListView) findViewById(R.id.listView);
+        txvUserEmail = (TextView) findViewById(R.id.txvUserEmail);
+        txvUserName = (TextView) findViewById(R.id.txvUserName);
         setupViewPager(viewPager);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
@@ -139,7 +166,6 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
             ImageView imageView = (ImageView) tabOne.findViewById(R.id.imvIcon);
 
             textView.setText(getResources().getStringArray(R.array.pager_)[aTab_list]);
-            FontHelper.applyFont(this, textView, "fonts/medium.OTF");
             String mDrawableName = "pager_" + aTab_list + "_inactive";
             int id = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
             imageView.setImageResource(id);

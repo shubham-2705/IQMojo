@@ -10,6 +10,7 @@
     <color name="otp_button">#360000</color>
     <color name="grey_text_color">#727272</color>
     <color name="dark_grey_text">#2E2E2E</color>
+    <color name="profile_bg">#E0E0E1</color>
 
 
 </resources>

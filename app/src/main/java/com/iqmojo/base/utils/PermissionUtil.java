@@ -108,7 +108,7 @@ public class PermissionUtil {
                             })
                             .show();
                 } else {
-                    ActivityCompat.requestPermissions(((Activity) activity.get()), permissions, mRequestCode);
+                    ActivityCompat.requestPermissions(((Activity) activity.get()), new String[]{permission}, mRequestCode);
                 }
             } else {
                 updateResult(true);

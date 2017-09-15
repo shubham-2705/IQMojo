@@ -9,7 +9,7 @@
     app:menuAlphaClosed="0.0"
     app:menuAlphaOpen="1.0"
 
-    app:clickToCloseScale="1.0"
+    app:clickToCloseScale="1.5"
 
     app:menuScaleClosed="1.1"
     app:menuScaleOpen="1.0"

@@ -83,10 +83,7 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         txvgetCode=(TextView) findViewById(R.id.txvgetCode);
         pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
 
-        FontHelper.applyFont(this,edtOTP,"fonts/sub_heading.OTF");
-        FontHelper.applyFont(this,txvDone,"fonts/sub_heading.OTF");
-        FontHelper.applyFont(this,txvResend,"fonts/sub_heading.OTF");
-        FontHelper.applyFont(this,txvgetCode,"fonts/sub_heading.OTF");
+
 
         txvDone.setOnClickListener(this);
         edtOTP.setText(""+IqMojoPrefrences.getInstance(context).getLong(AppConstants.KEY_OTP));

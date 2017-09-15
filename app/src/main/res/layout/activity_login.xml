@@ -33,6 +33,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:clickable="true"
+            android:typeface="sans"
             android:background="?attr/selectableItemBackground"
             android:drawablePadding="@dimen/margin_10"
             android:textColor="#3b5998"
@@ -62,6 +63,7 @@
             android:layout_centerInParent="true"
             android:background="@color/transparent"
             android:text="@string/or"
+            android:typeface="sans"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -103,6 +105,7 @@
             android:background="?attr/selectableItemBackground"
             android:drawablePadding="@dimen/margin_22"
             android:textColor="#f34a38"
+            android:typeface="sans"
             android:clickable="true"
             android:text="@string/log_in_with_google"
             android:drawableLeft="@drawable/google_72"

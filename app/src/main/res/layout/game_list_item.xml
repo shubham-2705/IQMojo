@@ -49,8 +49,8 @@
                 android:id="@+id/txvHeading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Shubham LAmba"
                 android:textSize="@dimen/app_text_size"
+                android:typeface="serif"
                 android:textColor="@color/dark_grey_text"/>
 
             <com.iqmojo.base.ui.widgets.AutoResizeTextView
@@ -58,10 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="@dimen/margin_5"
+                android:typeface="monospace"
                 android:layout_below="@id/txvHeading"
                 android:lineSpacingMultiplier="1.1"
                 android:textSize="@dimen/expiry_text_size"
-                android:text="buiiuqd ubfu ibquid fhuf bfiuqf ibi ibqufi iubqf qfuq"
                 android:textColor="@color/grey_text_color"/>
 
             <TextView
@@ -70,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/red_gradient_rounded_bg"
                 android:gravity="center"
+                android:typeface="monospace"
                 android:layout_marginTop="7dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

@@ -92,8 +92,6 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         context = EnterMobileActivity.this;
         edtMobile = (EditText) findViewById(R.id.edtMobile);
         txvGetOtp = (TextView) findViewById(R.id.txvGetOtp);
-        FontHelper.applyFont(this, txvGetOtp, "fonts/sub_heading.OTF");
-        FontHelper.applyFont(this, edtMobile, "fonts/sub_heading.OTF");
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
         txvGetOtp.setOnClickListener(this);
     }
@@ -110,10 +108,18 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                         public void onPermissionResult(boolean isGranted, int requestCode) {
                             if (isGranted) {
                                 // permission is granted
-                                hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+                                PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                                    @Override
+                                    public void onPermissionResult(boolean isGranted, int requestCode) {
+                                        if (isGranted) {
+                                            // permission is granted
+                                            hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+                                        }
+                                    }
+                                }).validate(Manifest.permission.READ_SMS);
                             }
                         }
-                    }).validate(Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_STATE);
+                    }).validate(Manifest.permission.READ_PHONE_STATE);
                 }
                 break;
         }

@@ -67,9 +67,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         TextView txvgoogle= (TextView)findViewById(R.id.txvgoogle);
         TextView txvfb= (TextView)findViewById(R.id.txvfb);
         TextView txvOr= (TextView)findViewById(R.id.txvOr);
-        FontHelper.applyFont(this,txvfb,"fonts/medium.OTF");
-        FontHelper.applyFont(this,txvgoogle,"fonts/medium.OTF");
-        FontHelper.applyFont(this,txvOr,"fonts/medium.OTF");
+//        FontHelper.applyFont(this,txvfb,"fonts/medium.OTF");
+//        FontHelper.applyFont(this,txvgoogle,"fonts/medium.OTF");
+//        FontHelper.applyFont(this,txvOr,"fonts/medium.OTF");
 
         context = LoginActivity.this;
         callbackManager = CallbackManager.Factory.create();
@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-                        Toast.makeText(context, "succ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show();
                         GraphRequest request = GraphRequest.newMeRequest(
                                 loginResult.getAccessToken(),
                                 new GraphRequest.GraphJSONObjectCallback() {

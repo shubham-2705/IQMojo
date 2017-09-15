@@ -59,10 +59,6 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             holder.txvDesc.setText(gameItemResponse.getShortDesc());
             holder.txvHeading.setText(gameItemResponse.getName());
 
-            FontHelper.applyFont(mcontext, holder.txvDesc, "fonts/sub_heading.OTF");
-            FontHelper.applyFont(mcontext, holder.txvHeading, "fonts/heading.OTF");
-            FontHelper.applyFont(mcontext, holder.txvStart, "fonts/sub_heading.OTF");
-
             String decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
             if (decoded_url != null && !TextUtils.isEmpty(decoded_url))
                 Picasso.with(mcontext).load(decoded_url).into(holder.imvGameLogo);
