@@ -57,4 +57,6 @@ public interface AppConstants {
     String KEY_EMAIL_ID = "email_id";
     String KEY_OTP = "otp";
     String KEY_GCM_ID = "gcm_id";
+    String KEY_FB_PROFILE_PIC = "fb_profile_pic";
+
 }
