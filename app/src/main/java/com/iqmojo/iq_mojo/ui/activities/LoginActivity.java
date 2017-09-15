@@ -2,6 +2,7 @@ package com.iqmojo.iq_mojo.ui.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -58,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     TextView txvgoogle,txvfb;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
-    String strEmail="", strId="", strLocation="", gcmRegID="";
+    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl, fb_firstname, fb_lastname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,12 +121,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
                                             }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
 
-                                            Log.v("devicetoken---->>>", gcmRegID);
+                                                fb_firstname = response.getJSONObject().getString("first_name");
+                                            }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("last_name"))){
+
+                                                fb_lastname = response.getJSONObject().getString("last_name");
+                                            }
+                                            if (response != null && response.getError() == null &&
+                                                    response.getJSONObject() != null) {
+                                                fbprofilepicurl = response.getJSONObject().getJSONObject("picture")
+                                                        .getJSONObject("data").getString("url");
+                                            }
+
+                                            Log.v("fbprofilepicurl---->>>", fbprofilepicurl);
 
                                             IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
-
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PROFILE_PIC, fbprofilepicurl);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
 
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
@@ -141,7 +155,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                 });
 
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}");
+                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}, picture.width(150).height(150)");
                         request.setParameters(parameters);
                         request.executeAsync();
 
@@ -185,10 +199,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ShowLog.d(TAG, "resultCode:" + resultCode);
+        ShowLog.d(TAG, "data:" + data.getData());
+
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            ShowLog.d(TAG, "resultCode:" + resultCode);
             handleSignInResult(result);
         }
         else
@@ -211,6 +229,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             ShowLog.d(TAG, "handleSignInResult:" + acct.getDisplayName());
+
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, personName);
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC, personPhoto.toString());
+
+            ShowLog.d(TAG, "personGivenName:" + personGivenName);
+
+
         } else {
             // Signed out, show unauthenticated UI.
         }
