@@ -58,7 +58,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     Context context;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
-    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl;
+    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl, fb_firstname, fb_lastname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +118,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
                                             }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
+
+                                                fb_firstname = response.getJSONObject().getString("first_name");
+                                            }
+                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("last_name"))){
+
+                                                fb_lastname = response.getJSONObject().getString("last_name");
+                                            }
                                             if (response != null && response.getError() == null &&
                                                     response.getJSONObject() != null) {
                                                 fbprofilepicurl = response.getJSONObject().getJSONObject("picture")
@@ -128,7 +136,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                             IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
                                             IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PROFILE_PIC, fbprofilepicurl);
-
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
 
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
@@ -182,10 +190,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ShowLog.d(TAG, "resultCode:" + resultCode);
+        ShowLog.d(TAG, "data:" + data.getData());
+
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            ShowLog.d(TAG, "resultCode:" + resultCode);
             handleSignInResult(result);
         }
         else
@@ -216,6 +228,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, personName);
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC, personPhoto.toString());
 
             ShowLog.d(TAG, "personGivenName:" + personGivenName);
 

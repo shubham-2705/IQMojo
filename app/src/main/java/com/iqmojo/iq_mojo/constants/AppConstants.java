@@ -58,5 +58,9 @@ public interface AppConstants {
     String KEY_OTP = "otp";
     String KEY_GCM_ID = "gcm_id";
     String KEY_FB_PROFILE_PIC = "fb_profile_pic";
+    String KEY_FB_NAME = "fb_name";
+    String KEY_GOOGLE_NAME = "google_name";
+    String KEY_GOOGLE_PIC = "google_pic";
+
 
 }
