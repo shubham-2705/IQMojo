@@ -121,7 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                             if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
 
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
-                                            }else strLocation = "india";
+                                            }else strLocation = "";
                                             if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
 
                                                 fb_firstname = response.getJSONObject().getString("first_name");
@@ -145,7 +145,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
                                             i.putExtra(AppConstants.LOCATION, strLocation);
-                                            i.putExtra(AppConstants.FB_ID, strId);
+                                            i.putExtra(AppConstants.ID, strId);
                                             i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
                                             startActivity(i);
 
@@ -232,18 +232,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             GoogleSignInAccount acct = result.getSignInAccount();
             ShowLog.d(TAG, "handleSignInResult:" + acct.getDisplayName());
 
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
-
-            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, personName);
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, acct.getDisplayName());
             IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_PIC, personPhoto.toString());
 
-            ShowLog.d(TAG, "personGivenName:" + personGivenName);
 
+            Intent i = new Intent(context, EnterMobileActivity.class);
+            i.putExtra(AppConstants.EMAIL_ID,acct.getEmail());
+            i.putExtra(AppConstants.ID,acct.getId());
+            i.putExtra(AppConstants.GOOGLE_TOKEN, acct.getIdToken());
+            startActivity(i);
 
         } else {
             // Signed out, show unauthenticated UI.

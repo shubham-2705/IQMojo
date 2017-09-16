@@ -38,7 +38,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
     private EditText edtMobile;
     private TextView txvGetOtp;
-    private String email = "", location = "", id = "", gcmId = "";
+    private String email = "", location = "", id = "", gcmId = "", google_token;
     Context context;
 
     @Override
@@ -52,16 +52,22 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
             email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
         else email = "";
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
-            id = getIntent().getExtras().getString(AppConstants.FB_ID);
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.ID)))
+            id = getIntent().getExtras().getString(AppConstants.ID);
         else id = "";
 
         if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
             location = getIntent().getExtras().getString(AppConstants.LOCATION);
         else location = "";
+
         if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
             gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
         else gcmId = "";
+
+        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)))
+            google_token = getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN);
+        else google_token = "";
+
 
 
         edtMobile.addTextChangedListener(new TextWatcher() {
@@ -160,8 +166,10 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                             + "&country=" + location + "&appVersion=" + BuildConfig.VERSION_NAME + "&deviceName=" + android.os.Build.MODEL +
                             "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=android" + "&deviceToken=" + gcmId
                             + "&androidVersion=" + Build.VERSION.RELEASE + "&androidId=" + CommonFunctionsUtil.getVersionName() + "&networkType=" +
-                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + "" +
-                            "&googleName=" + "" + "&googleToken=" + "" + "&googlePicture=" + "" + "&fBPlayerId=" + id;
+                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + id +
+                            "&googleName=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_NAME) + "&googleToken=" +
+                            google_token + "&googlePicture=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_PIC) + "&fBPlayerId=" + id;
+
                     url = url.replace(" ", "%20");
                     ShowLog.v("url-->> ", url);
                     break;
@@ -193,14 +201,12 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                         RegisterResponse registerResponse = (RegisterResponse) responseObject;
                         try {
 
-                            IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, registerResponse.getUserId());
-                            IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, registerResponse.getCoins());
-                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, email);
-                            IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, registerResponse.getOtp());
-
-
                             Intent i = new Intent(context, EnterOtpActivity.class);
                             i.putExtra(AppConstants.MOBILE, edtMobile.getText().toString().trim());
+                            i.putExtra(AppConstants.KEY_USER_ID, registerResponse.getUserId());
+                            i.putExtra(AppConstants.KEY_COINS, registerResponse.getCoins());
+                            i.putExtra(AppConstants.KEY_EMAIL_ID, email);
+                            i.putExtra(AppConstants.KEY_OTP, registerResponse.getOtp());
                             startActivity(i);
 
                         } catch (Exception e) {

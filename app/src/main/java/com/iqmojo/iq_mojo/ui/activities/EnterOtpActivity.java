@@ -98,6 +98,11 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         {
             case R.id.txvDone:
 
+                IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, getIntent().getIntExtra(AppConstants.KEY_USER_ID, 0));
+                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, getIntent().getLongExtra(AppConstants.KEY_COINS,0));
+                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, getIntent().getStringExtra(AppConstants.KEY_EMAIL_ID));
+                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, getIntent().getLongExtra(AppConstants.KEY_OTP,0));
+
                 Intent i = new Intent(context, HomeActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
