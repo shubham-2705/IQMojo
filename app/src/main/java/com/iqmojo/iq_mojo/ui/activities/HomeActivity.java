@@ -14,6 +14,7 @@ import android.support.v4.widget.ViewDragHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +36,10 @@ import com.iqmojo.iq_mojo.ui.fragments.FaqFragment;
 import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
 import com.iqmojo.iq_mojo.ui.fragments.WinnerFragment;
 import com.iqmojo.iq_mojo.utils.FontHelper;
+import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +58,11 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private MenuAdapter menuAdapter;
     private int active_position = 0;
     private TextView txvUserEmail,txvCoins,txvUserName;
+    private ImageView imvProfilePic;
     DuoDrawerLayout drawerLayout;
     DuoDrawerToggle drawerToggle;
-    private static int[] tab_list = {AppConstants.HOME, AppConstants.WINNER,
-            AppConstants.CONTEST, AppConstants.FAQ};
+    private static int[] tab_list = {AppConstants.HomeTabKeys.HOME, AppConstants.HomeTabKeys.WINNER,
+            AppConstants.HomeTabKeys.CONTEST, AppConstants.HomeTabKeys.FAQ};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +105,15 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private void setupHamburgerList()
     {
         txvUserEmail.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_EMAIL_ID));
-        txvUserName.setText("");
+        txvUserName.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_DISPLAY_NAME));
+        String decoded_url = null;
+        try {
+            decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_DISPLAY_PIC),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (decoded_url != null && !TextUtils.isEmpty(decoded_url))
+            Picasso.with(this).load(decoded_url).into(imvProfilePic);
         menuAdapter = new MenuAdapter(this);
         listView.setAdapter(menuAdapter);
 
@@ -137,6 +150,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         listView = (ListView) findViewById(R.id.listView);
         txvUserEmail = (TextView) findViewById(R.id.txvUserEmail);
         txvUserName = (TextView) findViewById(R.id.txvUserName);
+        imvProfilePic = (ImageView) findViewById(R.id.imvProfilePic);
         setupViewPager(viewPager);
 
         tabs = (TabLayout) findViewById(R.id.tabs);

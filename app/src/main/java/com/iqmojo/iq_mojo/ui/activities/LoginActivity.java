@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     TextView txvgoogle,txvfb;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
-    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl, fb_firstname, fb_lastname;
+    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl="", fb_firstname="", fb_lastname="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,11 +135,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                                         .getJSONObject("data").getString("url");
                                             }
 
-                                            Log.v("fbprofilepicurl---->>>", fbprofilepicurl);
+                                            ShowLog.v("fbprofilepicurl---->>>", fbprofilepicurl);
 
                                             IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PROFILE_PIC, fbprofilepicurl);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_PIC, fbprofilepicurl);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, fb_firstname + " "+ fb_lastname);
 
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
@@ -155,7 +155,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                 });
 
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}, picture.width(150).height(150)");
+                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}, picture.width(140).height(130)");
                         request.setParameters(parameters);
                         request.executeAsync();
 
@@ -237,8 +237,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
-            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, personName);
-            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC, personPhoto.toString());
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, personName);
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_PIC, personPhoto.toString());
 
             ShowLog.d(TAG, "personGivenName:" + personGivenName);
 

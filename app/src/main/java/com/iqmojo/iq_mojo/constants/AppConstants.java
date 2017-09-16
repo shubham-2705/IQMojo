@@ -17,6 +17,7 @@ public interface AppConstants {
     String FB_ID = "fb_id";
     String MOBILE = "mobile";
     String DEVICE_TOKEN = "Device_Token";
+    String SCREEN_NO = "screen_no";
 
     //Toolbar Change
 
@@ -35,11 +36,20 @@ public interface AppConstants {
 
 
     // Home tabs
-    int HOME = 0;
-    int WINNER = 1;
-    int CONTEST = 2;
-    int FAQ = 3;
+    interface HomeTabKeys {
+        int HOME = 0;
+        int WINNER = 1;
+        int CONTEST = 2;
+        int FAQ = 3;
+    }
 
+
+    // My Account Dashboard Tabs
+    interface MyAccountTabKeys {
+
+        int MY_POINTS = 0;
+        int MY_TRANSACTIONS = 1;
+    }
 
 
     // Hamburger Menu options
@@ -57,10 +67,8 @@ public interface AppConstants {
     String KEY_EMAIL_ID = "email_id";
     String KEY_OTP = "otp";
     String KEY_GCM_ID = "gcm_id";
-    String KEY_FB_PROFILE_PIC = "fb_profile_pic";
-    String KEY_FB_NAME = "fb_name";
-    String KEY_GOOGLE_NAME = "google_name";
-    String KEY_GOOGLE_PIC = "google_pic";
+    String KEY_DISPLAY_NAME = "display_name";
+    String KEY_DISPLAY_PIC = "display_pic";
 
 
 }

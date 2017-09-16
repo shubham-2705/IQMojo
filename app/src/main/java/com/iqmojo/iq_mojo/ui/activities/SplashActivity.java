@@ -73,6 +73,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                     public void run() {
                         Intent i = new Intent(context, LoginActivity.class);
                         startActivity(i);
+                        finish();
 
                     }
                 }, 2000);
@@ -135,6 +136,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                             if (loginResponse.getLoginStatus()) {
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                         } catch (Exception e) {
                             hideProgressDialog();

@@ -1,6 +1,7 @@
 package com.iqmojo.iq_mojo.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.iqmojo.R;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
+import com.iqmojo.iq_mojo.ui.activities.MyAccountDashboardActivity;
 
 
 public class MenuAdapter extends BaseAdapter {
@@ -81,10 +83,16 @@ public class MenuAdapter extends BaseAdapter {
                 ((HomeActivity)mContext).closeDrawer();
                 switch (position) {
                     case AppConstants.My_Points:
+                        Intent intent=new Intent(mContext, MyAccountDashboardActivity.class);
+                        intent.putExtra(AppConstants.SCREEN_NO,0);
+                        mContext.startActivity(intent);
                         break;
                     case AppConstants.My_Profile:
                         break;
                     case AppConstants.Transactions:
+                        Intent intent1=new Intent(mContext, MyAccountDashboardActivity.class);
+                        intent1.putExtra(AppConstants.SCREEN_NO,1);
+                        mContext.startActivity(intent1);
                         break;
                     case AppConstants.Referral:
                         break;

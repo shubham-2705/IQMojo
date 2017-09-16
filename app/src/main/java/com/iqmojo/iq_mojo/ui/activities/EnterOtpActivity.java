@@ -99,6 +99,7 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
             case R.id.txvDone:
 
                 Intent i = new Intent(context, HomeActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
 
                 break;

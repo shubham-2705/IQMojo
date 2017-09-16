@@ -15,6 +15,11 @@
         <item>FAQs</item>
     </string-array>
 
+    <string-array name="pager_0">
+        <item>My Points</item>
+        <item>My Transactions</item>
+    </string-array>
+
     <string-array name="menu_">
         <item>My Points</item>
         <item>My Profile</item>

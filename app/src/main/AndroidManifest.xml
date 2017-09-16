@@ -62,12 +62,12 @@
             android:name=".iq_mojo.ui.activities.EnterOtpActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
         <activity
             android:name=".iq_mojo.ui.activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"></activity>
+
+        <activity android:name=".iq_mojo.ui.activities.MyAccountDashboardActivity"></activity>
     </application>
 
 </manifest>
