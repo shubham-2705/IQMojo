@@ -28,7 +28,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.vision.text.Text;
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.facebook.FacebookSdk;
@@ -224,6 +223,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
+        ToastUtil.showLongToast(this,"handleSignInResult:" + result.isSuccess());
         ShowLog.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.

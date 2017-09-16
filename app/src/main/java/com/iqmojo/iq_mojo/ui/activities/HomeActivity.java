@@ -24,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.vision.text.Text;
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
