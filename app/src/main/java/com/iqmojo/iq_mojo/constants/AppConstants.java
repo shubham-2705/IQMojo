@@ -14,10 +14,11 @@ public interface AppConstants {
     //Intent keys
     String LOCATION = "fb_location";
     String EMAIL_ID = "email_id";
-    String FB_ID = "fb_id";
+    String ID = "id";
     String MOBILE = "mobile";
     String DEVICE_TOKEN = "Device_Token";
     String SCREEN_NO = "screen_no";
+    String GOOGLE_TOKEN = "google_token";
 
     //Toolbar Change
 
