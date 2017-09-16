@@ -107,6 +107,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     public void onCompleted(JSONObject object, GraphResponse response) {
                                         try {
 
+                                            Log.i("response --> ", ""+ response);
+
 
                                             if(response.getJSONObject().getString("id")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("id"))){
 
@@ -116,10 +118,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                                 strEmail = response.getJSONObject().getString("email");
                                             }
-                                            if(response.getJSONObject().getString("location")!=null && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
+                                            if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
 
                                                 strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
-                                            }
+                                            }else strLocation = "india";
                                             if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
 
                                                 fb_firstname = response.getJSONObject().getString("first_name");
@@ -132,7 +134,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                                     response.getJSONObject() != null) {
                                                 fbprofilepicurl = response.getJSONObject().getJSONObject("picture")
                                                         .getJSONObject("data").getString("url");
-                                            }
+                                            }else fbprofilepicurl = "";
 
                                             ShowLog.v("fbprofilepicurl---->>>", fbprofilepicurl);
 
