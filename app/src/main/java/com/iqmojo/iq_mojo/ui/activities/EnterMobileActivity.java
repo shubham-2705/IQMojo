@@ -77,6 +77,11 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                 } else {
                     edtMobile.setLetterSpacing(0f);
                 }
+                if(s.length()==10)
+                {
+                    hideDialogKeypad();
+                    hideKeypad();
+                }
 
             }
 
