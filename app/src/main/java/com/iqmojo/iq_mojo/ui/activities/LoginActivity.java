@@ -241,6 +241,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             i.putExtra(AppConstants.EMAIL_ID,acct.getEmail());
             i.putExtra(AppConstants.ID,acct.getId());
             i.putExtra(AppConstants.GOOGLE_TOKEN, acct.getIdToken());
+            i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
+
             startActivity(i);
 
         } else {
