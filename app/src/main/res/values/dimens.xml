@@ -53,6 +53,8 @@
     <dimen name="text_size_18sp">18sp</dimen>
     <dimen name="text_size_20sp">20sp</dimen>
     <dimen name="text_size_21sp">21sp</dimen>
+    <dimen name="text_size_25sp">25sp</dimen>
+
 
     <dimen name="margin_1">1dp</dimen>
     <dimen name="margin_2">2dp</dimen>

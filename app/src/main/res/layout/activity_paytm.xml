@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.iqmojo.iq_mojo.ui.activities.PaytmActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transferPaytm"
+            android:textSize="@dimen/text_size_25sp"/>
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_21sp"
+            android:layout_marginTop="@dimen/margin_7"
+            android:text=""
+            />
+
+        <TextView
+            android:id="@+id/text_rupees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_7"
+            android:textSize="@dimen/text_size_18sp"
+            android:drawablePadding="@dimen/margin_5"
+            android:drawableLeft="@drawable/pager_00_inactive"
+            android:text="125.26"/>
+
+        <TextView
+            android:id="@+id/text_avail_bal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_15sp"
+            android:text="@string/avail_bal"
+            android:layout_marginTop="@dimen/margin_7"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+
+            <EditText
+                android:id="@+id/editmobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/enterMobile"
+                android:textColor="@color/colorPrimaryDark"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:typeface="sans" />
+
+            <EditText
+                android:id="@+id/editAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="@string/amount"
+                android:textColor="@color/colorPrimaryDark"
+                android:typeface="sans"
+                android:inputType="numberDecimal"
+                />
+
+        <TextView
+            android:id="@+id/txvSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@id/rlyMobile"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="@dimen/padding_5"
+            android:gravity="center"
+            android:paddingLeft="@dimen/padding_50"
+            android:paddingRight="@dimen/padding_50"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/app_text_size"
+            android:typeface="monospace"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</RelativeLayout>

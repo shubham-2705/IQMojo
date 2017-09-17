@@ -36,4 +36,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="avail_bal">Available Balance</string>
+    <string name="bankAccount">Bank Account</string>
+    <string name="transferPaytm">Transfer to Paytm</string>
+    <string name="transferBank">Transfer to Bank Account</string>
+    <string name="enterMobile">Enter your mobile number</string>
+    <string name="amount">Amount</string>
+    <string name="accountname">Account Holder Name</string>
+    <string name="accountnum">Account Number</string>
+    <string name="confaccountnum">Confirm Account Number</string>
+    <string name="ifsc">IFSC Code</string>
 </resources>
