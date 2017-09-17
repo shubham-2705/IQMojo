@@ -6,124 +6,324 @@
     android:layout_height="match_parent"
     tools:context="com.iqmojo.iq_mojo.ui.activities.PaytmActivity">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/grey_gradient_bg">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/transferBank"
-            android:textSize="@dimen/text_size_25sp"/>
-
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_21sp"
-            android:layout_marginTop="@dimen/margin_7"
-            android:text=""
-            />
-
-        <TextView
-            android:id="@+id/text_rupees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_7"
-            android:textSize="@dimen/text_size_18sp"
-            android:drawablePadding="@dimen/margin_5"
-            android:drawableLeft="@drawable/pager_00_inactive"
-            android:text="125.26"/>
-
-        <TextView
-            android:id="@+id/text_avail_bal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_15sp"
-            android:text="@string/avail_bal"
-            android:layout_marginTop="@dimen/margin_7"
-            />
-
-    </LinearLayout>
+            android:orientation="vertical">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:gravity="center">
+            <LinearLayout
+                android:id="@+id/llyBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/accountname"
-            android:textColor="@color/colorPrimaryDark"
-            android:typeface="sans" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:textSize="@dimen/profile_name_text_size"
+                    android:typeface="monospace"
+                    android:text="@string/transferBank"
+                    />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/accountnum"
-            android:textColor="@color/colorPrimaryDark"
-            android:typeface="sans"
-            />
+                <TextView
+                    android:id="@+id/text_rupees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:drawableLeft="@drawable/pager_00_inactive"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:text="125.26"
+                    android:textSize="@dimen/profile_name"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/text_avail_bal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="@string/avail_bal"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/txvNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:text="*You can transfer upto a max 100 Points."
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="sans" />
+
+            </LinearLayout>
 
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/confaccountnum"
-            android:textColor="@color/colorPrimaryDark"
-            android:typeface="sans" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_below="@id/llyBank"
+                android:orientation="vertical">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/amount"
-            android:textColor="@color/colorPrimaryDark"
-            android:typeface="sans"
-            android:inputType="numberDecimal"
-            />
+                <RelativeLayout
+                    android:id="@+id/rlyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_20"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/mobile_red"/>
 
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="@string/ifsc"
-            android:textColor="@color/colorPrimaryDark"
-            android:typeface="sans" />
-    </LinearLayout>
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:typeface="monospace"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvMobile"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="20"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:imeOptions="actionNext"
+                        android:hint="Account Holder Name"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
 
-</ScrollView>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvMobile"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlyAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_30"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvAccount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/acc_num_red"/>
+
+
+                    <EditText
+                        android:id="@+id/editAccount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvAccount"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="15"
+                        android:imeOptions="actionNext"
+                        android:hint="Account Number"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvAccount"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlyConfirmAcc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_30"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvConfirmAcc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/confirm_acc_num_red"/>
+
+
+                    <EditText
+                        android:id="@+id/editConfirmAcc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvConfirmAcc"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="15"
+                        android:imeOptions="actionNext"
+                        android:hint="Confirm Account Number"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvConfirmAcc"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlyAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_30"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/amount_red"/>
+
+
+                    <EditText
+                        android:id="@+id/editAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvAmount"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="5"
+                        android:imeOptions="actionNext"
+                        android:hint="Amount"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvAmount"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rlyIfsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_30"
+                    android:layout_marginBottom="@dimen/padding_30"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_edittext"
+                    android:layout_marginRight="@dimen/left_right_margin_for_edittext"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvIfsc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/ifsc_red"/>
+
+
+                    <EditText
+                        android:id="@+id/editIfsc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvIfsc"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="10"
+                        android:imeOptions="actionDone"
+                        android:hint="IFSC Code"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvIfsc"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/txvSubmit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@drawable/red_gradient_rounded_bg"
+                    android:elevation="@dimen/padding_5"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_50"
+                    android:paddingRight="@dimen/padding_50"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="sans"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 </RelativeLayout>

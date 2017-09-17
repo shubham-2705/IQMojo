@@ -6,5 +6,6 @@
     <dimen name="profile_name_text_size">19sp</dimen>
     <dimen name="profile_name">17sp</dimen>
     <dimen name="drawer_text_size">15sp</dimen>
+    <dimen name="button_width">170dp</dimen>
 
 </resources>

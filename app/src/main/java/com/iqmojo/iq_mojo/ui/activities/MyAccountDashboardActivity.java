@@ -34,10 +34,8 @@ import java.util.List;
 
 public class MyAccountDashboardActivity extends BaseActivity {
 
-    Toolbar mToolbar;
     ViewPager viewPager;
     TabLayout tabs;
-    private TextView txvCoins;
     private int active_position = 0;
     private static int[] tab_list = {AppConstants.MyAccountTabKeys.MY_POINTS, AppConstants.MyAccountTabKeys.MY_TRANSACTIONS};
 
@@ -61,7 +59,7 @@ public class MyAccountDashboardActivity extends BaseActivity {
     }
 
     private void setupToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
 
@@ -71,7 +69,7 @@ public class MyAccountDashboardActivity extends BaseActivity {
         mToolbar.setLogo(R.drawable.iqmojo_toolbar);
 
 
-        txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
+        TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
         txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
     }

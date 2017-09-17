@@ -11,6 +11,8 @@
     <color name="grey_text_color">#727272</color>
     <color name="dark_grey_text">#2E2E2E</color>
     <color name="profile_bg">#E0E0E1</color>
+    <color name="wrong_ans">#ef3c3c</color>
+    <color name="right_ans">#0e9952</color>
 
 
 </resources>

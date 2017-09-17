@@ -20,6 +20,7 @@ public interface AppConstants {
     String DEVICE_TOKEN = "Device_Token";
     String SCREEN_NO = "screen_no";
     String GOOGLE_TOKEN = "google_token";
+    String GAME_ITEM_OBJECT = "game_object";
 
     //Toolbar Change
 
@@ -74,6 +75,7 @@ public interface AppConstants {
     String KEY_FB_PIC = "fb_pic";
     String KEY_FB_NAME = "fb_name";
     String KEY_MOBILE = "mobile";
+
 
 
 }

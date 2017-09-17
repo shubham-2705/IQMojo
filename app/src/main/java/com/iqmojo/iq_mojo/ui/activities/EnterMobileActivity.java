@@ -168,7 +168,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                     // api request
                     url = ApiConstants.Urls.REGISTER_USER + "?" + "msisdn=" + edtMobile.getText().toString().trim() + "&email=" + email
                             + "&country=" + location + "&appVersion=" + BuildConfig.VERSION_NAME + "&deviceName=" + android.os.Build.MODEL +
-                            "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=android" + "&deviceToken=" + gcmId
+                            "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=ANDROID" + "&deviceToken=" + gcmId
                             + "&androidVersion=" + Build.VERSION.RELEASE + "&androidId=" + CommonFunctionsUtil.getVersionName() + "&networkType=" +
                             CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + google_id +
                             "&googleName=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_GOOGLE_NAME) + "&googleToken=" +

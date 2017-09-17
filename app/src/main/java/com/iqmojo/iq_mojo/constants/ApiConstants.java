@@ -17,6 +17,7 @@ public interface ApiConstants {
         String GAME_LIST = BASE_URL + "games";
         String LOGIN = BASE_URL + "login/";
         String RESEND = BASE_URL + "sendOtp/";
+        String GET_QUESTION = BASE_URL + "startGame";
     }
 
     interface REQUEST_TYPE
@@ -25,6 +26,7 @@ public interface ApiConstants {
         int LOGIN = 1;
         int RESEND = 2;
         int GAME_LIST=3;
+        int GET_QUESTION =4 ;
     }
 
 

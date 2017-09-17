@@ -7,4 +7,7 @@
     <dimen name="profile_name_text_size">20sp</dimen>
     <dimen name="profile_name">18sp</dimen>
     <dimen name="drawer_text_size">16sp</dimen>
+    <dimen name="button_width">200dp</dimen>
+    <dimen name="progress_radius">19dp</dimen>
+
 </resources>

@@ -1,6 +1,7 @@
 package com.iqmojo.iq_mojo.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.iqmojo.R;
+import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.GameItemResponse;
+import com.iqmojo.iq_mojo.ui.activities.GameDetailsActivity;
 import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
 import com.iqmojo.iq_mojo.utils.FontHelper;
 import com.squareup.picasso.Picasso;
@@ -63,9 +66,14 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             if (decoded_url != null && !TextUtils.isEmpty(decoded_url))
                 Picasso.with(mcontext).load(decoded_url).into(holder.imvGameLogo);
 
-            holder.txvHeading.setOnClickListener(new View.OnClickListener() {
+            holder.txvStart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    Intent intent=new Intent(mcontext, GameDetailsActivity.class);
+                    intent.putExtra(AppConstants.GAME_ITEM_OBJECT,gameItemResponse);
+                    mcontext.startActivity(intent);
+
 
                 }
             });

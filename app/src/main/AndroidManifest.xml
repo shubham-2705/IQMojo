@@ -67,13 +67,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".iq_mojo.ui.activities.MyAccountDashboardActivity" />
-        <activity android:name=".iq_mojo.ui.activities.PaytmActivity"
+        <activity
+            android:name=".iq_mojo.ui.activities.PaytmActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name=".iq_mojo.ui.activities.BankActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.BankActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity android:name=".iq_mojo.ui.activities.GameDetailsActivity" />
+        <activity android:name=".iq_mojo.ui.activities.GameEntryFeeActivity" />
+        <activity android:name=".iq_mojo.ui.activities.PlayQuestionActivity"></activity>
     </application>
 
 </manifest>

@@ -45,6 +45,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 
@@ -59,7 +60,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private MenuAdapter menuAdapter;
     private int active_position = 0;
     private TextView txvUserEmail, txvCoins, txvUserName;
-    private ImageView imvProfilePic;
+    private CircleImageView imvProfilePic;
     DuoDrawerLayout drawerLayout;
     DuoDrawerToggle drawerToggle;
     long backpress_time=System.currentTimeMillis();
@@ -177,7 +178,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         listView = (ListView) findViewById(R.id.listView);
         txvUserEmail = (TextView) findViewById(R.id.txvUserEmail);
         txvUserName = (TextView) findViewById(R.id.txvUserName);
-        imvProfilePic = (ImageView) findViewById(R.id.imvProfilePic);
+        imvProfilePic = (CircleImageView) findViewById(R.id.imvProfilePic);
         setupViewPager(viewPager);
 
         tabs = (TabLayout) findViewById(R.id.tabs);

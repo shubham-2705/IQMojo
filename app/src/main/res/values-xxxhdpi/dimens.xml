@@ -6,4 +6,6 @@
     <dimen name="profile_name_text_size">24sp</dimen>
     <dimen name="profile_name">24sp</dimen>
     <dimen name="drawer_text_size">23sp</dimen>
+    <dimen name="button_width">300dp</dimen>
+    <dimen name="progress_radius">10dp</dimen>
 </resources>

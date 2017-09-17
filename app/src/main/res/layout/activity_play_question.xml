@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:timer="http://schemas.android.com/apk/res-auto"
+    xmlns:sage42="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:id="@+id/llyquestions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/margin_10"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txvTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center"
+                android:text="56"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/profile_name_text_size"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txvTotal"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="center"
+                android:text="Total Questions"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="sans" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txvAttempted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center"
+                android:text="56"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/profile_name_text_size"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txvAttempted"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="center"
+                android:text="Attempted"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="sans" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txvCorrect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center"
+                android:text="56"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/profile_name_text_size"
+                android:typeface="serif" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txvCorrect"
+                android:layout_marginTop="@dimen/margin_5"
+                android:gravity="center"
+                android:text="Correct Answer"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="sans" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llyquestions">
+
+        <LinearLayout
+            android:id="@+id/llyEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:elevation="@dimen/margin_5"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/llyEmpty"
+            android:background="@drawable/grey_gradient_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.iqmojo.base.ui.widgets.AutoResizeTextView
+                    android:id="@+id/txvQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="45dp"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.3"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/profile_name_text_size"
+                    android:typeface="monospace" />
+
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:card_view="http://schemas.android.com/tools"
+                    android:id="@+id/cardBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_margin="@dimen/margin_15"
+                    android:background="@color/transparent"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/grey_text_color"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="@dimen/margin_2"
+                    app:cardPreventCornerOverlap="false">
+
+                    <ImageView
+                        android:id="@+id/merchantCardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_5"
+                        android:scaleType="fitCenter" />
+
+                </android.support.v7.widget.CardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txvOption1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:typeface="monospace"
+                            android:background="@drawable/diagonal_drawable"
+                            android:elevation="@dimen/padding_2"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/margin_30dp"
+                            android:paddingRight="@dimen/margin_30dp"
+                            android:text="option 1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/expiry_text_size" />
+
+
+                        <TextView
+                            android:id="@+id/txvOption2"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:typeface="monospace"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:background="@drawable/diagonal_drawable"
+                            android:elevation="@dimen/padding_2"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/margin_30dp"
+                            android:paddingRight="@dimen/margin_30dp"
+                            android:text="option 1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/expiry_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/margin_5"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txvOption3"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:typeface="monospace"
+                            android:background="@drawable/diagonal_drawable"
+                            android:elevation="@dimen/padding_2"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/margin_30dp"
+                            android:paddingRight="@dimen/margin_30dp"
+                            android:text="option 1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/expiry_text_size" />
+                        <TextView
+                            android:id="@+id/txvOption4"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:typeface="monospace"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:background="@drawable/diagonal_drawable"
+                            android:elevation="@dimen/padding_2"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/margin_30dp"
+                            android:paddingRight="@dimen/margin_30dp"
+                            android:text="option 1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="@dimen/expiry_text_size" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/padding_20"
+        android:layout_below="@id/llyquestions">
+
+        <TextView
+            android:id="@+id/txvTime"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/drawer_text_size"
+            android:background="@drawable/circular_bg"/>
+
+        <io.github.krtkush.lineartimer.LinearTimerView
+            android:id="@+id/linearTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            timer:initialColor="@color/wrong_ans"
+            timer:progressColor="@color/colorPrimaryDark"
+            timer:startingPoint="270"
+            timer:radius="@dimen/progress_radius"
+            android:layout_centerInParent="true"
+            timer:strokeWidth="3dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

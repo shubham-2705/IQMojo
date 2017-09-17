@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,11 +24,16 @@ import com.iqmojo.iq_mojo.ui.activities.BankActivity;
 import com.iqmojo.iq_mojo.ui.activities.PaytmActivity;
 import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyPointsFragment extends BaseFragment implements View.OnClickListener {
 
     View view;
-    Button btn_paytm, btn_bank;
-    ImageView img_profile;
+    TextView btn_paytm, btn_bank;
+    CircleImageView img_profile;
     String img_url;
     Context context;
     TextView text_name;
@@ -33,26 +41,51 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_my_points, container, false);
+        try {
 
-        context = getActivity();
+            if (view == null) {
+                view = inflater.inflate(R.layout.fragment_my_points, container, false);
+                context = getBaseActivity();
 
-        text_name = (TextView) view.findViewById(R.id.text_name);
-        btn_bank = (Button) view.findViewById(R.id.btn_bank);
-        btn_paytm = (Button) view.findViewById(R.id.btn_paytm);
-        btn_bank.setOnClickListener(this);
-        btn_paytm.setOnClickListener(this);
+                text_name = (TextView) view.findViewById(R.id.text_name);
+                btn_bank = (TextView) view.findViewById(R.id.btn_bank);
+                btn_paytm = (TextView) view.findViewById(R.id.btn_paytm);
+                btn_bank.setOnClickListener(this);
+                btn_paytm.setOnClickListener(this);
 
-        img_profile = (ImageView) view.findViewById(R.id.img_profile_pic);
+                img_profile = (CircleImageView) view.findViewById(R.id.profile_image);
 
-        img_url =  IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_PIC);
+                String decoded_url = null;
+                try {
+                    if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_PIC)))
+                        decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_PIC), "UTF-8");
+                    if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_PIC)))
+                        decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_PIC), "UTF-8");
 
-        if (img_url != null && !TextUtils.isEmpty(img_url))
-            Picasso.with(context).load(img_url).into(img_profile);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
+                    Picasso.with(getBaseActivity()).load(decoded_url).into(img_profile);
+//                    img_profile.setBorderColor(ContextCompat.getColor(getBaseActivity(),R.color.white));
+                }
 
-        if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_NAME)))
-        text_name.setText(IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_NAME));
+                if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_NAME)))
+                    text_name.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_NAME));
+                if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME)))
+                    text_name.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME));
 
+            } else {
+                final ViewParent parent = view.getParent();
+                if (parent instanceof ViewManager) {
+                    final ViewManager viewManager = (ViewManager) parent;
+                    viewManager.removeView(view);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -65,7 +98,7 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
 
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.btn_bank:
 
