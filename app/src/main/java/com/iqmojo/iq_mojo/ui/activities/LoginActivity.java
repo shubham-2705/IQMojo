@@ -118,10 +118,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                                 strEmail = response.getJSONObject().getString("email");
                                             }
-                                            if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
-
-                                                strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
-                                            }else strLocation = "";
+//                                            if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
+//
+//                                                strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
+//                                            }else strLocation = "";
                                             if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
 
                                                 fb_firstname = response.getJSONObject().getString("first_name");
@@ -138,14 +138,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                                             ShowLog.v("fbprofilepicurl---->>>", fbprofilepicurl);
 
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_PIC, fbprofilepicurl);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, fb_firstname + " "+ fb_lastname);
+
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PIC, fbprofilepicurl);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC,"");
+                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, "");
 
                                             Intent i = new Intent(context, EnterMobileActivity.class);
                                             i.putExtra(AppConstants.EMAIL_ID, strEmail);
                                             i.putExtra(AppConstants.LOCATION, strLocation);
-                                            i.putExtra(AppConstants.ID, strId);
+                                            i.putExtra(AppConstants.FB_ID, strId);
                                             i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
                                             startActivity(i);
 
@@ -225,7 +227,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-        ToastUtil.showLongToast(this,"handleSignInResult:" + result.isSuccess());
         ShowLog.d(TAG, "handleSignInResult:" + result.isSuccess());
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
@@ -233,13 +234,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             ShowLog.d(TAG, "handleSignInResult:" + acct.getDisplayName());
 
             Uri personPhoto = acct.getPhotoUrl();
-            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_NAME, acct.getDisplayName());
-            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_DISPLAY_PIC, personPhoto.toString());
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, acct.getDisplayName());
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC, personPhoto.toString());
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PIC,"");
+            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, "");
 
 
             Intent i = new Intent(context, EnterMobileActivity.class);
             i.putExtra(AppConstants.EMAIL_ID,acct.getEmail());
-            i.putExtra(AppConstants.ID,acct.getId());
+            i.putExtra(AppConstants.GOOGLE_ID,acct.getId());
+            i.putExtra(AppConstants.LOCATION, strLocation);
             i.putExtra(AppConstants.GOOGLE_TOKEN, acct.getIdToken());
             i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
 
@@ -260,6 +264,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     GCMHelper  gcmRegistrationHelper = new GCMHelper(
                             getApplicationContext());
                     gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
+                    IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
 
                 } catch (Exception bug) {
                     bug.printStackTrace();

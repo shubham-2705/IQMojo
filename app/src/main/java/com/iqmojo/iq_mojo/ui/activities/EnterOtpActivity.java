@@ -32,7 +32,7 @@ import com.iqmojo.iq_mojo.utils.FontHelper;
 public class EnterOtpActivity extends BaseActivity implements View.OnClickListener, onUpdateViewListener {
 
     private EditText edtOTP;
-    private TextView txvDone,txvResend,txvgetCode;
+    private TextView txvDone, txvResend, txvgetCode;
     private Context context;
     private String mobileNo;
     private int attempt = 1;
@@ -54,12 +54,9 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()>0)
-                {
+                if (s.length() > 0) {
                     edtOTP.setLetterSpacing(0.5f);
-                }
-                else
-                {
+                } else {
                     edtOTP.setLetterSpacing(0f);
                 }
 
@@ -73,35 +70,32 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-
-    public void getView()
-    {
-        edtOTP=(EditText)findViewById(R.id.edtOTP);
-        txvDone=(TextView) findViewById(R.id.txvDone);
-        txvResend=(TextView) findViewById(R.id.txvResend);
-        txvgetCode=(TextView) findViewById(R.id.txvgetCode);
+    public void getView() {
+        edtOTP = (EditText) findViewById(R.id.edtOTP);
+        txvDone = (TextView) findViewById(R.id.txvDone);
+        txvResend = (TextView) findViewById(R.id.txvResend);
+        txvgetCode = (TextView) findViewById(R.id.txvgetCode);
 //        pbLoading=(ProgressBar) findViewById(R.id.pbLoading);
 
 
-
         txvDone.setOnClickListener(this);
-        edtOTP.setText(""+IqMojoPrefrences.getInstance(context).getLong(AppConstants.KEY_OTP));
+        edtOTP.setText(("" + getIntent().getLongExtra(AppConstants.KEY_OTP, 0)));
 
     }
 
     @Override
     public void onClick(View v) {
 
-        int id=v.getId();
+        int id = v.getId();
 
-        switch (id)
-        {
+        switch (id) {
             case R.id.txvDone:
 
                 IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, getIntent().getIntExtra(AppConstants.KEY_USER_ID, 0));
-                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, getIntent().getLongExtra(AppConstants.KEY_COINS,0));
+                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, getIntent().getLongExtra(AppConstants.KEY_COINS, 0));
                 IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, getIntent().getStringExtra(AppConstants.KEY_EMAIL_ID));
-                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, getIntent().getLongExtra(AppConstants.KEY_OTP,0));
+                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, getIntent().getLongExtra(AppConstants.KEY_OTP, 0));
+                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_MOBILE, mobileNo);
 
                 Intent i = new Intent(context, HomeActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -147,10 +141,10 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
 
                     clasz = ResendResponse.class;
 
-                    url = ApiConstants.Urls.RESEND + "?" + "msisdn=" + getIntent().getStringExtra(AppConstants.MOBILE) +"&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&googleMail=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_EMAIL_ID) +
+                    url = ApiConstants.Urls.RESEND + "?" + "msisdn=" + getIntent().getStringExtra(AppConstants.MOBILE) + "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&googleMail=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_EMAIL_ID) +
                             "&attempt=" + attempt;
                     url = url.replace(" ", "%20");
-                    Log.v("url-->> ",url);
+                    Log.v("url-->> ", url);
                     break;
 
 
@@ -191,7 +185,6 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }

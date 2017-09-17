@@ -14,7 +14,8 @@ public interface AppConstants {
     //Intent keys
     String LOCATION = "fb_location";
     String EMAIL_ID = "email_id";
-    String ID = "id";
+    String GOOGLE_ID = "google_id";
+    String FB_ID = "fb_id";
     String MOBILE = "mobile";
     String DEVICE_TOKEN = "Device_Token";
     String SCREEN_NO = "screen_no";
@@ -68,8 +69,11 @@ public interface AppConstants {
     String KEY_EMAIL_ID = "email_id";
     String KEY_OTP = "otp";
     String KEY_GCM_ID = "gcm_id";
-    String KEY_DISPLAY_NAME = "display_name";
-    String KEY_DISPLAY_PIC = "display_pic";
+    String KEY_GOOGLE_NAME = "google_name";
+    String KEY_GOOGLE_PIC = "google_pic";
+    String KEY_FB_PIC = "fb_pic";
+    String KEY_FB_NAME = "fb_name";
+    String KEY_MOBILE = "mobile";
 
 
 }

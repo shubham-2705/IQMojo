@@ -2,6 +2,7 @@ package com.iqmojo.iq_mojo.ui.activities;
 
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -56,10 +58,11 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private ListView listView;
     private MenuAdapter menuAdapter;
     private int active_position = 0;
-    private TextView txvUserEmail,txvCoins,txvUserName;
+    private TextView txvUserEmail, txvCoins, txvUserName;
     private ImageView imvProfilePic;
     DuoDrawerLayout drawerLayout;
     DuoDrawerToggle drawerToggle;
+    long backpress_time=System.currentTimeMillis();
     private static int[] tab_list = {AppConstants.HomeTabKeys.HOME, AppConstants.HomeTabKeys.WINNER,
             AppConstants.HomeTabKeys.CONTEST, AppConstants.HomeTabKeys.FAQ};
 
@@ -74,14 +77,30 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - backpress_time < 2 * 1000) {
+            super.onBackPressed();
+        } else {
+            backpress_time = System.currentTimeMillis();
+            Snackbar sbar = Snackbar.make(drawerLayout, getResources().getString(R.string.press_again_toExit), Snackbar.LENGTH_SHORT);
+            final View view = sbar.getView();
+            final TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.snackbar_textsize));
+            tv.setTextColor(ContextCompat.getColor(this,R.color.white));
+            sbar.getView().setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.grey_text_color));
+            sbar.show();
+        }
+    }
+
     public void setupDrawer_Toolbar() {
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        txvCoins=(TextView)mToolbar.findViewById(R.id.txvCoins);
+        txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
 
         mToolbar.setLogo(R.drawable.iqmojo_toolbar);
 
-        txvCoins.setText((""+new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+        txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
         drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
         drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -101,13 +120,22 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     }
 
-    private void setupHamburgerList()
-    {
+    private void setupHamburgerList() {
         txvUserEmail.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_EMAIL_ID));
-        txvUserName.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_DISPLAY_NAME));
+
+
+        if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_NAME)))
+            txvUserName.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_NAME));
+        if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME)))
+            txvUserName.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME));
+
         String decoded_url = null;
         try {
-            decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_DISPLAY_PIC),"UTF-8");
+            if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_PIC)))
+                decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_PIC), "UTF-8");
+            if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_PIC)))
+                decoded_url = URLDecoder.decode(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_PIC), "UTF-8");
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

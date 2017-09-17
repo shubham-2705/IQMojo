@@ -38,7 +38,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
     private EditText edtMobile;
     private TextView txvGetOtp;
-    private String email = "", location = "", id = "", gcmId = "", google_token;
+    private String email = "", location = "", google_id = "",fb_id="", gcmId = "", google_token;
     Context context;
 
     @Override
@@ -48,23 +48,27 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
         getView();
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
+        if (getIntent().getExtras().getString(AppConstants.EMAIL_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
             email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
         else email = "";
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.ID)))
-            id = getIntent().getExtras().getString(AppConstants.ID);
-        else id = "";
+        if (getIntent().getExtras().getString(AppConstants.GOOGLE_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_ID)))
+            google_id = getIntent().getExtras().getString(AppConstants.GOOGLE_ID);
+        else google_id = "";
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
+        if (getIntent().getExtras().getString(AppConstants.FB_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
+            fb_id = getIntent().getExtras().getString(AppConstants.FB_ID);
+        else fb_id = "";
+
+        if (getIntent().getExtras().getString(AppConstants.LOCATION)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
             location = getIntent().getExtras().getString(AppConstants.LOCATION);
         else location = "";
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
+        if (getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
             gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
         else gcmId = "";
 
-        if (!TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)))
+        if (getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)))
             google_token = getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN);
         else google_token = "";
 
@@ -166,9 +170,9 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                             + "&country=" + location + "&appVersion=" + BuildConfig.VERSION_NAME + "&deviceName=" + android.os.Build.MODEL +
                             "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=android" + "&deviceToken=" + gcmId
                             + "&androidVersion=" + Build.VERSION.RELEASE + "&androidId=" + CommonFunctionsUtil.getVersionName() + "&networkType=" +
-                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + id +
-                            "&googleName=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_NAME) + "&googleToken=" +
-                            google_token + "&googlePicture=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_DISPLAY_PIC) + "&fBPlayerId=" + id;
+                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + google_id +
+                            "&googleName=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_GOOGLE_NAME) + "&googleToken=" +
+                            google_token + "&googlePicture=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_GOOGLE_PIC) + "&fBPlayerId=" + fb_id;
 
                     url = url.replace(" ", "%20");
                     ShowLog.v("url-->> ", url);

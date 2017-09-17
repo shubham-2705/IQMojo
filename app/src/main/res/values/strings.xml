@@ -6,6 +6,7 @@
     <string name="get_otp">Get OTP</string>
     <string name="enter_your_mobile_number">Enter your Mobile Number</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="press_again_toExit">Press back again to exit.</string>
     <string name="error_network_not_available">Communication Failure with server. \nPlease Check GPRS Settings in Handset.</string>
 
     <string-array name="pager_">

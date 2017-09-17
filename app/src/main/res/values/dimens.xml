@@ -90,6 +90,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="snackbar_textsize">14dp</dimen>
     <dimen name="bottom_line">0.80dp</dimen>
     <dimen name="left_right_margin_for_edittext">50dp</dimen>
     <dimen name="tab_height">65dp</dimen>
