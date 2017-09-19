@@ -66,7 +66,10 @@
             android:name=".iq_mojo.ui.activities.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".iq_mojo.ui.activities.MyAccountDashboardActivity" />
+        <activity
+            android:name=".iq_mojo.ui.activities.MyAccountDashboardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".iq_mojo.ui.activities.PaytmActivity"
             android:screenOrientation="portrait"
@@ -75,9 +78,22 @@
             android:name=".iq_mojo.ui.activities.BankActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".iq_mojo.ui.activities.GameDetailsActivity" />
-        <activity android:name=".iq_mojo.ui.activities.GameEntryFeeActivity" />
-        <activity android:name=".iq_mojo.ui.activities.PlayQuestionActivity"></activity>
+        <activity
+            android:name=".iq_mojo.ui.activities.GameDetailsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.GameEntryFeeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.PlayQuestionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.GameResultActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

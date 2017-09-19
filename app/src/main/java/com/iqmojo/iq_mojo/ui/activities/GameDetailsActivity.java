@@ -3,9 +3,12 @@ package com.iqmojo.iq_mojo.ui.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iqmojo.R;
@@ -13,13 +16,18 @@ import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.GameItemResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 
 public class GameDetailsActivity extends BaseActivity {
 
     TextView txvGameName, txvDesc, txvTnC, txvPlay;
     GameItemResponse gameItemResponse;
+    ImageView imvQuestionImage;
+    CardView cardBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,22 @@ public class GameDetailsActivity extends BaseActivity {
         if (gameItemResponse.gettAndC() != null) {
             txvTnC.setText(gameItemResponse.gettAndC());
         }
+
+        String decoded_url = null;
+        try {
+            if (gameItemResponse.getImageUrl()!=null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
+                decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
+            Picasso.with(this).load(decoded_url).into(imvQuestionImage);
+        }
+        else
+        {
+            cardBackground.setVisibility(View.GONE);
+        }
+
     }
 
     private void getView() {
@@ -51,6 +75,8 @@ public class GameDetailsActivity extends BaseActivity {
         txvGameName = (TextView) findViewById(R.id.txvGameName);
         txvTnC = (TextView) findViewById(R.id.txvTnC);
         txvPlay = (TextView) findViewById(R.id.txvPlay);
+        imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
+        cardBackground = (CardView) findViewById(R.id.cardBackground);
 
         txvPlay.setOnClickListener(new View.OnClickListener() {
             @Override

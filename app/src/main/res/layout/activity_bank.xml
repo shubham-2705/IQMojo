@@ -316,6 +316,7 @@
                     android:paddingLeft="@dimen/padding_50"
                     android:paddingRight="@dimen/padding_50"
                     android:text="SUBMIT"
+                    android:layout_marginBottom="@dimen/margin_40dp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/form_textsize"
                     android:typeface="sans"

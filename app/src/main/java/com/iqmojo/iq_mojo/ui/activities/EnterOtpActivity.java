@@ -54,10 +54,12 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0) {
-                    edtOTP.setLetterSpacing(0.5f);
-                } else {
-                    edtOTP.setLetterSpacing(0f);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    if (s.length() > 0) {
+                        edtOTP.setLetterSpacing(0.5f);
+                    } else {
+                        edtOTP.setLetterSpacing(0f);
+                    }
                 }
 
             }

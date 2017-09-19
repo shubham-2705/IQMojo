@@ -8,4 +8,5 @@
     <dimen name="drawer_text_size">23sp</dimen>
     <dimen name="button_width">300dp</dimen>
     <dimen name="progress_radius">10dp</dimen>
+    <dimen name="question_view_height">150dp</dimen>
 </resources>

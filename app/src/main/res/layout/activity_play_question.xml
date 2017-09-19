@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:sage42="http://schemas.android.com/tools"
     xmlns:timer="http://schemas.android.com/apk/res-auto"
-    xmlns:sage42="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar"
@@ -132,12 +132,11 @@
         </LinearLayout>
 
 
-
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/llyEmpty"
+            android:fillViewport="true"
             android:background="@drawable/grey_gradient_bg">
 
             <LinearLayout
@@ -148,10 +147,12 @@
                 <com.iqmojo.base.ui.widgets.AutoResizeTextView
                     android:id="@+id/txvQuestion"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:gravity="center"
                     android:lineSpacingMultiplier="1.3"
+                    android:padding="@dimen/padding_15"
+                    android:lines="3"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/profile_name_text_size"
                     android:typeface="monospace" />
@@ -171,7 +172,7 @@
                     app:cardPreventCornerOverlap="false">
 
                     <ImageView
-                        android:id="@+id/merchantCardImage"
+                        android:id="@+id/imvQuestionImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -184,91 +185,28 @@
                 </android.support.v7.widget.CardView>
 
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_15"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="match_parent">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="@dimen/margin_5"
-                        android:layout_marginRight="@dimen/margin_5"
-                        android:orientation="vertical"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/txvOption1"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:typeface="monospace"
-                            android:background="@drawable/diagonal_drawable"
-                            android:elevation="@dimen/padding_2"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/margin_30dp"
-                            android:paddingRight="@dimen/margin_30dp"
-                            android:text="option 1"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/expiry_text_size" />
+                        android:id="@+id/llyOptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:orientation="vertical">
 
 
-                        <TextView
-                            android:id="@+id/txvOption2"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:typeface="monospace"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/diagonal_drawable"
-                            android:elevation="@dimen/padding_2"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/margin_30dp"
-                            android:paddingRight="@dimen/margin_30dp"
-                            android:text="option 1"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/expiry_text_size" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="@dimen/margin_5"
-                        android:layout_marginRight="@dimen/margin_5"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/txvOption3"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:typeface="monospace"
-                            android:background="@drawable/diagonal_drawable"
-                            android:elevation="@dimen/padding_2"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/margin_30dp"
-                            android:paddingRight="@dimen/margin_30dp"
-                            android:text="option 1"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/expiry_text_size" />
-                        <TextView
-                            android:id="@+id/txvOption4"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:typeface="monospace"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/diagonal_drawable"
-                            android:elevation="@dimen/padding_2"
-                            android:gravity="center"
-                            android:paddingLeft="@dimen/margin_30dp"
-                            android:paddingRight="@dimen/margin_30dp"
-                            android:text="option 1"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/expiry_text_size" />
-
-                    </LinearLayout>
-                </LinearLayout>
+                    <View
+                        android:id="@+id/viewTransparent"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"/>
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -278,37 +216,33 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/llyquestions"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/padding_20"
-        android:layout_below="@id/llyquestions">
+        android:layout_marginTop="@dimen/padding_20">
 
         <TextView
             android:id="@+id/txvTime"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:textColor="@color/white"
-            android:gravity="center"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/drawer_text_size"
-            android:background="@drawable/circular_bg"/>
+            android:background="@drawable/circular_bg"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/drawer_text_size" />
 
         <io.github.krtkush.lineartimer.LinearTimerView
             android:id="@+id/linearTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             timer:initialColor="@color/wrong_ans"
             timer:progressColor="@color/colorPrimaryDark"
-            timer:startingPoint="270"
             timer:radius="@dimen/progress_radius"
-            android:layout_centerInParent="true"
-            timer:strokeWidth="3dp"/>
+            timer:startingPoint="270"
+            timer:strokeWidth="3dp" />
 
 
     </RelativeLayout>
-
-
-
-
 
 
 </RelativeLayout>

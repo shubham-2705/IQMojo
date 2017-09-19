@@ -82,10 +82,13 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() > 0) {
-                    edtMobile.setLetterSpacing(0.5f);
-                } else {
-                    edtMobile.setLetterSpacing(0f);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                    // Do something for lollipop and above versions
+                    if (s.length() > 0) {
+                        edtMobile.setLetterSpacing(0.5f);
+                    } else {
+                        edtMobile.setLetterSpacing(0f);
+                    }
                 }
                 if(s.length()==10)
                 {

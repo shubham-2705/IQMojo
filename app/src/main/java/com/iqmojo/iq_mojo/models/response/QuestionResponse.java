@@ -1,94 +1,86 @@
 package com.iqmojo.iq_mojo.models.response;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by shubhamlamba on 17/09/17.
  */
 
-public class QuestionResponse {
+public class QuestionResponse implements Parcelable {
 
-    private Question question;
+    private QuestionItemResponse question;
+    private PrevQuestionResponse preQAns;
+    private GameResultResponse gameResult;
+    private Long coins;
 
-    public Question getQuestion() {
+
+
+    public PrevQuestionResponse getPreQAns() {
+        return preQAns;
+    }
+
+    public void setPreQAns(PrevQuestionResponse preQAns) {
+        this.preQAns = preQAns;
+    }
+
+    public GameResultResponse getGameResult() {
+        return gameResult;
+    }
+
+    public void setGameResult(GameResultResponse gameResult) {
+        this.gameResult = gameResult;
+    }
+
+    public Long getCoins() {
+        return coins;
+    }
+
+    public void setCoins(Long coins) {
+        this.coins = coins;
+    }
+
+    public QuestionItemResponse getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(QuestionItemResponse question) {
         this.question = question;
     }
 
-    public class Question
-    {
-        private int qId;
-        private int qLevel;
-        private String qText;
-        private String imageUrl;
-        private String ansOptions;
-        private String category;
-        private int validOption;
-        private int allowTime;
 
-        public String getCategory() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category = category;
-        }
-
-        public int getAllowTime() {
-            return allowTime;
-        }
-
-        public void setAllowTime(int allowTime) {
-            this.allowTime = allowTime;
-        }
-
-        public int getqId() {
-            return qId;
-        }
-
-        public void setqId(int qId) {
-            this.qId = qId;
-        }
-
-        public int getqLevel() {
-            return qLevel;
-        }
-
-        public void setqLevel(int qLevel) {
-            this.qLevel = qLevel;
-        }
-
-        public String getqText() {
-            return qText;
-        }
-
-        public void setqText(String qText) {
-            this.qText = qText;
-        }
-
-        public String getImageUrl() {
-            return imageUrl;
-        }
-
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
-
-        public String getAnsOptions() {
-            return ansOptions;
-        }
-
-        public void setAnsOptions(String ansOptions) {
-            this.ansOptions = ansOptions;
-        }
-
-        public int getValidOption() {
-            return validOption;
-        }
-
-        public void setValidOption(int validOption) {
-            this.validOption = validOption;
-        }
+    @Override
+    public int describeContents() {
+        return 0;
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.question);
+        dest.writeValue(this.preQAns);
+        dest.writeValue(this.gameResult);
+        dest.writeValue(this.coins);
+    }
+
+    public QuestionResponse() {
+    }
+
+    protected QuestionResponse(Parcel in) {
+        this.question = in.readParcelable(QuestionItemResponse.class.getClassLoader());
+        this.preQAns = in.readParcelable(PrevQuestionResponse.class.getClassLoader());
+        this.gameResult = in.readParcelable(GameResultResponse.class.getClassLoader());
+        this.coins = (Long) in.readValue(Long.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<QuestionResponse> CREATOR = new Parcelable.Creator<QuestionResponse>() {
+        @Override
+        public QuestionResponse createFromParcel(Parcel source) {
+            return new QuestionResponse(source);
+        }
+
+        @Override
+        public QuestionResponse[] newArray(int size) {
+            return new QuestionResponse[size];
+        }
+    };
 }

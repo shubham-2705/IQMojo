@@ -14,7 +14,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.iqmojo"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -77,6 +77,7 @@ dependencies {
     compile 'com.github.krtkush:LinearTimer:v2.1.1'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 

@@ -21,6 +21,7 @@ public interface AppConstants {
     String SCREEN_NO = "screen_no";
     String GOOGLE_TOKEN = "google_token";
     String GAME_ITEM_OBJECT = "game_object";
+    String GAME_RESULT = "game_result";
 
     //Toolbar Change
 
@@ -36,6 +37,7 @@ public interface AppConstants {
 
     String WEBVIEW_URL = "webview_url";
     String WEBVIEW_HEADER = "webview_header";
+
 
 
     // Home tabs

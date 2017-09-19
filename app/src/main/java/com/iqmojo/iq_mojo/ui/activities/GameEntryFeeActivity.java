@@ -3,9 +3,12 @@ package com.iqmojo.iq_mojo.ui.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iqmojo.R;
@@ -13,13 +16,24 @@ import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.GameItemResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 
 public class GameEntryFeeActivity extends BaseActivity {
 
     TextView txvWallet,txvPurchase,txvEntry,txvGameName;
     GameItemResponse gameItemResponse;
+    ImageView imvQuestionImage;
+    CardView cardBackground;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateToolbar();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +50,34 @@ public class GameEntryFeeActivity extends BaseActivity {
 
     }
 
+    private void updateToolbar() {
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
+        txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+    }
+
     private void setView() {
         if (gameItemResponse.getTotalQ()>0) {
             txvGameName.setText("Set of "+gameItemResponse.getTotalQ()+" Questions!");
         }
         if (gameItemResponse.getEntryFee()>0) {
             txvEntry.setText(""+gameItemResponse.getEntryFee());
+        }
+
+        String decoded_url = null;
+        try {
+            if (gameItemResponse.getImageUrl()!=null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
+                decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
+            Picasso.with(this).load(decoded_url).into(imvQuestionImage);
+        }
+        else
+        {
+            cardBackground.setVisibility(View.GONE);
         }
 
     }
@@ -51,6 +87,8 @@ public class GameEntryFeeActivity extends BaseActivity {
         txvGameName = (TextView) findViewById(R.id.txvGameName);
         txvPurchase = (TextView) findViewById(R.id.txvPurchase);
         txvWallet = (TextView) findViewById(R.id.txvWallet);
+        imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
+        cardBackground = (CardView) findViewById(R.id.cardBackground);
 
         txvWallet.setOnClickListener(new View.OnClickListener() {
             @Override
