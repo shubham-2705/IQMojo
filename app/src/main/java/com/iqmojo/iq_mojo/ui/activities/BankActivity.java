@@ -20,7 +20,11 @@ public class BankActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank);
 
-        setupToolbar();
+        try {
+            setupToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

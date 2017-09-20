@@ -98,19 +98,23 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
     public void onClick(View v) {
 
 
-        switch (v.getId()) {
+        try {
+            switch (v.getId()) {
 
-            case R.id.btn_bank:
+                case R.id.btn_bank:
 
-                Intent i = new Intent(context, BankActivity.class);
-                startActivity(i);
+                    Intent i = new Intent(context, BankActivity.class);
+                    startActivity(i);
 
-                break;
+                    break;
 
-            case R.id.btn_paytm:
-                Intent i1 = new Intent(context, PaytmActivity.class);
-                startActivity(i1);
-                break;
+                case R.id.btn_paytm:
+                    Intent i1 = new Intent(context, PaytmActivity.class);
+                    startActivity(i1);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }

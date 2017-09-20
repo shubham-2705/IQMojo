@@ -21,7 +21,11 @@ public class PaytmActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paytm);
 
-        setupToolbar();
+        try {
+            setupToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

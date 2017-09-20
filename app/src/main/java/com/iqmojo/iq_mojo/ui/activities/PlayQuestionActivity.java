@@ -69,36 +69,48 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
         setContentView(R.layout.activity_play_question);
 
 
-        linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
-        txvTime = (TextView) findViewById(R.id.txvTime);
+        try {
+            linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
+            txvTime = (TextView) findViewById(R.id.txvTime);
 
-        txvTotal = (TextView) findViewById(R.id.txvTotal);
-        txvAttempted = (TextView) findViewById(R.id.txvAttempted);
-        txvCorrect = (TextView) findViewById(R.id.txvCorrect);
-        imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
-        cardBackground = (CardView) findViewById(R.id.cardBackground);
-        llyOptions = (LinearLayout) findViewById(R.id.llyOptions);
-        setupToolbar();
+            txvTotal = (TextView) findViewById(R.id.txvTotal);
+            txvAttempted = (TextView) findViewById(R.id.txvAttempted);
+            txvCorrect = (TextView) findViewById(R.id.txvCorrect);
+            imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
+            cardBackground = (CardView) findViewById(R.id.cardBackground);
+            llyOptions = (LinearLayout) findViewById(R.id.llyOptions);
+            setupToolbar();
 
-        if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null) {
-            gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
-            gameid = gameItemResponse.getGameId();
-            txvTotal.setText(("" + gameItemResponse.getTotalQ()));
-            txvAttempted.setText("" + attemptedCount);
-            txvCorrect.setText("" + correctCount);
+            if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null) {
+                gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+                gameid = gameItemResponse.getGameId();
+                txvTotal.setText(("" + gameItemResponse.getTotalQ()));
+                txvAttempted.setText("" + attemptedCount);
+                txvCorrect.setText("" + correctCount);
+            }
+
+            hitApiRequest(ApiConstants.REQUEST_TYPE.GET_QUESTION, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        hitApiRequest(ApiConstants.REQUEST_TYPE.GET_QUESTION, 0);
 
 
     }
 
     private void updateCorrectVariable(int correctCount) {
-        txvCorrect.setText("" + correctCount);
+        try {
+            txvCorrect.setText("" + correctCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateAttemptVariable(int attemptedCount) {
-        txvAttempted.setText("" + attemptedCount);
+        try {
+            txvAttempted.setText("" + attemptedCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -300,6 +312,8 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
 
                                     wrongView.setTextColor(ContextCompat.getColor(PlayQuestionActivity.this, R.color.white));
                                     wrongView.setBackground(ContextCompat.getDrawable(PlayQuestionActivity.this, R.drawable.wrong_ans_bg));
+                                    correctView.setTextColor(ContextCompat.getColor(PlayQuestionActivity.this, R.color.white));
+                                    correctView.setBackground(ContextCompat.getDrawable(PlayQuestionActivity.this, R.drawable.correct_ans_bg));
                                 }
                             }
 
@@ -414,6 +428,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                             if (questionResponse1.getGameResult() != null) {
                                 ToastUtil.showLongToast(PlayQuestionActivity.this, "Redirecting to results..");
                                 final GameResultResponse gameResult = questionResponse1.getGameResult();
+                                IqMojoPrefrences.getInstance(PlayQuestionActivity.this).setLong(AppConstants.KEY_COINS, questionResponse1.getCoins());
 
                                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                                     @Override
@@ -448,13 +463,17 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
     @Override
     public void timerTick(long tickUpdateInMillis) {
 
-        ShowLog.i("Time left", String.valueOf(tickUpdateInMillis));
-        txvTime.setText("" + (tickUpdateInMillis / 1000));
+        try {
+            ShowLog.i("Time left", String.valueOf(tickUpdateInMillis));
+            txvTime.setText("" + (tickUpdateInMillis / 1000));
 
-        if((tickUpdateInMillis / 1000)==0)
-        {
-            ShowLog.d("--next","timer finish call next ques");
-            callNextQuestion(-1);
+            if((tickUpdateInMillis / 1000)==0)
+            {
+                ShowLog.d("--next","timer finish call next ques");
+                callNextQuestion(-1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

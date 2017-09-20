@@ -42,33 +42,37 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_otp);
 
-        context = EnterOtpActivity.this;
-        mobileNo = getIntent().getStringExtra(AppConstants.MOBILE);
-        getView();
+        try {
+            context = EnterOtpActivity.this;
+            mobileNo = getIntent().getStringExtra(AppConstants.MOBILE);
+            getView();
 
-        edtOTP.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            edtOTP.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    if (s.length() > 0) {
-                        edtOTP.setLetterSpacing(0.5f);
-                    } else {
-                        edtOTP.setLetterSpacing(0f);
-                    }
                 }
 
-            }
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        if (s.length() > 0) {
+                            edtOTP.setLetterSpacing(0.5f);
+                        } else {
+                            edtOTP.setLetterSpacing(0f);
+                        }
+                    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                }
 
-            }
-        });
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -88,40 +92,44 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
-        int id = v.getId();
+        try {
+            int id = v.getId();
 
-        switch (id) {
-            case R.id.txvDone:
+            switch (id) {
+                case R.id.txvDone:
 
-                IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, getIntent().getIntExtra(AppConstants.KEY_USER_ID, 0));
-                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, getIntent().getLongExtra(AppConstants.KEY_COINS, 0));
-                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, getIntent().getStringExtra(AppConstants.KEY_EMAIL_ID));
-                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, getIntent().getLongExtra(AppConstants.KEY_OTP, 0));
-                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_MOBILE, mobileNo);
+                    IqMojoPrefrences.getInstance(context).setInteger(AppConstants.KEY_USER_ID, getIntent().getIntExtra(AppConstants.KEY_USER_ID, 0));
+                    IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, getIntent().getLongExtra(AppConstants.KEY_COINS, 0));
+                    IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_EMAIL_ID, getIntent().getStringExtra(AppConstants.KEY_EMAIL_ID));
+                    IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_OTP, getIntent().getLongExtra(AppConstants.KEY_OTP, 0));
+                    IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_MOBILE, mobileNo);
 
-                Intent i = new Intent(context, HomeActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
+                    Intent i = new Intent(context, HomeActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
 
-                break;
-            case R.id.txvResend:
+                    break;
+                case R.id.txvResend:
 
-/*
-                http://108.161.135.146:9397/iqm/api/v1/user/sendOtp/?msisdn=
+    /*
+                    http://108.161.135.146:9397/iqm/api/v1/user/sendOtp/?msisdn=
 
-                include parameters msisdn, deviceId, googleMail and attempt*/
+                    include parameters msisdn, deviceId, googleMail and attempt*/
 
-                PermissionUtil.with(EnterOtpActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
-                    @Override
-                    public void onPermissionResult(boolean isGranted, int requestCode) {
-                        if (isGranted) {
+                    PermissionUtil.with(EnterOtpActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                        @Override
+                        public void onPermissionResult(boolean isGranted, int requestCode) {
+                            if (isGranted) {
 
-                            hitApiRequest(ApiConstants.REQUEST_TYPE.RESEND);
+                                hitApiRequest(ApiConstants.REQUEST_TYPE.RESEND);
+                            }
                         }
-                    }
-                }).validate(Manifest.permission.READ_PHONE_STATE);
-                break;
+                    }).validate(Manifest.permission.READ_PHONE_STATE);
+                    break;
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

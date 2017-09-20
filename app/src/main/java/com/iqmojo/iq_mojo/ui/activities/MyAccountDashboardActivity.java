@@ -44,8 +44,12 @@ public class MyAccountDashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account_dashboard);
 
-        getView();
-        setupToolbar();
+        try {
+            getView();
+            setupToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

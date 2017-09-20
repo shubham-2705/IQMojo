@@ -34,12 +34,16 @@ public class GameDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_details);
 
-        if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
-            gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+        try {
+            if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
+                gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
 
-        setupToolbar();
-        getView();
-        setView();
+            setupToolbar();
+            getView();
+            setView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setView() {
@@ -55,8 +59,8 @@ public class GameDetailsActivity extends BaseActivity {
 
         String decoded_url = null;
         try {
-            if (gameItemResponse.getImageUrl()!=null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
-                decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
+            if (gameItemResponse.getDescImage()!=null && !TextUtils.isEmpty(gameItemResponse.getDescImage()))
+                decoded_url = URLDecoder.decode(gameItemResponse.getDescImage(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

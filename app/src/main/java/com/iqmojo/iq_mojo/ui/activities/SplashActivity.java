@@ -135,6 +135,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                         try {
                             if (loginResponse.getLoginStatus()) {
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+                                IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, loginResponse.getCoins());
                                 startActivity(i);
                                 finish();
                             }

@@ -61,49 +61,53 @@ public class MenuAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.hamburger_list_item, parent, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        ShowLog.d("----posi",position+"---"+list_values[position]);
-        viewHolder.txvMenu.setText(list_values[position]);
-        String mDrawableName = "menu_" + getItem(position);
+        try {
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.hamburger_list_item, parent, false);
+                viewHolder = new ViewHolder(convertView);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            ShowLog.d("----posi", position + "---" + list_values[position]);
+            viewHolder.txvMenu.setText(list_values[position]);
+            String mDrawableName = "menu_" + getItem(position);
 //        int id = mContext.getResources().getIdentifier(mDrawableName, "drawable", mContext.getPackageName());
-        int id=list_images[position];
-        viewHolder.txvMenu.setCompoundDrawablesWithIntrinsicBounds(id, 0, 0, 0);
+            int id = list_images[position];
+            viewHolder.txvMenu.setCompoundDrawablesWithIntrinsicBounds(id, 0, 0, 0);
 //            viewHolder.txvMenu.setCompoundDrawablePadding((int) (((HomeActivity) mContext).convertPixelsToDp(35, mContext)));
 
-        viewHolder.txvMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowLog.d("---","close");
-                ((HomeActivity)mContext).closeDrawer();
-                switch (position) {
-                    case AppConstants.My_Points:
-                        Intent intent=new Intent(mContext, MyAccountDashboardActivity.class);
-                        intent.putExtra(AppConstants.SCREEN_NO,0);
-                        mContext.startActivity(intent);
-                        break;
-                    case AppConstants.My_Profile:
-                        break;
-                    case AppConstants.Transactions:
-                        Intent intent1=new Intent(mContext, MyAccountDashboardActivity.class);
-                        intent1.putExtra(AppConstants.SCREEN_NO,1);
-                        mContext.startActivity(intent1);
-                        break;
-                    case AppConstants.Referral:
-                        break;
-                    case AppConstants.Terms_And_Conditions:
-                        break;
-                    case AppConstants.Contact_Us:
-                        break;
+            viewHolder.txvMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ShowLog.d("---", "close");
+                    ((HomeActivity) mContext).closeDrawer();
+                    switch (position) {
+                        case AppConstants.My_Points:
+                            Intent intent = new Intent(mContext, MyAccountDashboardActivity.class);
+                            intent.putExtra(AppConstants.SCREEN_NO, 0);
+                            mContext.startActivity(intent);
+                            break;
+                        case AppConstants.My_Profile:
+                            break;
+                        case AppConstants.Transactions:
+                            Intent intent1 = new Intent(mContext, MyAccountDashboardActivity.class);
+                            intent1.putExtra(AppConstants.SCREEN_NO, 1);
+                            mContext.startActivity(intent1);
+                            break;
+                        case AppConstants.Referral:
+                            break;
+                        case AppConstants.Terms_And_Conditions:
+                            break;
+                        case AppConstants.Contact_Us:
+                            break;
 
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return convertView;
 
 

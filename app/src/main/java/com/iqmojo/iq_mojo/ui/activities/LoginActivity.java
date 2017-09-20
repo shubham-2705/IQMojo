@@ -65,132 +65,140 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txvgoogle= (TextView)findViewById(R.id.txvgoogle);
-        txvfb= (TextView)findViewById(R.id.txvfb);
-        TextView txvOr= (TextView)findViewById(R.id.txvOr);
+        try {
+            txvgoogle= (TextView)findViewById(R.id.txvgoogle);
+            txvfb= (TextView)findViewById(R.id.txvfb);
+            TextView txvOr= (TextView)findViewById(R.id.txvOr);
 //        FontHelper.applyFont(this,txvfb,"fonts/medium.OTF");
 //        FontHelper.applyFont(this,txvgoogle,"fonts/medium.OTF");
 //        FontHelper.applyFont(this,txvOr,"fonts/medium.OTF");
 
-        context = LoginActivity.this;
-        callbackManager = CallbackManager.Factory.create();
-        RlFbLogin = (RelativeLayout) findViewById(R.id.rlyFb);
-        RlsGoogleLogin = (RelativeLayout) findViewById(R.id.rlyGoogle);
-        RlFbLogin.setOnClickListener(this);
-        RlsGoogleLogin.setOnClickListener(this);
-        txvgoogle.setOnClickListener(this);
-        txvfb.setOnClickListener(this);
+            context = LoginActivity.this;
+            callbackManager = CallbackManager.Factory.create();
+            RlFbLogin = (RelativeLayout) findViewById(R.id.rlyFb);
+            RlsGoogleLogin = (RelativeLayout) findViewById(R.id.rlyGoogle);
+            RlFbLogin.setOnClickListener(this);
+            RlsGoogleLogin.setOnClickListener(this);
+            txvgoogle.setOnClickListener(this);
+            txvfb.setOnClickListener(this);
 
-        // google sign in
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestIdToken(getString(R.string.google_signin_server_client_id))
-                .build();
+            // google sign in
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestIdToken(getString(R.string.google_signin_server_client_id))
+                    .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this , this )
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-
-
-        GetGCM();
-        // fb sign in
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                        GraphRequest request = GraphRequest.newMeRequest(
-                                loginResult.getAccessToken(),
-                                new GraphRequest.GraphJSONObjectCallback() {
-                                    @Override
-                                    public void onCompleted(JSONObject object, GraphResponse response) {
-                                        try {
-
-                                            Log.i("response --> ", ""+ response);
+            mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this , this )
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
 
 
-                                            if(response.getJSONObject().getString("id")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("id"))){
+            GetGCM();
+            // fb sign in
+            LoginManager.getInstance().registerCallback(callbackManager,
+                    new FacebookCallback<LoginResult>() {
+                        @Override
+                        public void onSuccess(LoginResult loginResult) {
+                            // App code
+                            Toast.makeText(context, "Successfully logged in", Toast.LENGTH_SHORT).show();
+                            GraphRequest request = GraphRequest.newMeRequest(
+                                    loginResult.getAccessToken(),
+                                    new GraphRequest.GraphJSONObjectCallback() {
+                                        @Override
+                                        public void onCompleted(JSONObject object, GraphResponse response) {
+                                            try {
 
-                                                strId = response.getJSONObject().getString("id");
+                                                Log.i("response --> ", ""+ response);
+
+
+                                                if(response.getJSONObject().getString("id")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("id"))){
+
+                                                    strId = response.getJSONObject().getString("id");
+                                                }
+                                                if(response.getJSONObject().getString("email")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("email"))){
+
+                                                    strEmail = response.getJSONObject().getString("email");
+                                                }
+    //                                            if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
+    //
+    //                                                strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
+    //                                            }else strLocation = "";
+                                                if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
+
+                                                    fb_firstname = response.getJSONObject().getString("first_name");
+                                                }
+                                                if(!TextUtils.isEmpty(response.getJSONObject().getString("last_name"))){
+
+                                                    fb_lastname = response.getJSONObject().getString("last_name");
+                                                }
+                                                if (response != null && response.getError() == null &&
+                                                        response.getJSONObject() != null) {
+                                                    fbprofilepicurl = response.getJSONObject().getJSONObject("picture")
+                                                            .getJSONObject("data").getString("url");
+                                                }else fbprofilepicurl = "";
+
+                                                ShowLog.v("fbprofilepicurl---->>>", fbprofilepicurl);
+
+
+                                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PIC, fbprofilepicurl);
+                                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
+                                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC,"");
+                                                IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, "");
+
+                                                Intent i = new Intent(context, EnterMobileActivity.class);
+                                                i.putExtra(AppConstants.EMAIL_ID, strEmail);
+                                                i.putExtra(AppConstants.LOCATION, strLocation);
+                                                i.putExtra(AppConstants.FB_ID, strId);
+                                                i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
+                                                startActivity(i);
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-                                            if(response.getJSONObject().getString("email")!=null && !TextUtils.isEmpty(response.getJSONObject().getString("email"))){
-
-                                                strEmail = response.getJSONObject().getString("email");
-                                            }
-//                                            if(response.getJSONObject().has("location") && !TextUtils.isEmpty(response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country"))){
-//
-//                                                strLocation = response.getJSONObject().getJSONObject("location").getJSONObject("location").getString("country");
-//                                            }else strLocation = "";
-                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("first_name"))){
-
-                                                fb_firstname = response.getJSONObject().getString("first_name");
-                                            }
-                                            if(!TextUtils.isEmpty(response.getJSONObject().getString("last_name"))){
-
-                                                fb_lastname = response.getJSONObject().getString("last_name");
-                                            }
-                                            if (response != null && response.getError() == null &&
-                                                    response.getJSONObject() != null) {
-                                                fbprofilepicurl = response.getJSONObject().getJSONObject("picture")
-                                                        .getJSONObject("data").getString("url");
-                                            }else fbprofilepicurl = "";
-
-                                            ShowLog.v("fbprofilepicurl---->>>", fbprofilepicurl);
-
-
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_PIC, fbprofilepicurl);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_FB_NAME, fb_firstname + " "+ fb_lastname);
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_PIC,"");
-                                            IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GOOGLE_NAME, "");
-
-                                            Intent i = new Intent(context, EnterMobileActivity.class);
-                                            i.putExtra(AppConstants.EMAIL_ID, strEmail);
-                                            i.putExtra(AppConstants.LOCATION, strLocation);
-                                            i.putExtra(AppConstants.FB_ID, strId);
-                                            i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
-                                            startActivity(i);
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
                                         }
-                                    }
-                                });
+                                    });
 
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}, picture.width(140).height(130)");
-                        request.setParameters(parameters);
-                        request.executeAsync();
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location{location}, picture.width(140).height(130)");
+                            request.setParameters(parameters);
+                            request.executeAsync();
 
-                    }
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
+                        }
+                        @Override
+                        public void onCancel() {
+                            // App code
+                        }
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                    }
-                });
+                        @Override
+                        public void onError(FacebookException exception) {
+                            // App code
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
-            case R.id.rlyFb:
-                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
-                break;
-            case R.id.rlyGoogle:
-                signIn();
-                break;
-            case R.id.txvfb:
-                LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
-                break;
-            case R.id.txvgoogle:
-                signIn();
-                break;
+        try {
+            switch(v.getId()){
+                case R.id.rlyFb:
+                    LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
+                    break;
+                case R.id.rlyGoogle:
+                    signIn();
+                    break;
+                case R.id.txvfb:
+                    LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email", "user_location"));
+                    break;
+                case R.id.txvgoogle:
+                    signIn();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -202,20 +210,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ShowLog.d(TAG, "resultCode:" + resultCode);
-        ShowLog.d(TAG, "data:" + data.getData());
-
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        try {
             ShowLog.d(TAG, "resultCode:" + resultCode);
-            handleSignInResult(result);
-        }
-        else
-        {
-            // for fb
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+            ShowLog.d(TAG, "data:" + data.getData());
+
+
+            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+            if (requestCode == RC_SIGN_IN) {
+                GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                ShowLog.d(TAG, "resultCode:" + resultCode);
+                handleSignInResult(result);
+            }
+            else
+            {
+                // for fb
+                callbackManager.onActivityResult(requestCode, resultCode, data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -256,24 +268,28 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void GetGCM() {
 
-        Thread thread = new Thread(new Runnable() {
+        try {
+            Thread thread = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                try {
-                    GCMHelper  gcmRegistrationHelper = new GCMHelper(
-                            getApplicationContext());
-                    gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
-                    IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
+                @Override
+                public void run() {
+                    try {
+                        GCMHelper  gcmRegistrationHelper = new GCMHelper(
+                                getApplicationContext());
+                        gcmRegID = gcmRegistrationHelper.GCMRegister("681782354637");
+                        IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_GCM_ID, gcmRegID);
 
-                } catch (Exception bug) {
-                    bug.printStackTrace();
+                    } catch (Exception bug) {
+                        bug.printStackTrace();
+                    }
+
                 }
+            });
 
-            }
-        });
-
-        thread.start();
+            thread.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

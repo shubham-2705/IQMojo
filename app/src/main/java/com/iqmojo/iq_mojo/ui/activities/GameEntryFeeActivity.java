@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 
 public class GameEntryFeeActivity extends BaseActivity {
 
-    TextView txvWallet,txvPurchase,txvEntry,txvGameName;
+    TextView txvWallet, txvPurchase, txvEntry, txvGameName;
     GameItemResponse gameItemResponse;
     ImageView imvQuestionImage;
     CardView cardBackground;
@@ -32,7 +32,11 @@ public class GameEntryFeeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateToolbar();
+        try {
+            updateToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -41,44 +45,58 @@ public class GameEntryFeeActivity extends BaseActivity {
         setContentView(R.layout.activity_game_entry_fee);
 
 
-        if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
-            gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+        try {
+            if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
+                gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
 
-        setupToolbar();
-        getView();
-        setView();
+            setupToolbar();
+            getView();
+            setView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     private void updateToolbar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        try {
+            Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
-        txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+            TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
+            txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void setView() {
-        if (gameItemResponse.getTotalQ()>0) {
-            txvGameName.setText("Set of "+gameItemResponse.getTotalQ()+" Questions!");
+        if (gameItemResponse.getTotalQ() > 0) {
+            txvGameName.setText("Set of " + gameItemResponse.getTotalQ() + " Questions!");
         }
-        if (gameItemResponse.getEntryFee()>0) {
-            txvEntry.setText(""+gameItemResponse.getEntryFee());
+        if (gameItemResponse.getEntryFee() > 0) {
+            txvEntry.setText("" + gameItemResponse.getEntryFee());
         }
 
         String decoded_url = null;
         try {
-            if (gameItemResponse.getImageUrl()!=null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
+            if (gameItemResponse.getImageUrl() != null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
                 decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
             Picasso.with(this).load(decoded_url).into(imvQuestionImage);
-        }
-        else
-        {
+        } else {
             cardBackground.setVisibility(View.GONE);
         }
+
+        if (IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS) > gameItemResponse.getEntryFee()) {
+            txvWallet.setVisibility(View.VISIBLE);
+        } else {
+            txvWallet.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -94,7 +112,7 @@ public class GameEntryFeeActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(GameEntryFeeActivity.this,PlayQuestionActivity.class);
+                Intent intent = new Intent(GameEntryFeeActivity.this, PlayQuestionActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                 startActivity(intent);
 

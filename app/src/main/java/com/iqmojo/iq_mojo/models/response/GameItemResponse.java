@@ -12,6 +12,7 @@ public class GameItemResponse implements Parcelable {
     private String name;
     private int gameId;
     private String imageUrl;
+    private String descImage;
     private String shortDesc;
     private String detailDesc;
     private String tAndC;
@@ -21,6 +22,13 @@ public class GameItemResponse implements Parcelable {
     private int maxAttempt;
     private int reward;
 
+    public String getDescImage() {
+        return descImage;
+    }
+
+    public void setDescImage(String descImage) {
+        this.descImage = descImage;
+    }
 
     public int getMaxAttempt() {
         return maxAttempt;
@@ -127,6 +135,7 @@ public class GameItemResponse implements Parcelable {
         dest.writeString(this.name);
         dest.writeInt(this.gameId);
         dest.writeString(this.imageUrl);
+        dest.writeString(this.descImage);
         dest.writeString(this.shortDesc);
         dest.writeString(this.detailDesc);
         dest.writeString(this.tAndC);
@@ -141,6 +150,7 @@ public class GameItemResponse implements Parcelable {
         this.name = in.readString();
         this.gameId = in.readInt();
         this.imageUrl = in.readString();
+        this.descImage = in.readString();
         this.shortDesc = in.readString();
         this.detailDesc = in.readString();
         this.tAndC = in.readString();

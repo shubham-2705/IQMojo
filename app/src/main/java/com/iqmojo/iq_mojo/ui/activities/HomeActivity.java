@@ -1,6 +1,7 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
 import android.annotation.TargetApi;
+import android.content.res.Resources;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -72,25 +73,33 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        getView();
-        setupDrawer_Toolbar();
-        setupHamburgerList();
+        try {
+            getView();
+            setupDrawer_Toolbar();
+            setupHamburgerList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - backpress_time < 2 * 1000) {
-            super.onBackPressed();
-        } else {
-            backpress_time = System.currentTimeMillis();
-            Snackbar sbar = Snackbar.make(drawerLayout, getResources().getString(R.string.press_again_toExit), Snackbar.LENGTH_SHORT);
-            final View view = sbar.getView();
-            final TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.snackbar_textsize));
-            tv.setTextColor(ContextCompat.getColor(this,R.color.white));
-            sbar.getView().setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.grey_text_color));
-            sbar.show();
+        try {
+            if (System.currentTimeMillis() - backpress_time < 2 * 1000) {
+                super.onBackPressed();
+            } else {
+                backpress_time = System.currentTimeMillis();
+                Snackbar sbar = Snackbar.make(drawerLayout, getResources().getString(R.string.press_again_toExit), Snackbar.LENGTH_SHORT);
+                final View view = sbar.getView();
+                final TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.snackbar_textsize));
+                tv.setTextColor(ContextCompat.getColor(this,R.color.white));
+                sbar.getView().setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.grey_text_color));
+                sbar.show();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
         }
     }
 

@@ -24,11 +24,15 @@ public class GameResultActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_result);
 
-        if (getIntent().getParcelableExtra(AppConstants.GAME_RESULT) != null)
-            gameResultResponse = getIntent().getParcelableExtra(AppConstants.GAME_RESULT);
+        try {
+            if (getIntent().getParcelableExtra(AppConstants.GAME_RESULT) != null)
+                gameResultResponse = getIntent().getParcelableExtra(AppConstants.GAME_RESULT);
 
-        setView();
-        setupToolbar();
+            setView();
+            setupToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setView() {

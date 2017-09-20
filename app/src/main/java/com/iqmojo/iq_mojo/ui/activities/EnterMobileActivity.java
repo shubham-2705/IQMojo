@@ -46,63 +46,66 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_mobile);
 
-        getView();
+        try {
+            getView();
 
-        if (getIntent().getExtras().getString(AppConstants.EMAIL_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
-            email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
-        else email = "";
+            if (getIntent().getExtras().getString(AppConstants.EMAIL_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.EMAIL_ID)))
+                email = getIntent().getExtras().getString(AppConstants.EMAIL_ID);
+            else email = "";
 
-        if (getIntent().getExtras().getString(AppConstants.GOOGLE_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_ID)))
-            google_id = getIntent().getExtras().getString(AppConstants.GOOGLE_ID);
-        else google_id = "";
+            if (getIntent().getExtras().getString(AppConstants.GOOGLE_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_ID)))
+                google_id = getIntent().getExtras().getString(AppConstants.GOOGLE_ID);
+            else google_id = "";
 
-        if (getIntent().getExtras().getString(AppConstants.FB_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
-            fb_id = getIntent().getExtras().getString(AppConstants.FB_ID);
-        else fb_id = "";
+            if (getIntent().getExtras().getString(AppConstants.FB_ID)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.FB_ID)))
+                fb_id = getIntent().getExtras().getString(AppConstants.FB_ID);
+            else fb_id = "";
 
-        if (getIntent().getExtras().getString(AppConstants.LOCATION)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
-            location = getIntent().getExtras().getString(AppConstants.LOCATION);
-        else location = "";
+            if (getIntent().getExtras().getString(AppConstants.LOCATION)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.LOCATION)))
+                location = getIntent().getExtras().getString(AppConstants.LOCATION);
+            else location = "";
 
-        if (getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
-            gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
-        else gcmId = "";
+            if (getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN)))
+                gcmId = getIntent().getExtras().getString(AppConstants.DEVICE_TOKEN);
+            else gcmId = "";
 
-        if (getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)))
-            google_token = getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN);
-        else google_token = "";
+            if (getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)!=null && !TextUtils.isEmpty(getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN)))
+                google_token = getIntent().getExtras().getString(AppConstants.GOOGLE_TOKEN);
+            else google_token = "";
 
 
+            edtMobile.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        edtMobile.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-                    // Do something for lollipop and above versions
-                    if (s.length() > 0) {
-                        edtMobile.setLetterSpacing(0.5f);
-                    } else {
-                        edtMobile.setLetterSpacing(0f);
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                        // Do something for lollipop and above versions
+                        if (s.length() > 0) {
+                            edtMobile.setLetterSpacing(0.5f);
+                        } else {
+                            edtMobile.setLetterSpacing(0f);
+                        }
                     }
+                    if(s.length()==10)
+                    {
+                        hideDialogKeypad();
+                        hideKeypad();
+                    }
+
                 }
-                if(s.length()==10)
-                {
-                    hideDialogKeypad();
-                    hideKeypad();
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
                 }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void getView() {
@@ -116,28 +119,32 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         int id = v.getId();
 
-        switch (id) {
-            case R.id.txvGetOtp:
-                if (validateNumber()) {
-                    PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
-                        @Override
-                        public void onPermissionResult(boolean isGranted, int requestCode) {
-                            if (isGranted) {
-                                // permission is granted
-                                PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
-                                    @Override
-                                    public void onPermissionResult(boolean isGranted, int requestCode) {
-                                        if (isGranted) {
-                                            // permission is granted
-                                            hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+        try {
+            switch (id) {
+                case R.id.txvGetOtp:
+                    if (validateNumber()) {
+                        PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                            @Override
+                            public void onPermissionResult(boolean isGranted, int requestCode) {
+                                if (isGranted) {
+                                    // permission is granted
+                                    PermissionUtil.with(EnterMobileActivity.this).setCallback(new PermissionUtil.PermissionGrantedListener() {
+                                        @Override
+                                        public void onPermissionResult(boolean isGranted, int requestCode) {
+                                            if (isGranted) {
+                                                // permission is granted
+                                                hitApiRequest(ApiConstants.REQUEST_TYPE.REGISTER_USER);
+                                            }
                                         }
-                                    }
-                                }).validate(Manifest.permission.READ_SMS);
+                                    }).validate(Manifest.permission.READ_SMS);
+                                }
                             }
-                        }
-                    }).validate(Manifest.permission.READ_PHONE_STATE);
-                }
-                break;
+                        }).validate(Manifest.permission.READ_PHONE_STATE);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
