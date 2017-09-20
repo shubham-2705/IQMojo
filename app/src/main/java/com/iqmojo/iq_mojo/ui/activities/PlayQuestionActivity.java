@@ -71,7 +71,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
 
         linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
         txvTime = (TextView) findViewById(R.id.txvTime);
-        txvQuestion = (TextView) findViewById(R.id.txvQuestion);
+
         txvTotal = (TextView) findViewById(R.id.txvTotal);
         txvAttempted = (TextView) findViewById(R.id.txvAttempted);
         txvCorrect = (TextView) findViewById(R.id.txvCorrect);
@@ -251,6 +251,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                             txvTime.setText("" + timer);
                             quesId = questionResponse.getQuestion().getqId();
                             quesLevel = questionResponse.getQuestion().getqLevel();
+                            txvQuestion = (TextView) findViewById(R.id.txvQuestion);
                             txvQuestion.setText(questionResponse.getQuestion().getqText());
 
                             String decoded_url = null;
@@ -378,6 +379,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                                         txvTime.setText("" + timer);
                                         quesId = questionResponse1.getQuestion().getqId();
                                         quesLevel = questionResponse1.getQuestion().getqLevel();
+                                        txvQuestion = (TextView) findViewById(R.id.txvQuestion);
                                         txvQuestion.setText(questionResponse1.getQuestion().getqText());
 
                                         String decoded_url = null;
