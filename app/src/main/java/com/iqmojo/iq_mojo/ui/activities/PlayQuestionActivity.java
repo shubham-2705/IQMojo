@@ -435,6 +435,9 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                                     public void run() {
                                         Intent intent = new Intent(PlayQuestionActivity.this, GameResultActivity.class);
                                         intent.putExtra(AppConstants.GAME_RESULT, gameResult);
+                                        intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                                        intent.putExtra(AppConstants.KEY_COINS, questionResponse1.getCoins().toString());
+                                        ShowLog.d("--coins","----"+questionResponse1.getCoins());
                                         startActivity(intent);
                                         finish();
                                     }

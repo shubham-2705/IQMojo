@@ -3,21 +3,35 @@ package com.iqmojo.iq_mojo.ui.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.models.response.GameItemResponse;
 import com.iqmojo.iq_mojo.models.response.GameResultResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.DecimalFormat;
 
 public class GameResultActivity extends BaseActivity {
 
     GameResultResponse gameResultResponse;
+    GameItemResponse gameItemResponse;
+    String coins;
+    ImageView imvQuestionImage;
+    CardView cardBackground;
+    TextView txvResp,txvRespExtended,txStatsLabel,txvTotalQValue,txvCorrectQValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +42,13 @@ public class GameResultActivity extends BaseActivity {
             if (getIntent().getParcelableExtra(AppConstants.GAME_RESULT) != null)
                 gameResultResponse = getIntent().getParcelableExtra(AppConstants.GAME_RESULT);
 
+            if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
+                gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+
+            if (getIntent().getStringExtra(AppConstants.KEY_COINS) !=null)
+                coins = getIntent().getStringExtra(AppConstants.KEY_COINS);
+
+            getView();
             setView();
             setupToolbar();
         } catch (Exception e) {
@@ -35,17 +56,40 @@ public class GameResultActivity extends BaseActivity {
         }
     }
 
+    private void getView()
+    {
+        txvResp=(TextView)findViewById(R.id.txvResp);
+        txvRespExtended=(TextView)findViewById(R.id.txvRespExtended);
+        txStatsLabel=(TextView)findViewById(R.id.txStatsLabel);
+        txvTotalQValue=(TextView)findViewById(R.id.txvTotalQValue);
+        txvCorrectQValue=(TextView)findViewById(R.id.txvCorrectQValue);
+        imvQuestionImage=(ImageView) findViewById(R.id.imvQuestionImage);
+        cardBackground=(CardView) findViewById(R.id.cardBackground);
+    }
     private void setView() {
-        TextView txvResult = (TextView) findViewById(R.id.txvResult);
-        String result = "";
-        if (gameResultResponse.getResult() == 0) {
-            result = "Lost";
-        } else {
-            result = "Won";
+        txvResp.setText(Html.fromHtml(gameResultResponse.getRespText()));
+        if(gameResultResponse.getReward()>0)
+        {
+            txvRespExtended.setText("You get "+gameResultResponse.getReward()+" coins for playing #"+gameItemResponse.getName()+"!");
         }
+        else {
+            txvRespExtended.setVisibility(View.GONE);
+        }
+        txvCorrectQValue.setText(""+gameResultResponse.getCorrect());
+        txvTotalQValue.setText(""+gameResultResponse.getTotalQ());
 
-        txvResult.setText("Total Questions : " + gameResultResponse.getTotalQ()+"\nGame Result : "+result+"\nCoins Earned : "+gameResultResponse.getReward()
-        +"\nCorrect Answers : "+gameResultResponse.getCorrect()+"\nWrong Answers : "+gameResultResponse.getWrong());
+        String decoded_url = null;
+        try {
+            if (gameItemResponse.getDescImage() != null && !TextUtils.isEmpty(gameItemResponse.getDescImage()))
+                decoded_url = URLDecoder.decode(gameItemResponse.getDescImage(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
+            Picasso.with(this).load(decoded_url).into(imvQuestionImage);
+        } else {
+            cardBackground.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -80,7 +124,8 @@ public class GameResultActivity extends BaseActivity {
         mToolbar.setLogo(R.drawable.iqmojo_toolbar);
 
         TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
-        txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+        txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(Long.parseLong(coins))));
+        IqMojoPrefrences.getInstance(this).setLong(AppConstants.KEY_COINS,Long.parseLong(coins));
 
     }
 }

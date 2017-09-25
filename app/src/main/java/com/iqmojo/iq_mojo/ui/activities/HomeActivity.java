@@ -83,6 +83,28 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     }
 
+    private void updateToolbar() {
+        try {
+            Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            TextView txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
+            txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            updateToolbar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         try {

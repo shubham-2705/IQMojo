@@ -80,8 +80,8 @@ public class GameEntryFeeActivity extends BaseActivity {
 
         String decoded_url = null;
         try {
-            if (gameItemResponse.getImageUrl() != null && !TextUtils.isEmpty(gameItemResponse.getImageUrl()))
-                decoded_url = URLDecoder.decode(gameItemResponse.getImageUrl(), "UTF-8");
+            if (gameItemResponse.getDescImage() != null && !TextUtils.isEmpty(gameItemResponse.getDescImage()))
+                decoded_url = URLDecoder.decode(gameItemResponse.getDescImage(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
