@@ -67,7 +67,6 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     long backpress_time=System.currentTimeMillis();
     private static int[] tab_list = {AppConstants.HomeTabKeys.HOME, AppConstants.HomeTabKeys.WINNER,
             AppConstants.HomeTabKeys.CONTEST, AppConstants.HomeTabKeys.FAQ};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +76,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
             getView();
             setupDrawer_Toolbar();
             setupHamburgerList();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,6 +112,12 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
+    /**
+     * Called if InstanceID token is updated. This may occur if the security of
+     * the previous token had been compromised. Note that this is called when the InstanceID token
+     * is initially generated so this is where you would retrieve the token.
+     */
+    // [START refresh_token]
         drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
         drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 

@@ -39,6 +39,7 @@ import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 import com.iqmojo.iq_mojo.utils.FontHelper;
 import com.iqmojo.iq_mojo.utils.GCMHelper;
+import com.iqmojo.iq_mojo.utils.RegistrationIntentService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -269,7 +270,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void GetGCM() {
 
         try {
-            Thread thread = new Thread(new Runnable() {
+        /*    Thread thread = new Thread(new Runnable() {
 
                 @Override
                 public void run() {
@@ -286,7 +287,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 }
             });
 
-            thread.start();
+            thread.start();*/
+
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -19,6 +19,7 @@ public interface ApiConstants {
         String RESEND = BASE_URL + "sendOtp/";
         String GET_QUESTION = BASE_URL + "startGame";
         String NEXT_QUESTION=BASE_URL + "nextQ";
+        String UPDATE_DEVICE_INFO =  BASE_URL + "updateDeviceInfo";
     }
 
     interface REQUEST_TYPE
@@ -29,6 +30,7 @@ public interface ApiConstants {
         int GAME_LIST=3;
         int GET_QUESTION =4 ;
         int NEXT_QUESTION = 5;
+        int UPDATE_DEVICE_INFO = 6;
     }
 
 
