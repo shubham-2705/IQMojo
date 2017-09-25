@@ -20,6 +20,7 @@ import com.iqmojo.base.network.NetworkEngine;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.PermissionUtil;
+import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
@@ -28,6 +29,7 @@ import com.iqmojo.iq_mojo.models.response.RegisterResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.iqmojo.iq_mojo.utils.RegistrationIntentService;
 
 /**
  * Created by shubhamlamba on 18/08/17.
@@ -78,6 +80,14 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                     }
                 }, 2000);
             }
+
+            if(TextUtils.isEmpty(IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_FCM_ID))){
+
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
+            }
+
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -99,13 +109,23 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
 
                     clasz = LoginResponse.class;
 
-                    url = ApiConstants.Urls.LOGIN + "?" + "email=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_EMAIL_ID) + "&deviceId=" + CommonFunctionsUtil.getDeviceImei(SplashActivity.this) + "&deviceToken=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_GCM_ID) +
+                    url = ApiConstants.Urls.LOGIN + "?" + "email=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_EMAIL_ID) + "&deviceId=" + CommonFunctionsUtil.getDeviceImei(SplashActivity.this) +
                             "&UserId=" + IqMojoPrefrences.getInstance(SplashActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&Otp=" + IqMojoPrefrences.getInstance(SplashActivity.this).getLong(AppConstants.KEY_OTP);
 
                     url = url.replace(" ", "%20");
                     Log.v("url-->> ", url);
                     break;
 
+                case ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO:
+
+                    clasz = LoginResponse.class;
+
+                    url = ApiConstants.Urls.UPDATE_DEVICE_INFO + "?" + "deviceId=" + CommonFunctionsUtil.getDeviceImei(SplashActivity.this) + "&deviceToken=" + IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_FCM_ID) +
+                            "&userId=" + IqMojoPrefrences.getInstance(SplashActivity.this).getInteger(AppConstants.KEY_USER_ID);
+
+                    url = url.replace(" ", "%20");
+                    Log.v("url-->> ", url);
+                    break;
 
                 default:
                     break;
@@ -134,11 +154,26 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                         LoginResponse loginResponse = (LoginResponse) responseObject;
                         try {
                             if (loginResponse.getLoginStatus()) {
+
+
+                                hitApiRequest(ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO);
+
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                                 IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, loginResponse.getCoins());
                                 startActivity(i);
                                 finish();
                             }
+                        } catch (Exception e) {
+                            hideProgressDialog();
+                        }
+                        break;
+
+
+                    case ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO:
+                        try {
+
+                            ShowLog.v(AppConstants.DEVICE_TOKEN, (String) responseObject);
+
                         } catch (Exception e) {
                             hideProgressDialog();
                         }

@@ -94,6 +94,14 @@
             android:name=".iq_mojo.ui.activities.GameResultActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <service
+            android:name=".iq_mojo.utils.RegistrationIntentService"
+            android:exported="false" />
+        <service
+            android:name=".iq_mojo.utils.MyFirebaseInstanceIDService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
