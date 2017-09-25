@@ -79,4 +79,5 @@ public interface AppConstants {
     String KEY_FB_NAME = "fb_name";
     String KEY_MOBILE = "mobile";
     String KEY_FCM_ID = "fcm_id";
+    String KEY_FCM_ID_UPDATED ="fcm_updated" ;
 }

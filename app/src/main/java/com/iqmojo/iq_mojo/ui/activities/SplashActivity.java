@@ -29,7 +29,7 @@ import com.iqmojo.iq_mojo.models.response.RegisterResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
-import com.iqmojo.iq_mojo.utils.RegistrationIntentService;
+import com.iqmojo.iq_mojo.utils.MyFirebaseInstanceIDService;
 
 /**
  * Created by shubhamlamba on 18/08/17.
@@ -52,6 +52,11 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 
         try {
+
+
+            // start service for fcm token
+            Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
+            startService(intent);
 
             userid = IqMojoPrefrences.getInstance(context).getInteger(AppConstants.KEY_USER_ID);
             otp = IqMojoPrefrences.getInstance(context).getLong(AppConstants.KEY_OTP);
@@ -79,12 +84,6 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
 
                     }
                 }, 2000);
-            }
-
-            if(TextUtils.isEmpty(IqMojoPrefrences.getInstance(SplashActivity.this).getString(AppConstants.KEY_FCM_ID))){
-
-                Intent intent = new Intent(this, RegistrationIntentService.class);
-                startService(intent);
             }
 
 
@@ -155,8 +154,8 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                         try {
                             if (loginResponse.getLoginStatus()) {
 
-
-                                hitApiRequest(ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO);
+                                if (IqMojoPrefrences.getInstance(context).getBoolean(AppConstants.KEY_FCM_ID_UPDATED))
+                                    hitApiRequest(ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO);
 
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                                 IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, loginResponse.getCoins());

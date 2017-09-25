@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
@@ -18,7 +20,9 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
+        IqMojoPrefrences.getInstance(getApplicationContext()).setString(AppConstants.KEY_FCM_ID, refreshedToken);
+        IqMojoPrefrences.getInstance(getApplicationContext()).setBoolean(AppConstants.KEY_FCM_ID_UPDATED, true);
+//        Intent intent = new Intent(this, RegistrationIntentService.class);
+//        startService(intent);
     }
 }

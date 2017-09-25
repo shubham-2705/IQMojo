@@ -38,8 +38,7 @@ import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 import com.iqmojo.iq_mojo.utils.FontHelper;
-import com.iqmojo.iq_mojo.utils.GCMHelper;
-import com.iqmojo.iq_mojo.utils.RegistrationIntentService;
+import com.iqmojo.iq_mojo.utils.MyFirebaseInstanceIDService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,7 +58,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     TextView txvgoogle,txvfb;
     GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1000;
-    String strEmail="", strId="", strLocation="", gcmRegID="", fbprofilepicurl="", fb_firstname="", fb_lastname="";
+    String strEmail="", strId="", strLocation="", fbprofilepicurl="", fb_firstname="", fb_lastname="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     .build();
 
 
-            GetGCM();
+//            GetGCM();
             // fb sign in
             LoginManager.getInstance().registerCallback(callbackManager,
                     new FacebookCallback<LoginResult>() {
@@ -150,7 +149,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                                 i.putExtra(AppConstants.EMAIL_ID, strEmail);
                                                 i.putExtra(AppConstants.LOCATION, strLocation);
                                                 i.putExtra(AppConstants.FB_ID, strId);
-                                                i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
+                                                i.putExtra(AppConstants.DEVICE_TOKEN, IqMojoPrefrences.getInstance(getApplicationContext()).getString(AppConstants.KEY_FCM_ID));
                                                 startActivity(i);
 
                                             } catch (JSONException e) {
@@ -258,7 +257,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             i.putExtra(AppConstants.GOOGLE_ID,acct.getId());
             i.putExtra(AppConstants.LOCATION, strLocation);
             i.putExtra(AppConstants.GOOGLE_TOKEN, acct.getIdToken());
-            i.putExtra(AppConstants.DEVICE_TOKEN, gcmRegID);
+            i.putExtra(AppConstants.DEVICE_TOKEN, IqMojoPrefrences.getInstance(getApplicationContext()).getString(AppConstants.KEY_FCM_ID));
 
             startActivity(i);
 
@@ -289,7 +288,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
             thread.start();*/
 
-            Intent intent = new Intent(this, RegistrationIntentService.class);
+            Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
             startService(intent);
 
         } catch (Exception e) {
