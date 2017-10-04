@@ -20,6 +20,7 @@ public interface ApiConstants {
         String GET_QUESTION = BASE_URL + "startGame";
         String NEXT_QUESTION=BASE_URL + "nextQ";
         String UPDATE_DEVICE_INFO =  BASE_URL + "updateDeviceInfo";
+        String TXN = BASE_URL + "tx";
     }
 
     interface REQUEST_TYPE
@@ -31,6 +32,7 @@ public interface ApiConstants {
         int GET_QUESTION =4 ;
         int NEXT_QUESTION = 5;
         int UPDATE_DEVICE_INFO = 6;
+        int TXN = 7;
     }
 
 

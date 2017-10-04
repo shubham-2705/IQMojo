@@ -71,12 +71,15 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:11.0.4'
     compile 'com.google.android.gms:play-services-location:11.0.4'
     compile 'com.google.firebase:firebase-core:11.0.4'
-    compile "com.google.firebase:firebase-messaging:11.0.4"
+    compile 'com.google.firebase:firebase-messaging:11.0.4'
     compile 'com.google.android.gms:play-services-drive:11.0.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.krtkush:LinearTimer:v2.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
+
+
 
 
 

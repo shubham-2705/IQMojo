@@ -26,10 +26,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
-
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -310,7 +306,7 @@ public class CommonFunctionsUtil {
     }
 
 
-    public static String getDeviceToken(Context context){
+ /*   public static String getDeviceToken(Context context){
         String token="";
 
         try {
@@ -325,7 +321,7 @@ public class CommonFunctionsUtil {
         }
 
         return token;
-    }
+    }*/
 
 
 

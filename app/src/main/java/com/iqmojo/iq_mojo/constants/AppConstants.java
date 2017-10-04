@@ -23,8 +23,8 @@ public interface AppConstants {
     String GAME_ITEM_OBJECT = "game_object";
     String GAME_RESULT = "game_result";
     String FCM_ID = "fcm_id";
-
-    //Toolbar Change
+    String ADD_COINS = "coins_add_redeem";
+    //Toolbar ChangeCoins
 
 //    int DEFAULT = 0;
 //    int HISTORY = 1;
