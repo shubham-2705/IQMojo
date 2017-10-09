@@ -27,8 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
 
 import java.lang.reflect.Field;
 import java.net.URISyntaxException;
@@ -310,22 +308,22 @@ public class CommonFunctionsUtil {
     }
 
 
-    public static String getDeviceToken(Context context){
-        String token="";
-
-        try {
-            InstanceID instanceID = InstanceID.getInstance(context);
-
-            token = instanceID.getToken(gcm_defaultSenderId, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-
-            Log.i("devicetoken", "GCM Registration Token: " + token);
-
-        }catch (Exception e) {
-            Log.d("devicetoken", "Failed to complete token refresh", e);
-        }
-
-        return token;
-    }
+//    public static String getDeviceToken(Context context){
+//        String token="";
+//
+//        try {
+//            InstanceID instanceID = InstanceID.getInstance(context);
+//
+//            token = instanceID.getToken(gcm_defaultSenderId, GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+//
+//            Log.i("devicetoken", "GCM Registration Token: " + token);
+//
+//        }catch (Exception e) {
+//            Log.d("devicetoken", "Failed to complete token refresh", e);
+//        }
+//
+//        return token;
+//    }
 
 
 

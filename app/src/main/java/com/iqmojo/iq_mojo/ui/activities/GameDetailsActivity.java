@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
+import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.GameItemResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
@@ -24,10 +25,11 @@ import java.text.DecimalFormat;
 
 public class GameDetailsActivity extends BaseActivity {
 
-    TextView txvGameName, txvDesc, txvTnC, txvPlay;
+    TextView txvGameName, txvDesc, txvTnC, txvPlay, txvResume;
     GameItemResponse gameItemResponse;
     ImageView imvQuestionImage;
     CardView cardBackground;
+    private boolean isResume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class GameDetailsActivity extends BaseActivity {
         try {
             if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
                 gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+
+            isResume = getIntent().getBooleanExtra(AppConstants.IS_RESUME, false);
 
             setupToolbar();
             getView();
@@ -57,18 +61,20 @@ public class GameDetailsActivity extends BaseActivity {
             txvTnC.setText(gameItemResponse.gettAndC());
         }
 
+        if (isResume) {
+            txvResume.setVisibility(View.VISIBLE);
+        }
+
         String decoded_url = null;
         try {
-            if (gameItemResponse.getDescImage()!=null && !TextUtils.isEmpty(gameItemResponse.getDescImage()))
+            if (gameItemResponse.getDescImage() != null && !TextUtils.isEmpty(gameItemResponse.getDescImage()))
                 decoded_url = URLDecoder.decode(gameItemResponse.getDescImage(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         if (decoded_url != null && !TextUtils.isEmpty(decoded_url)) {
             Picasso.with(this).load(decoded_url).into(imvQuestionImage);
-        }
-        else
-        {
+        } else {
             cardBackground.setVisibility(View.GONE);
         }
 
@@ -79,6 +85,7 @@ public class GameDetailsActivity extends BaseActivity {
         txvGameName = (TextView) findViewById(R.id.txvGameName);
         txvTnC = (TextView) findViewById(R.id.txvTnC);
         txvPlay = (TextView) findViewById(R.id.txvPlay);
+        txvResume = (TextView) findViewById(R.id.txvResume);
         imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
         cardBackground = (CardView) findViewById(R.id.cardBackground);
 
@@ -87,6 +94,17 @@ public class GameDetailsActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GameDetailsActivity.this, GameEntryFeeActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                intent.putExtra(AppConstants.IS_RESUME,false);
+                startActivity(intent);
+
+            }
+        });
+        txvResume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameDetailsActivity.this, GameEntryFeeActivity.class);
+                intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                intent.putExtra(AppConstants.IS_RESUME,true);
                 startActivity(intent);
 
             }

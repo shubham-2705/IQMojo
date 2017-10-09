@@ -23,11 +23,13 @@ import com.squareup.picasso.Picasso;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class GameResultActivity extends BaseActivity {
 
     GameResultResponse gameResultResponse;
     GameItemResponse gameItemResponse;
+    ArrayList<GameItemResponse> bonusGameItemResponses;
     String coins;
     ImageView imvQuestionImage;
     CardView cardBackground;
@@ -44,6 +46,9 @@ public class GameResultActivity extends BaseActivity {
 
             if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
                 gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+
+            if (getIntent().getParcelableArrayListExtra(AppConstants.BONUS_GAMES) != null)
+                bonusGameItemResponses = getIntent().getParcelableArrayListExtra(AppConstants.BONUS_GAMES);
 
             if (getIntent().getStringExtra(AppConstants.KEY_COINS) !=null)
                 coins = getIntent().getStringExtra(AppConstants.KEY_COINS);

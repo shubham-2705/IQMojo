@@ -1,9 +1,14 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -13,10 +18,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
 
 import com.android.volley.Request;
 import com.iqmojo.R;
@@ -39,8 +47,10 @@ import com.squareup.picasso.Picasso;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import android.app.Dialog;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -55,13 +65,16 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
     GameItemResponse gameItemResponse;
     int gameid = 0, timer = 0, quesId = 0, quesLevel = 0, ansValue = 0, attemptedCount = 1, correctCount = 0;
     LinearTimerView linearTimerView;
-    ImageView imvQuestionImage;
+    ImageView imvQuestionImage,imvPause;
     CardView cardBackground;
     LinearLayout llyOptions;
     HashMap<String, Integer> valuesMap;
     HashMap<Integer, String> displayMap;
     HashMap<Integer, TextView> textviewMap = new HashMap<>();
+    private boolean isResume;
 
+    private int resumeGame=0;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +83,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
 
 
         try {
+            mReceiver = new BatteryBroadcastReceiver();
             linearTimerView = (LinearTimerView) findViewById(R.id.linearTimer);
             txvTime = (TextView) findViewById(R.id.txvTime);
 
@@ -77,6 +91,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             txvAttempted = (TextView) findViewById(R.id.txvAttempted);
             txvCorrect = (TextView) findViewById(R.id.txvCorrect);
             imvQuestionImage = (ImageView) findViewById(R.id.imvQuestionImage);
+            imvPause = (ImageView) findViewById(R.id.imvPause);
             cardBackground = (CardView) findViewById(R.id.cardBackground);
             llyOptions = (LinearLayout) findViewById(R.id.llyOptions);
             setupToolbar();
@@ -88,6 +103,19 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                 txvAttempted.setText("" + attemptedCount);
                 txvCorrect.setText("" + correctCount);
             }
+
+            isResume = getIntent().getBooleanExtra(AppConstants.IS_RESUME, false);
+
+            if(isResume)
+                resumeGame=1;
+
+            imvPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // show dialog for pause button
+                    showPauseDialog();
+                }
+            });
 
             hitApiRequest(ApiConstants.REQUEST_TYPE.GET_QUESTION, 0);
         } catch (Exception e) {
@@ -110,6 +138,50 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             txvAttempted.setText("" + attemptedCount);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter(AppConstants.PHONE_CALL));
+        super.onStart();
+    }
+    @Override
+    protected void onStop() {
+        unregisterReceiver(mReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        super.onStop();
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Intent intent1 = new Intent(PlayQuestionActivity.this, HomeActivity.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent1);
+        }
+
+    };
+
+    private class BatteryBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+            ShowLog.d("---battery","   "+level);
+            if(level<=10)
+            {
+                ToastUtil.showShortToast(PlayQuestionActivity.this,"Please connect your device to power supply.");
+                if(level<=5)
+                {
+                    Intent intent1 = new Intent(context, HomeActivity.class);
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(intent1);
+                    ToastUtil.showShortToast(PlayQuestionActivity.this,"Game paused due to low battery.");
+                }
+
+            }
         }
     }
 
@@ -167,7 +239,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
 
                     clasz = QuestionResponse.class;
 
-                    url = ApiConstants.Urls.GET_QUESTION + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid;
+                    url = ApiConstants.Urls.GET_QUESTION + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid+ "&resume=" + resumeGame;
 
                     url = url.replace(" ", "%20");
                     Log.v("url-->> ", url);
@@ -424,10 +496,11 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                                 }, 2000);
                             }
 
-                            // handle result prev ques was the last question
+                            // handle result if prev ques was the last question
                             if (questionResponse1.getGameResult() != null) {
                                 ToastUtil.showLongToast(PlayQuestionActivity.this, "Redirecting to results..");
                                 final GameResultResponse gameResult = questionResponse1.getGameResult();
+                                final ArrayList<GameItemResponse> bonusGameItemResponses=questionResponse1.getGames();
                                 IqMojoPrefrences.getInstance(PlayQuestionActivity.this).setLong(AppConstants.KEY_COINS, questionResponse1.getCoins());
 
                                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -437,6 +510,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                                         intent.putExtra(AppConstants.GAME_RESULT, gameResult);
                                         intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                                         intent.putExtra(AppConstants.KEY_COINS, questionResponse1.getCoins().toString());
+                                        intent.putParcelableArrayListExtra(AppConstants.BONUS_GAMES, bonusGameItemResponses);
                                         ShowLog.d("--coins","----"+questionResponse1.getCoins());
                                         startActivity(intent);
                                         finish();
@@ -691,5 +765,53 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
 
         ansValue = ansId;
 
+    }
+
+    public void showPauseDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.getWindow().setBackgroundDrawableResource(R.drawable.transparent_bg_image);
+        dialog.setContentView(R.layout.pause_game_dialog);
+
+        TextView txvResume=(TextView)dialog.findViewById(R.id.txvResume);
+        TextView txvNewGame=(TextView)dialog.findViewById(R.id.txvNewGame);
+
+        try {
+
+            txvResume.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            txvNewGame.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(PlayQuestionActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        dialog.setCancelable(true);
+        dialog.show();
+        try {
+            if (!((Activity) this).isFinishing()) {
+//                dialog.show();
+            }
+        } catch (WindowManager.BadTokenException e) {
+            e.printStackTrace();
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        // return dialog;
     }
 }

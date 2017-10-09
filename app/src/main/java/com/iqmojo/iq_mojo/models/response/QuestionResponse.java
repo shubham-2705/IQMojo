@@ -3,6 +3,8 @@ package com.iqmojo.iq_mojo.models.response;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by shubhamlamba on 17/09/17.
  */
@@ -13,8 +15,18 @@ public class QuestionResponse implements Parcelable {
     private PrevQuestionResponse preQAns;
     private GameResultResponse gameResult;
     private Long coins;
+    private ArrayList<GameItemResponse> games;
 
 
+
+
+    public ArrayList<GameItemResponse> getGames() {
+        return games;
+    }
+
+    public void setGames(ArrayList<GameItemResponse> games) {
+        this.games = games;
+    }
 
     public PrevQuestionResponse getPreQAns() {
         return preQAns;
@@ -49,6 +61,9 @@ public class QuestionResponse implements Parcelable {
     }
 
 
+    public QuestionResponse() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -56,13 +71,11 @@ public class QuestionResponse implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.question);
-        dest.writeValue(this.preQAns);
-        dest.writeValue(this.gameResult);
+        dest.writeParcelable(this.question, flags);
+        dest.writeParcelable(this.preQAns, flags);
+        dest.writeParcelable(this.gameResult, flags);
         dest.writeValue(this.coins);
-    }
-
-    public QuestionResponse() {
+        dest.writeTypedList(this.games);
     }
 
     protected QuestionResponse(Parcel in) {
@@ -70,9 +83,10 @@ public class QuestionResponse implements Parcelable {
         this.preQAns = in.readParcelable(PrevQuestionResponse.class.getClassLoader());
         this.gameResult = in.readParcelable(GameResultResponse.class.getClassLoader());
         this.coins = (Long) in.readValue(Long.class.getClassLoader());
+        this.games = in.createTypedArrayList(GameItemResponse.CREATOR);
     }
 
-    public static final Parcelable.Creator<QuestionResponse> CREATOR = new Parcelable.Creator<QuestionResponse>() {
+    public static final Creator<QuestionResponse> CREATOR = new Creator<QuestionResponse>() {
         @Override
         public QuestionResponse createFromParcel(Parcel source) {
             return new QuestionResponse(source);

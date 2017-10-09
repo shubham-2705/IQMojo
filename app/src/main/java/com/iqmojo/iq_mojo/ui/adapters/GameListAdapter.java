@@ -31,6 +31,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     private Context mcontext;
     private ArrayList<GameItemResponse> gameItemResponses;
     private HomeFragment homeFragment;
+    private boolean isResume;
 
     public GameListAdapter(Context context, ArrayList<GameItemResponse> list, HomeFragment fragment) {
         mcontext = context;
@@ -66,12 +67,22 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             if (decoded_url != null && !TextUtils.isEmpty(decoded_url))
                 Picasso.with(mcontext).load(decoded_url).into(holder.imvGameLogo);
 
+            if (gameItemResponse.getActive() == 2) {
+                holder.txvStart.setText("RESUME GAME");
+                isResume=true;
+            } else {
+                isResume=false;
+                holder.txvStart.setText("START");
+            }
+
             holder.txvStart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent=new Intent(mcontext, GameDetailsActivity.class);
-                    intent.putExtra(AppConstants.GAME_ITEM_OBJECT,gameItemResponse);
+                    Intent intent = new Intent(mcontext, GameDetailsActivity.class);
+                    intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                    isResume = gameItemResponse.getActive() == 2;
+                    intent.putExtra(AppConstants.IS_RESUME,isResume);
                     mcontext.startActivity(intent);
 
 

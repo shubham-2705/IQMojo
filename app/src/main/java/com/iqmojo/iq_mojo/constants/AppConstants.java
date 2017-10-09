@@ -22,7 +22,10 @@ public interface AppConstants {
     String GOOGLE_TOKEN = "google_token";
     String GAME_ITEM_OBJECT = "game_object";
     String GAME_RESULT = "game_result";
+    String BONUS_GAMES = "bonus_games";
     String FCM_ID = "fcm_id";
+    String IS_RESUME = "is_resume";
+    String PHONE_CALL = "phone_call";
 
     //Toolbar Change
 

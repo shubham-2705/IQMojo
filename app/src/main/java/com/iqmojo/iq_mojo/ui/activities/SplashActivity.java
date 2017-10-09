@@ -154,8 +154,10 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                         try {
                             if (loginResponse.getLoginStatus()) {
 
-                                if (IqMojoPrefrences.getInstance(context).getBoolean(AppConstants.KEY_FCM_ID_UPDATED))
+                                if (IqMojoPrefrences.getInstance(context).getBoolean(AppConstants.KEY_FCM_ID_UPDATED)) {
                                     hitApiRequest(ApiConstants.REQUEST_TYPE.UPDATE_DEVICE_INFO);
+                                    IqMojoPrefrences.getInstance(getApplicationContext()).setBoolean(AppConstants.KEY_FCM_ID_UPDATED, false);
+                                }
 
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
                                 IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, loginResponse.getCoins());

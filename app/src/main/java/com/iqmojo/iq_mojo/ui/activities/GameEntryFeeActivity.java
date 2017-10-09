@@ -28,6 +28,7 @@ public class GameEntryFeeActivity extends BaseActivity {
     GameItemResponse gameItemResponse;
     ImageView imvQuestionImage;
     CardView cardBackground;
+    private boolean isResume;
 
     @Override
     protected void onResume() {
@@ -48,6 +49,9 @@ public class GameEntryFeeActivity extends BaseActivity {
         try {
             if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null)
                 gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
+
+            isResume = getIntent().getBooleanExtra(AppConstants.IS_RESUME, false);
+
 
             setupToolbar();
             getView();
@@ -114,6 +118,7 @@ public class GameEntryFeeActivity extends BaseActivity {
 
                 Intent intent = new Intent(GameEntryFeeActivity.this, PlayQuestionActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                intent.putExtra(AppConstants.IS_RESUME,isResume);
                 startActivity(intent);
 
             }
