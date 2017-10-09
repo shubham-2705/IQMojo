@@ -26,7 +26,6 @@ import com.iqmojo.iq_mojo.models.response.GameListResponse;
 import com.iqmojo.iq_mojo.models.response.TransactionListItemResponse;
 import com.iqmojo.iq_mojo.models.response.TransactionListResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
-import com.iqmojo.iq_mojo.utils.ExpandableListAdapter;
 import com.iqmojo.iq_mojo.utils.TransactionListAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -129,14 +128,16 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
                                     if (transactionListResponse.getTransaction_list().get(i).getTxType().equalsIgnoreCase("C")){
                                         transactionListResponsesCredit.add(transactionListResponse.getTransaction_list().get(i));
                                         creditAmount = creditAmount + transactionListResponse.getTransaction_list().get(i).getCoins();
-                                        txt_amountCredit.setText(String.valueOf(creditAmount));
+
                                     }else if (transactionListResponse.getTransaction_list().get(i).getTxType().equalsIgnoreCase("D")){
                                         transactionListResponsesDebit.add(transactionListResponse.getTransaction_list().get(i));
                                         debitAmount = debitAmount + transactionListResponse.getTransaction_list().get(i).getCoins();
-                                        txt_amountdebit.setText(String.valueOf(debitAmount));
+
                                     }
                                 }
 
+                                txt_amountCredit.setText(String.valueOf(creditAmount));
+                                txt_amountdebit.setText(String.valueOf(debitAmount));
 
 
 

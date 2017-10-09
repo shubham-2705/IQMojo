@@ -116,8 +116,13 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".iq_mojo.ui.activities.AddCoins" />
-        <activity android:name=".iq_mojo.ui.activities.AddCoinsDetails"></activity>
+        <activity android:name=".iq_mojo.ui.activities.AddCoins"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+
+        <activity android:name=".iq_mojo.ui.activities.AddCoinsDetails"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
     </application>
 
 </manifest>
