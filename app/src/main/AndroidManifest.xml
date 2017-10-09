@@ -102,7 +102,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".iq_mojo.utils.MyFirebaseMessagingService"
             android:exported="false">
@@ -117,6 +116,8 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".iq_mojo.ui.activities.AddCoins" />
+        <activity android:name=".iq_mojo.ui.activities.AddCoinsDetails"></activity>
     </application>
 
 </manifest>

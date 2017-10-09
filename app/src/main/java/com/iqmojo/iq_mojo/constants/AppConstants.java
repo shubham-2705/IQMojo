@@ -28,6 +28,8 @@ public interface AppConstants {
     String PHONE_CALL = "phone_call";
 
     //Toolbar Change
+    String ADD_COINS = "coins_add_redeem";
+    //Toolbar ChangeCoins
 
 //    int DEFAULT = 0;
 //    int HISTORY = 1;

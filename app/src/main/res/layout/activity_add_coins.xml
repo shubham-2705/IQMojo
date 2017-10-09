@@ -5,9 +5,6 @@
     android:background="@drawable/grey_gradient_bg"
     tools:context="com.iqmojo.iq_mojo.ui.fragments.MyPointsFragment">
 
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,53 +75,60 @@
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/txvCoinsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_size_20sp"
+        android:gravity="center"
+        android:layout_below="@id/llyProfile"
+        android:layout_margin="@dimen/margin_30dp"
+        />
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/llyProfile"
+        android:layout_below="@id/txvCoinsText"
+        android:layout_marginTop="@dimen/margin_30dp"
         android:orientation="vertical">
 
 
         <TextView
-            android:id="@+id/txvAddCoins"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/rlyMobile"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_30dp"
-            android:background="@drawable/red_gradient_rounded_bg"
-            android:elevation="@dimen/padding_5"
-            android:gravity="center"
-            android:paddingLeft="@dimen/padding_50"
-            android:paddingRight="@dimen/padding_50"
-            android:layout_marginLeft="@dimen/margin_30dp"
-            android:layout_marginRight="@dimen/margin_30dp"
-            android:text="Add Coins"
-            android:textColor="@color/white"
-            android:textSize="@dimen/app_text_size"
+            android:id="@+id/txv_paytm"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="55dp"
             android:typeface="monospace"
-            android:visibility="visible" />
+            android:background="@drawable/diagonal_drawable"
+            android:elevation="@dimen/padding_3"
+            android:gravity="center"
+            android:maxWidth="300dp"
+            android:paddingLeft="@dimen/margin_30dp"
+            android:paddingRight="@dimen/margin_30dp"
+            android:drawablePadding="@dimen/margin_20"
+            android:drawableLeft="@drawable/iqmojo_toolbar"
+            android:text="Paytm Cash"
+            android:textColor="@color/dark_grey_text"
+            android:textSize="@dimen/form_textsize" />
+
         <TextView
-            android:id="@+id/txvRedeemCoins"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_30dp"
-            android:background="@drawable/red_gradient_rounded_bg"
-            android:elevation="@dimen/padding_5"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/margin_30dp"
-            android:layout_marginRight="@dimen/margin_30dp"
-            android:paddingLeft="@dimen/padding_50"
-            android:paddingRight="@dimen/padding_50"
-            android:text="Redeem Coins"
-            android:textColor="@color/white"
-            android:textSize="@dimen/app_text_size"
+            android:id="@+id/txv_bank"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="55dp"
             android:typeface="monospace"
-            android:visibility="visible" />
+            android:maxWidth="300dp"
+            android:background="@drawable/diagonal_drawable"
+            android:elevation="@dimen/padding_3"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_20"
+            android:paddingLeft="@dimen/margin_30dp"
+            android:paddingRight="@dimen/margin_30dp"
+            android:drawablePadding="@dimen/margin_20"
+            android:drawableLeft="@drawable/iqmojo_toolbar"
+            android:text="@string/bankAccount"
+            android:textColor="@color/dark_grey_text"
+            android:textSize="@dimen/form_textsize" />
     </LinearLayout>
-
 </RelativeLayout>
-

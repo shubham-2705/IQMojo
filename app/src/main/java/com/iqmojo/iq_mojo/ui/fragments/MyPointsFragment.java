@@ -20,6 +20,7 @@ import com.iqmojo.R;
 import com.iqmojo.base.ui.fragment.BaseFragment;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.iqmojo.iq_mojo.ui.activities.AddCoins;
 import com.iqmojo.iq_mojo.ui.activities.BankActivity;
 import com.iqmojo.iq_mojo.ui.activities.PaytmActivity;
 import com.squareup.picasso.Picasso;
@@ -32,9 +33,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyPointsFragment extends BaseFragment implements View.OnClickListener {
 
     View view;
-    TextView btn_paytm, btn_bank;
+    TextView txvAddCoins, txvRedeemCoins;
     CircleImageView img_profile;
-    String img_url;
     Context context;
     TextView text_name;
 
@@ -48,10 +48,10 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
                 context = getBaseActivity();
 
                 text_name = (TextView) view.findViewById(R.id.text_name);
-                btn_bank = (TextView) view.findViewById(R.id.btn_bank);
-                btn_paytm = (TextView) view.findViewById(R.id.btn_paytm);
-                btn_bank.setOnClickListener(this);
-                btn_paytm.setOnClickListener(this);
+                txvAddCoins = (TextView) view.findViewById(R.id.txvAddCoins);
+                txvRedeemCoins = (TextView) view.findViewById(R.id.txvRedeemCoins);
+                txvRedeemCoins.setOnClickListener(this);
+                txvAddCoins.setOnClickListener(this);
 
                 img_profile = (CircleImageView) view.findViewById(R.id.profile_image);
 
@@ -101,15 +101,17 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
         try {
             switch (v.getId()) {
 
-                case R.id.btn_bank:
+                case R.id.txvAddCoins:
 
-                    Intent i = new Intent(context, BankActivity.class);
+                    Intent i = new Intent(context, AddCoins.class);
+                    i.putExtra(AppConstants.ADD_COINS, "Add Coins");
                     startActivity(i);
 
                     break;
 
-                case R.id.btn_paytm:
-                    Intent i1 = new Intent(context, PaytmActivity.class);
+                case R.id.txvRedeemCoins:
+                    Intent i1 = new Intent(context, AddCoins.class);
+                    i1.putExtra(AppConstants.ADD_COINS, "Redeem Coins");
                     startActivity(i1);
                     break;
             }

@@ -13,6 +13,6 @@
     <color name="profile_bg">#E0E0E1</color>
     <color name="wrong_ans">#ef3c3c</color>
     <color name="right_ans">#0e9952</color>
-
+    <color name="mild_grey">#C0C0C0</color>
 
 </resources>
