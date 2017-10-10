@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
     TransactionListAdapter transactionListAdapter, debitAdapter;
     ListView listCredit, listDebit;
     RelativeLayout relativeCredit, relativeDebit;
+    LinearLayout rlCreditHeader, rlDebitHeader;
     TextView text_name, txvCoinsText, txt_amountCredit, txt_amountdebit;
     CircleImageView img_profile;
     long debitAmount, creditAmount;
@@ -60,6 +62,8 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
         txt_amountdebit = (TextView)view.findViewById(R.id.txt_amountdebit);
         txt_amountCredit = (TextView)view.findViewById(R.id.txt_amountCredit);
 
+        rlCreditHeader = (LinearLayout) view.findViewById(R.id.rlCreditHeader);
+        rlDebitHeader = (LinearLayout)view.findViewById(R.id.rlDebitHeader);
         listCredit = (ListView) view.findViewById(R.id.listCredit);
         relativeCredit = (RelativeLayout)view.findViewById(R.id.relativeCredit);
         relativeCredit.setOnClickListener(this);
@@ -203,13 +207,18 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
             case R.id.relativeCredit:
 
                 listDebit.setVisibility(View.GONE);
+                rlDebitHeader.setVisibility(View.GONE);
                 listCredit.setVisibility(View.VISIBLE);
+                rlCreditHeader.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.relativeDebit:
 
                 listCredit.setVisibility(View.GONE);
+                rlCreditHeader.setVisibility(View.GONE);
                 listDebit.setVisibility(View.VISIBLE);
+                rlDebitHeader.setVisibility(View.VISIBLE);
+
                 break;
         }
 

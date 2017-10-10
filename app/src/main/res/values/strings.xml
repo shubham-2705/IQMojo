@@ -48,4 +48,9 @@
     <string name="accountnum">Account Number</string>
     <string name="confaccountnum">Confirm Account Number</string>
     <string name="ifsc">IFSC Code</string>
+    <string name="date">DATE</string>
+    <string name="activity">ACTIVITY</string>
+    <string name="amount_header">AMOUNT</string>
 </resources>
+
+
