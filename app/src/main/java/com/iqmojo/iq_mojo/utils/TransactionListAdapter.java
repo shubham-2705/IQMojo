@@ -60,7 +60,9 @@ public class TransactionListAdapter extends BaseAdapter {
         TextView textAmount = (TextView)v.findViewById(R.id.textAmount);
 
         textDate.setText(formatDate(transactionListItemResponse.getTxTime()));
-        textAmount.setText(String.valueOf(transactionListItemResponse.getCoins()));
+        textActivity.setText(transactionListItemResponse.getTxType());
+        textAmount.setText(""+transactionListItemResponse.getCoins());
+      //  textAmount.setText(transactionListItemResponse.get);
 
         return v;
     }

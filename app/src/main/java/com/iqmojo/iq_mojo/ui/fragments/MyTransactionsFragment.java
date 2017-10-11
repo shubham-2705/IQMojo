@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ListAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -32,6 +34,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -45,7 +48,7 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
     ListView listCredit, listDebit;
     RelativeLayout relativeCredit, relativeDebit;
     LinearLayout rlCreditHeader, rlDebitHeader;
-    TextView text_name, txvCoinsText, txt_amountCredit, txt_amountdebit;
+    TextView text_name, txvCoinsText, txt_amountCredit, txt_amountdebit,text_rupees;
     CircleImageView img_profile;
     long debitAmount, creditAmount;
     boolean isClickedDebit, isClickedCredit;
@@ -61,16 +64,36 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
 
         txt_amountdebit = (TextView)view.findViewById(R.id.txt_amountdebit);
         txt_amountCredit = (TextView)view.findViewById(R.id.txt_amountCredit);
+        text_rupees = (TextView)view.findViewById(R.id.text_rupees);
 
         rlCreditHeader = (LinearLayout) view.findViewById(R.id.rlCreditHeader);
         rlDebitHeader = (LinearLayout)view.findViewById(R.id.rlDebitHeader);
         listCredit = (ListView) view.findViewById(R.id.listCredit);
         relativeCredit = (RelativeLayout)view.findViewById(R.id.relativeCredit);
         relativeCredit.setOnClickListener(this);
+        listCredit.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 
         listDebit = (ListView) view.findViewById(R.id.listDebit);
         relativeDebit = (RelativeLayout)view.findViewById(R.id.relativeDebit);
         relativeDebit.setOnClickListener(this);
+        listDebit.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
 
         listCredit.setVisibility(View.GONE);
         listDebit.setVisibility(View.GONE);
@@ -98,8 +121,32 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
         if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME)))
             text_name.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME));
 
+
+        text_rupees.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
+
         hitApiRequest(ApiConstants.REQUEST_TYPE.TXN);
         return view;
+    }
+
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 
     @Override
@@ -150,6 +197,8 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
 
                                 debitAdapter = new TransactionListAdapter(getActivity(), transactionListResponsesDebit);
                                 listDebit.setAdapter(debitAdapter);
+                                setListViewHeightBasedOnChildren(listDebit);
+                                setListViewHeightBasedOnChildren(listCredit);
                             }
                         } catch (Exception e) {
                             getBaseActivity().hideProgressDialog();

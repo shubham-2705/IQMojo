@@ -5,130 +5,177 @@
     android:background="@drawable/grey_gradient_bg"
     tools:context="com.iqmojo.iq_mojo.ui.fragments.MyPointsFragment">
 
-    <LinearLayout
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/padding_30"
-        android:id="@+id/llyProfile"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="5"
-                android:background="@color/grey_text_color" />
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/profile_pic"
-                app:civ_border_color="@color/grey_text_color"
-                app:civ_border_width="1dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="5"
-                android:background="@color/grey_text_color" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/text_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:text="Ramesh Kumar"
-            android:textSize="@dimen/profile_name_text_size"
-            android:typeface="monospace" />
-
-        <TextView
-            android:id="@+id/text_rupees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_7"
-            android:drawableLeft="@drawable/pager_00_inactive"
-            android:drawablePadding="@dimen/margin_5"
-            android:text="125.26"
-            android:textSize="@dimen/profile_name"
-            android:typeface="monospace" />
-
-        <TextView
-            android:id="@+id/text_avail_bal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:text="@string/avail_bal"
-            android:textSize="@dimen/form_textsize"
-            android:typeface="monospace" />
-
-    </LinearLayout>
+        android:layout_alignParentTop="true" />
 
 
-    <TextView
-        android:id="@+id/txvCoinsText"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/text_size_20sp"
-        android:gravity="center"
-        android:layout_below="@id/llyProfile"
-        android:layout_margin="@dimen/margin_30dp"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/grey_gradient_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llyProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/padding_30"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="5"
+                        android:background="@color/grey_text_color" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/profile_image"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/profile_pic"
+                        app:civ_border_color="@color/grey_text_color"
+                        app:civ_border_width="1dp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="5"
+                        android:background="@color/grey_text_color" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="Ramesh Kumar"
+                    android:textSize="@dimen/profile_name_text_size"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/text_rupees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_7"
+                    android:drawableLeft="@drawable/pager_00_inactive"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:text="125.26"
+                    android:textSize="@dimen/profile_name"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/text_avail_bal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="@string/avail_bal"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_below="@id/txvCoinsText"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/llycoinstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llyProfile"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2.5"
+                    android:background="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/txvCoinsText"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:typeface="monospace"
+                    android:text="redeem Coins"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/profile_name" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2.5"
+                    android:background="@color/colorPrimaryDark" />
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/txv_paytm"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="55dp"
-            android:typeface="monospace"
-            android:background="@drawable/diagonal_drawable"
-            android:elevation="@dimen/padding_3"
-            android:gravity="center"
-            android:maxWidth="300dp"
-            android:paddingLeft="@dimen/margin_30dp"
-            android:paddingRight="@dimen/margin_30dp"
-            android:drawablePadding="@dimen/margin_20"
-            android:drawableLeft="@drawable/iqmojo_toolbar"
-            android:text="Paytm Cash"
-            android:textColor="@color/dark_grey_text"
-            android:textSize="@dimen/form_textsize" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/llycoinstext"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txv_bank"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="55dp"
-            android:typeface="monospace"
-            android:maxWidth="300dp"
-            android:background="@drawable/diagonal_drawable"
-            android:elevation="@dimen/padding_3"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/margin_20"
-            android:paddingLeft="@dimen/margin_30dp"
-            android:paddingRight="@dimen/margin_30dp"
-            android:drawablePadding="@dimen/margin_20"
-            android:drawableLeft="@drawable/iqmojo_toolbar"
-            android:text="@string/bankAccount"
-            android:textColor="@color/dark_grey_text"
-            android:textSize="@dimen/form_textsize" />
-    </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txv_paytm"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="55dp"
+                    android:background="@drawable/diagonal_drawable"
+                    android:drawableLeft="@drawable/iqmojo_toolbar"
+                    android:drawablePadding="@dimen/margin_20"
+                    android:elevation="@dimen/padding_3"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:maxWidth="300dp"
+                    android:paddingLeft="@dimen/margin_30dp"
+                    android:paddingRight="@dimen/margin_30dp"
+                    android:text="Paytm Cash"
+                    android:textColor="@color/dark_grey_text"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="monospace" />
+
+                <TextView
+                    android:id="@+id/txv_bank"
+                    android:layout_width="@dimen/button_width"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/diagonal_drawable"
+                    android:drawableLeft="@drawable/iqmojo_toolbar"
+                    android:drawablePadding="@dimen/margin_20"
+                    android:elevation="@dimen/padding_3"
+                    android:gravity="center"
+                    android:maxWidth="300dp"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:paddingLeft="@dimen/margin_30dp"
+                    android:paddingRight="@dimen/margin_30dp"
+                    android:text="@string/bankAccount"
+                    android:textColor="@color/dark_grey_text"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="monospace" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
