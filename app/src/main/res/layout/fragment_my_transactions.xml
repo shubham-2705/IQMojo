@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/grey_gradient_bg"
     tools:context="com.iqmojo.iq_mojo.ui.fragments.MyTransactionsFragment">
 
@@ -13,8 +12,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/llyProfile"
@@ -145,60 +144,50 @@
 
             </RelativeLayout>
 
-   <LinearLayout
-       android:id="@+id/rlCreditHeader"
-       android:layout_width="match_parent"
-       android:layout_height="40dp"
-       android:visibility="gone"
-       android:background="@drawable/red_circular_txn_header"
-       android:layout_marginRight="@dimen/margin_40dp"
-       android:layout_marginLeft="@dimen/margin_40dp"
-       android:gravity="center"
-       >
+            <LinearLayout
+                android:id="@+id/rlCreditHeader"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/margin_45dp"
+                android:layout_marginRight="@dimen/margin_45dp"
+                android:background="@drawable/red_circular_txn_header"
+                android:gravity="center"
+                android:visibility="gone">
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:layout_alignParentLeft="true"
-          android:text="@string/date"
-          android:gravity="left|center"
-          android:layout_centerVertical="true"
-          android:paddingLeft="@dimen/margin_10"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace"
 
-          />
+                    />
 
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:layout_centerInParent="true"
-          android:gravity="left|center"
-          android:text="@string/activity"
-          />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/activity"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:text="@string/amount_header"
-          android:layout_centerVertical="true"
-          android:layout_alignParentRight="true"
-          android:paddingRight="@dimen/margin_10"
-          android:gravity="left|center"
-          />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/amount_header"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
 
-   </LinearLayout>
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/listCredit"
@@ -269,60 +258,52 @@
 
             </RelativeLayout>
 
-   <LinearLayout
-       android:id="@+id/rlDebitHeader"
-       android:layout_width="match_parent"
-       android:layout_height="40dp"
-       android:visibility="gone"
-       android:background="@drawable/red_circular_txn_header"
-       android:layout_marginRight="@dimen/margin_40dp"
-       android:layout_marginLeft="@dimen/margin_40dp"
-      android:gravity="center">
+            <LinearLayout
+                android:id="@+id/rlDebitHeader"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/margin_45dp"
+                android:layout_marginRight="@dimen/margin_45dp"
+                android:background="@drawable/red_circular_txn_header"
+                android:gravity="center"
+                android:visibility="gone">
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:gravity="left"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:layout_alignParentLeft="true"
-          android:text="@string/date"
-          android:layout_centerVertical="true"
-          android:paddingLeft="@dimen/margin_10"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace"
 
-          />
+                    />
 
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:gravity="left"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:layout_centerInParent="true"
-          android:text="@string/activity"
-          />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/activity"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
 
-      <TextView
-          android:layout_width="0dp"
-          android:layout_weight="33"
-          android:gravity="left"
-          android:layout_height="wrap_content"
-          android:textColor="@color/white"
-          android:textSize="@dimen/app_text_size"
-          android:typeface="monospace"
-          android:text="@string/amount_header"
-          android:layout_centerVertical="true"
-          android:layout_alignParentRight="true"
-          android:paddingRight="@dimen/margin_10"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="33"
+                    android:gravity="center"
+                    android:text="@string/amount_header"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace"
 
-          />
+                    />
 
-   </LinearLayout>
+            </LinearLayout>
 
 
             <ListView
@@ -331,9 +312,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_55dp"
                 android:layout_marginRight="@dimen/margin_55dp"
-                android:dividerHeight="0.5dp"
                 android:divider="@color/colorPrimaryDark"
-                 />
+                android:dividerHeight="0.5dp" />
         </LinearLayout>
 
     </ScrollView>
