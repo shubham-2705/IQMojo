@@ -51,6 +51,7 @@
     <string name="date">DATE</string>
     <string name="activity">ACTIVITY</string>
     <string name="amount_header">AMOUNT</string>
+    <string name="RupeeSign">\u20B9 </string>
 </resources>
 
 

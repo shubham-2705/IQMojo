@@ -194,8 +194,8 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
                                     }
                                 }
 
-                                txt_amountCredit.setText(String.valueOf(creditAmount));
-                                txt_amountdebit.setText(String.valueOf(debitAmount));
+                                txt_amountCredit.setText((getResources().getString(R.string.RupeeSign)+" "+String.valueOf(creditAmount)));
+                                txt_amountdebit.setText((getResources().getString(R.string.RupeeSign)+" "+String.valueOf(debitAmount)));
 
 
 
@@ -263,16 +263,12 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
             case R.id.relativeCredit:
 
                 if(!isClickedCredit) {
-                    listDebit.setVisibility(View.GONE);
-                    rlDebitHeader.setVisibility(View.GONE);
                     listCredit.setVisibility(View.VISIBLE);
                     rlCreditHeader.setVisibility(View.VISIBLE);
                     isClickedCredit = true;
                     animateArrow(imageArrowCredit, 0, 90);
                 }else{
                     isClickedCredit = false;
-                    listDebit.setVisibility(View.GONE);
-                    rlDebitHeader.setVisibility(View.GONE);
                     listCredit.setVisibility(View.GONE);
                     rlCreditHeader.setVisibility(View.GONE);
                     animateArrow(imageArrowCredit, 90, 0);
@@ -283,16 +279,12 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
 
             case R.id.relativeDebit:
                 if(!isClickedDebit) {
-                    listCredit.setVisibility(View.GONE);
-                    rlCreditHeader.setVisibility(View.GONE);
                     listDebit.setVisibility(View.VISIBLE);
                     rlDebitHeader.setVisibility(View.VISIBLE);
                     isClickedDebit = true;
                     animateArrow(imageArrowDebit, 0, 90);
                 }else{
                     isClickedDebit = false;
-                    listCredit.setVisibility(View.GONE);
-                    rlCreditHeader.setVisibility(View.GONE);
                     listDebit.setVisibility(View.GONE);
                     rlDebitHeader.setVisibility(View.GONE);
                     animateArrow(imageArrowDebit, 90, 0);
