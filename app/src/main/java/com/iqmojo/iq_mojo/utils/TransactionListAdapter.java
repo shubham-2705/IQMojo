@@ -53,19 +53,6 @@ public class TransactionListAdapter extends BaseAdapter {
             v=layin.inflate(R.layout.transaction_list_childs, null);
         }
 
-       /* CoinCatalogBean catalogBean = arraylist.get(position);
-
-        TextView textTitle=(TextView)v.findViewById(R.id.text_title_ID);
-        textTitle.setText(catalogBean.Title);
-
-        TextView textCat=(TextView)v.findViewById(R.id.text_coincategory_ID);
-
-        if (catalogBean.Category.contains("IRA Eligible")) {
-            textCat.setText("IRA Eligible");
-        } else {
-            textCat.setText("");
-        }*/
-
         TransactionListItemResponse transactionListItemResponse = transactionList.get(position);
 
         TextView textDate = (TextView)v.findViewById(R.id.textDate);

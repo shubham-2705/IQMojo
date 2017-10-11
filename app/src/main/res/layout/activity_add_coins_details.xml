@@ -112,21 +112,21 @@
                     android:background="@color/mild_grey">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/margin_15"
-                        android:drawableLeft="@drawable/pager_00_active"
-                        android:drawablePadding="@dimen/margin_10"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/padding_15"
-                        android:text="50 Coins"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/drawer_text_size"
-                        android:typeface="monospace"
-                        android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:paddingLeft="@dimen/padding_15"
+                android:text="50 Coins"
+                android:drawableLeft="@drawable/iq_add_icon"
+                android:drawablePadding="@dimen/margin_10"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/drawer_text_size"
+                android:typeface="monospace"
+                android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/txv100"
@@ -153,21 +153,21 @@
                     android:layout_marginBottom="@dimen/margin_10"
                     android:background="@color/mild_grey">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/margin_15"
-                        android:drawableLeft="@drawable/pager_00_active"
-                        android:drawablePadding="@dimen/margin_10"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/padding_15"
-                        android:text="100 Coins"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/drawer_text_size"
-                        android:typeface="monospace"
-                        android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:paddingLeft="@dimen/padding_15"
+                android:text="100 Coins"
+                android:drawableLeft="@drawable/iq_add_icon"
+                android:drawablePadding="@dimen/margin_10"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/drawer_text_size"
+                android:typeface="monospace"
+                android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/txv200"
@@ -195,21 +195,21 @@
                     android:background="@color/mild_grey">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/margin_15"
-                        android:drawableLeft="@drawable/pager_00_active"
-                        android:drawablePadding="@dimen/margin_10"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/padding_15"
-                        android:text="250 Coins"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/drawer_text_size"
-                        android:typeface="monospace"
-                        android:visibility="visible" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:paddingLeft="@dimen/padding_15"
+                android:text="250 Coins"
+                android:drawableLeft="@drawable/iq_add_icon"
+                android:drawablePadding="@dimen/margin_10"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/drawer_text_size"
+                android:typeface="monospace"
+                android:visibility="visible" />
 
                     <TextView
                         android:id="@+id/txv300"
