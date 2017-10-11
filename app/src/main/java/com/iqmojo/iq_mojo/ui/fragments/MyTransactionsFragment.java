@@ -48,7 +48,7 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
     TextView text_name, txvCoinsText, txt_amountCredit, txt_amountdebit;
     CircleImageView img_profile;
     long debitAmount, creditAmount;
-
+    boolean isClickedDebit, isClickedCredit;
     public MyTransactionsFragment() {
         // Required empty public constructor
     }
@@ -206,19 +206,35 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
 
             case R.id.relativeCredit:
 
-                listDebit.setVisibility(View.GONE);
-                rlDebitHeader.setVisibility(View.GONE);
-                listCredit.setVisibility(View.VISIBLE);
-                rlCreditHeader.setVisibility(View.VISIBLE);
+                if(!isClickedCredit) {
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                    listCredit.setVisibility(View.VISIBLE);
+                    rlCreditHeader.setVisibility(View.VISIBLE);
+                isClickedCredit = true;
+                }else{
+                    isClickedCredit = false;
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                }
                 break;
 
             case R.id.relativeDebit:
-
-                listCredit.setVisibility(View.GONE);
-                rlCreditHeader.setVisibility(View.GONE);
-                listDebit.setVisibility(View.VISIBLE);
-                rlDebitHeader.setVisibility(View.VISIBLE);
-
+                if(!isClickedDebit) {
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                    listDebit.setVisibility(View.VISIBLE);
+                    rlDebitHeader.setVisibility(View.VISIBLE);
+                    isClickedDebit = true;
+                }else{
+                    isClickedDebit = false;
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                }
                 break;
         }
 
