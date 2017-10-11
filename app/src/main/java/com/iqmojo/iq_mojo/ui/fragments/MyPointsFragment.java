@@ -27,13 +27,14 @@ import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.DecimalFormat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPointsFragment extends BaseFragment implements View.OnClickListener {
 
     View view;
-    TextView txvAddCoins, txvRedeemCoins;
+    TextView txvAddCoins, txvRedeemCoins,text_rupees;
     CircleImageView img_profile;
     Context context;
     TextView text_name;
@@ -48,6 +49,7 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
                 context = getBaseActivity();
 
                 text_name = (TextView) view.findViewById(R.id.text_name);
+                text_rupees = (TextView) view.findViewById(R.id.text_rupees);
                 txvAddCoins = (TextView) view.findViewById(R.id.txvAddCoins);
                 txvRedeemCoins = (TextView) view.findViewById(R.id.txvRedeemCoins);
                 txvRedeemCoins.setOnClickListener(this);
@@ -74,6 +76,8 @@ public class MyPointsFragment extends BaseFragment implements View.OnClickListen
                     text_name.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_GOOGLE_NAME));
                 if (!TextUtils.isEmpty(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME)))
                     text_name.setText(IqMojoPrefrences.getInstance(this).getString(AppConstants.KEY_FB_NAME));
+
+                text_rupees.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
             } else {
                 final ViewParent parent = view.getParent();
