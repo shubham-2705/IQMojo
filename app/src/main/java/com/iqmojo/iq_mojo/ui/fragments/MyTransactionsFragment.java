@@ -1,6 +1,7 @@
 package com.iqmojo.iq_mojo.ui.fragments;
 
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -51,6 +53,8 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
     TextView text_name, txvCoinsText, txt_amountCredit, txt_amountdebit,text_rupees;
     CircleImageView img_profile;
     long debitAmount, creditAmount;
+    boolean isClickedDebit, isClickedCredit;
+    private ImageView imageArrowCredit, imageArrowDebit;
 
     public MyTransactionsFragment() {
         // Required empty public constructor
@@ -71,6 +75,9 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
         listCredit = (ListView) view.findViewById(R.id.listCredit);
         relativeCredit = (RelativeLayout)view.findViewById(R.id.relativeCredit);
         relativeCredit.setOnClickListener(this);
+        imageArrowCredit = (ImageView) view.findViewById(R.id.imageArrowCredit);
+        imageArrowDebit = (ImageView) view.findViewById(R.id.imageArrowDebit);
+
         listCredit.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
@@ -255,21 +262,49 @@ public class MyTransactionsFragment extends BasePagerFragment implements  onUpda
 
             case R.id.relativeCredit:
 
-                listDebit.setVisibility(View.GONE);
-                rlDebitHeader.setVisibility(View.GONE);
-                listCredit.setVisibility(View.VISIBLE);
-                rlCreditHeader.setVisibility(View.VISIBLE);
+                if(!isClickedCredit) {
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                    listCredit.setVisibility(View.VISIBLE);
+                    rlCreditHeader.setVisibility(View.VISIBLE);
+                    isClickedCredit = true;
+                    animateArrow(imageArrowCredit, 0, 90);
+                }else{
+                    isClickedCredit = false;
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                    animateArrow(imageArrowCredit, 90, 0);
+                }
+
+
                 break;
 
             case R.id.relativeDebit:
-
-                listCredit.setVisibility(View.GONE);
-                rlCreditHeader.setVisibility(View.GONE);
-                listDebit.setVisibility(View.VISIBLE);
-                rlDebitHeader.setVisibility(View.VISIBLE);
-
+                if(!isClickedDebit) {
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                    listDebit.setVisibility(View.VISIBLE);
+                    rlDebitHeader.setVisibility(View.VISIBLE);
+                    isClickedDebit = true;
+                    animateArrow(imageArrowDebit, 0, 90);
+                }else{
+                    isClickedDebit = false;
+                    listCredit.setVisibility(View.GONE);
+                    rlCreditHeader.setVisibility(View.GONE);
+                    listDebit.setVisibility(View.GONE);
+                    rlDebitHeader.setVisibility(View.GONE);
+                    animateArrow(imageArrowDebit, 90, 0);
+                }
                 break;
         }
 
+    }
+
+    void animateArrow(ImageView image, float firstVal, float secondVal){
+        ObjectAnimator imageViewObjectAnimator = ObjectAnimator.ofFloat(image, "rotation", firstVal, secondVal);
+        imageViewObjectAnimator.setDuration(180);
+        imageViewObjectAnimator.start();
     }
 }
