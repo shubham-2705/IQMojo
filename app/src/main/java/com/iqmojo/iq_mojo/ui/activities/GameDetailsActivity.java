@@ -102,7 +102,7 @@ public class GameDetailsActivity extends BaseActivity {
         txvResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GameDetailsActivity.this, GameEntryFeeActivity.class);
+                Intent intent = new Intent(GameDetailsActivity.this, PlayQuestionActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                 intent.putExtra(AppConstants.IS_RESUME,true);
                 startActivity(intent);
