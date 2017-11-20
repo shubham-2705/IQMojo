@@ -33,7 +33,7 @@ public class GameResultActivity extends BaseActivity {
     String coins;
     ImageView imvQuestionImage;
     CardView cardBackground;
-    TextView txvResp,txvRespExtended,txStatsLabel,txvTotalQValue,txvCorrectQValue;
+    TextView txvResp,txvRespExtended,txStatsLabel,txvTotalQValue,txvCorrectQValue,txvPlay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class GameResultActivity extends BaseActivity {
 
     private void getView()
     {
+        txvPlay=(TextView)findViewById(R.id.txvPlay);
         txvResp=(TextView)findViewById(R.id.txvResp);
         txvRespExtended=(TextView)findViewById(R.id.txvRespExtended);
         txStatsLabel=(TextView)findViewById(R.id.txStatsLabel);
@@ -95,6 +96,14 @@ public class GameResultActivity extends BaseActivity {
         } else {
             cardBackground.setVisibility(View.GONE);
         }
+        txvPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(GameResultActivity.this,GameEntryFeeActivity.class);
+                intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

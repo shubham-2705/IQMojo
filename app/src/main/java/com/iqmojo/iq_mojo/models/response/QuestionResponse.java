@@ -13,12 +13,19 @@ public class QuestionResponse implements Parcelable {
 
     private QuestionItemResponse question;
     private PrevQuestionResponse preQAns;
+    private GameResultResponse resumeGameInfo;
     private GameResultResponse gameResult;
     private Long coins;
     private ArrayList<GameItemResponse> games;
 
 
+    public GameResultResponse getResumeGameInfo() {
+        return resumeGameInfo;
+    }
 
+    public void setResumeGameInfo(GameResultResponse resumeGameInfo) {
+        this.resumeGameInfo = resumeGameInfo;
+    }
 
     public ArrayList<GameItemResponse> getGames() {
         return games;
@@ -73,6 +80,7 @@ public class QuestionResponse implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeParcelable(this.question, flags);
         dest.writeParcelable(this.preQAns, flags);
+        dest.writeParcelable(this.resumeGameInfo, flags);
         dest.writeParcelable(this.gameResult, flags);
         dest.writeValue(this.coins);
         dest.writeTypedList(this.games);
@@ -81,6 +89,7 @@ public class QuestionResponse implements Parcelable {
     protected QuestionResponse(Parcel in) {
         this.question = in.readParcelable(QuestionItemResponse.class.getClassLoader());
         this.preQAns = in.readParcelable(PrevQuestionResponse.class.getClassLoader());
+        this.resumeGameInfo = in.readParcelable(GameResultResponse.class.getClassLoader());
         this.gameResult = in.readParcelable(GameResultResponse.class.getClassLoader());
         this.coins = (Long) in.readValue(Long.class.getClassLoader());
         this.games = in.createTypedArrayList(GameItemResponse.CREATOR);
