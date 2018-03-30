@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
-import com.iqmojo.iq_mojo.ui.activities.PlayQuestionActivity;
 
 /**
  * Created by shubhamlamba on 09/10/17.

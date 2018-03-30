@@ -31,6 +31,7 @@ import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.models.response.RegisterResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
+import com.iqmojo.iq_mojo.persistence.PrefrenceConstants;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
 import com.iqmojo.iq_mojo.utils.FontHelper;
 
@@ -180,7 +181,8 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                             + "&country=" + location + "&appVersion=" + BuildConfig.VERSION_NAME + "&deviceName=" + android.os.Build.MODEL +
                             "&deviceId=" + CommonFunctionsUtil.getDeviceImei(context) + "&deviceType=ANDROID" + "&deviceToken=" + gcmId
                             + "&androidVersion=" + Build.VERSION.RELEASE + "&androidId=" + CommonFunctionsUtil.getVersionName() + "&networkType=" +
-                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + "" + "&utm_Medium=" + "" + "&googlePlayerId=" + "" + "&googleId=" + google_id +
+                            CommonFunctionsUtil.getNetworkInfo(context) + "&utm_Source=" + IqMojoPrefrences.getInstance(this).getString(PrefrenceConstants.UTM_SOURCE) +
+                            "&utm_Medium=" + IqMojoPrefrences.getInstance(this).getString(PrefrenceConstants.UTM_MEDIUM) + "&googlePlayerId=" + "" + "&googleId=" + google_id +
                             "&googleName=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_GOOGLE_NAME) + "&googleToken=" +
                             google_token + "&googlePicture=" + IqMojoPrefrences.getInstance(context).getString(AppConstants.KEY_GOOGLE_PIC) + "&fBPlayerId=" + fb_id;
 
@@ -221,6 +223,7 @@ public class EnterMobileActivity extends BaseActivity implements View.OnClickLis
                             i.putExtra(AppConstants.KEY_COINS, registerResponse.getCoins());
                             i.putExtra(AppConstants.KEY_EMAIL_ID, email);
                             i.putExtra(AppConstants.KEY_OTP, registerResponse.getOtp());
+                            i.putParcelableArrayListExtra(AppConstants.KEY_TAB_LIST,registerResponse.getValidTab());
                             startActivity(i);
 
                         } catch (Exception e) {

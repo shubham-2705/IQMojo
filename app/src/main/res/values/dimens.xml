@@ -99,6 +99,7 @@
     <dimen name="snackbar_textsize">14dp</dimen>
     <dimen name="bottom_line">0.80dp</dimen>
     <dimen name="left_right_margin_for_edittext">50dp</dimen>
+    <dimen name="left_right_margin_for_challenge_page">20dp</dimen>
     <dimen name="tab_height">65dp</dimen>
     <dimen name="card_radius">8dp</dimen>
 </resources>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/game_card_view"
+    style="@style/cardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/padding_7"
+    android:layout_marginLeft="@dimen/margin_15"
+    android:layout_marginRight="@dimen/margin_15"
+    android:layout_marginTop="@dimen/padding_7"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    app:cardElevation="3dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/grey_gradient_bg_corners" />
+
+    <LinearLayout
+        android:id="@+id/llyCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_10"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5.5">
+
+            <TextView
+                android:id="@+id/txvChallengeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Challenge Name"
+                android:textColor="@color/dark_grey_text"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="serif" />
+
+            <TextView
+                android:id="@+id/txvChallengeNature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txvChallengeName"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Challenge Name"
+                android:textColor="@color/grey_text_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/txvMaxPlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txvChallengeNature"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Challenge Name"
+                android:textColor="@color/grey_text_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/txvWin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txvMaxPlay"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Challenge Name"
+                android:textColor="@color/grey_text_color"
+                android:textSize="@dimen/app_text_size"
+                android:typeface="monospace" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4.5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_1"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_1">
+
+                <TextView
+                    android:id="@+id/txvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/margin_5"
+                    android:drawableRight="@drawable/iq_add_icon"
+                    android:gravity="end|center_vertical"
+                    android:text="6"
+                    android:textColor="@color/dark_grey_text"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="serif" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom">
+
+                <TextView
+                    android:id="@+id/txvStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/red_gradient_rounded_bg"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/margin_7"
+                    android:paddingLeft="@dimen/margin_20"
+                    android:paddingRight="@dimen/margin_20"
+                    android:paddingTop="@dimen/margin_7"
+                    android:text="STOP"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/app_text_size"
+                    android:typeface="monospace" />
+
+                <ImageView
+                    android:id="@+id/shareIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/txvStop"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:paddingTop="@dimen/margin_10"
+                    android:paddingRight="@dimen/margin_10"
+                    android:paddingLeft="@dimen/margin_10"
+                    android:src="@drawable/share" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

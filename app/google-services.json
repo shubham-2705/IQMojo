@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "681782354637-au45m1aj0sr65u1tu02ob14io9tkluk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iqmojo",
+            "certificate_hash": "c51075ce5a38ca403092afce3a1c57c82f7942f8"
+          }
+        },
+        {
           "client_id": "681782354637-lo7p95082i62luui1a41jsvsid1bmjl8.apps.googleusercontent.com",
           "client_type": 3
         },
@@ -27,7 +35,7 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.iqmojo",
-            "certificate_hash": "546a1498e65d619d85210535d524e14e312747bc"
+            "certificate_hash": "07e871224887c01e80d9a1303cd9851b1677745e"
           }
         }
       ],

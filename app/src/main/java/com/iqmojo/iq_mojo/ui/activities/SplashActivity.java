@@ -52,8 +52,6 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
 
         try {
-
-
             // start service for fcm token
             Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
             startService(intent);
@@ -146,6 +144,8 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
         try {
             pbLoading.setVisibility(View.GONE);
             if (!isSuccess) {
+                ToastUtil.showShortToast(this, getString(R.string.error_network_not_available));
+                finish();
 //                buildAndComm.showOkDialog(UpiCreateVpaActivity.this, (String) responseObject);
             } else {
                 switch (reqType) {
@@ -160,6 +160,7 @@ public class SplashActivity extends BaseActivity implements onUpdateViewListener
                                 }
 
                                 Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+                                i.putParcelableArrayListExtra(AppConstants.KEY_TAB_LIST,loginResponse.getValidTab());
                                 IqMojoPrefrences.getInstance(context).setLong(AppConstants.KEY_COINS, loginResponse.getCoins());
                                 startActivity(i);
                                 finish();

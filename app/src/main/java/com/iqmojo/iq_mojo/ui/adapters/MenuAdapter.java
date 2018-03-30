@@ -11,17 +11,22 @@ import android.widget.TextView;
 
 import com.iqmojo.R;
 import com.iqmojo.base.utils.ShowLog;
+import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.ui.activities.ContactUsActivity;
 import com.iqmojo.iq_mojo.ui.activities.HomeActivity;
 import com.iqmojo.iq_mojo.ui.activities.MyAccountDashboardActivity;
+import com.iqmojo.iq_mojo.ui.activities.MyProfileActivity;
+import com.iqmojo.iq_mojo.ui.activities.ReferralActivity;
+import com.iqmojo.iq_mojo.ui.activities.WebviewActivity;
 
 
 public class MenuAdapter extends BaseAdapter {
 
     private static int[] list = {AppConstants.My_Points, AppConstants.My_Profile, AppConstants.Transactions,
-            AppConstants.Referral, AppConstants.Transactions, AppConstants.Contact_Us};
-    private static int[] list_images= {R.drawable.menu_0,R.drawable.menu_1,R.drawable.menu_2,R.drawable.menu_3,R.drawable.menu_4,R.drawable.menu_5};
-    private static String[] list_values={"My Points","My Profile","Transactions","Referral","Terms of Usage and Privacy Policy","Contact Us"};
+            AppConstants.Referral, AppConstants.Terms_And_Conditions, AppConstants.Privacy_Policy, AppConstants.Contact_Us};
+    private static int[] list_images= {R.drawable.menu_0,R.drawable.menu_1,R.drawable.menu_2,R.drawable.menu_3,R.drawable.menu_4,R.drawable.menu_5,R.drawable.menu_6};
+    private static String[] list_values={"My Points","My Profile","Transactions","Referral","Terms and Conditions","Privacy Policy","Contact Us"};
 
     private Context mContext;
     private LayoutInflater inflater;
@@ -82,24 +87,39 @@ public class MenuAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     ShowLog.d("---", "close");
                     ((HomeActivity) mContext).closeDrawer();
+                    Intent intent=null;
                     switch (position) {
                         case AppConstants.My_Points:
-                            Intent intent = new Intent(mContext, MyAccountDashboardActivity.class);
+                            intent = new Intent(mContext, MyAccountDashboardActivity.class);
                             intent.putExtra(AppConstants.SCREEN_NO, 0);
                             mContext.startActivity(intent);
                             break;
                         case AppConstants.My_Profile:
+                            intent = new Intent(mContext, MyProfileActivity.class);
+                            mContext.startActivity(intent);
                             break;
                         case AppConstants.Transactions:
-                            Intent intent1 = new Intent(mContext, MyAccountDashboardActivity.class);
-                            intent1.putExtra(AppConstants.SCREEN_NO, 1);
-                            mContext.startActivity(intent1);
+                            intent = new Intent(mContext, MyAccountDashboardActivity.class);
+                            intent.putExtra(AppConstants.SCREEN_NO, 1);
+                            mContext.startActivity(intent);
                             break;
                         case AppConstants.Referral:
+                            intent = new Intent(mContext, ReferralActivity.class);
+                            mContext.startActivity(intent);
                             break;
                         case AppConstants.Terms_And_Conditions:
+                            intent = new Intent(mContext, WebviewActivity.class);
+                            intent.putExtra(AppConstants.WEBVIEW_URL, ApiConstants.Urls.TNC);
+                            mContext.startActivity(intent);
+                            break;
+                        case AppConstants.Privacy_Policy:
+                            intent = new Intent(mContext, WebviewActivity.class);
+                            intent.putExtra(AppConstants.WEBVIEW_URL, ApiConstants.Urls.PRIVACY_POLICY);
+                            mContext.startActivity(intent);
                             break;
                         case AppConstants.Contact_Us:
+                            intent = new Intent(mContext, ContactUsActivity.class);
+                            mContext.startActivity(intent);
                             break;
 
                     }

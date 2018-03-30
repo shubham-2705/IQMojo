@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/grey_gradient_bg"
+        android:fillViewport="true"
+        android:paddingTop="@dimen/margin_15">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Challenge details"
+                    android:typeface="serif"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:padding="@dimen/margin_10"
+                    android:textSize="@dimen/profile_name_text_size"
+                    android:textColor="@color/dark_grey_text"/>
+
+                <RelativeLayout
+                    android:id="@+id/rlyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/padding_20"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imvMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_5"
+                        android:src="@drawable/ifsc_red"/>
+
+
+                    <EditText
+                        android:id="@+id/edtChallengeName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:typeface="monospace"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/imvMobile"
+                        android:layout_toEndOf="@+id/imvMobile"
+                        android:gravity="start|center_vertical"
+                        android:background="@null"
+                        android:maxLength="20"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:imeOptions="actionNext"
+                        android:hint="Challenge Title"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textSize="@dimen/form_textsize" />
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_line"
+                        android:layout_below="@id/imvMobile"
+                        android:background="@color/colorPrimaryDark"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Challenge Type"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page"
+                    android:textSize="@dimen/drawer_text_size"/>
+
+
+                <RadioGroup
+                    android:id="@+id/rdGrpChallengeType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/rdBtnPublicType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:padding="@dimen/margin_20"
+                        android:text="Public"/>
+
+                    <RadioButton
+                        android:id="@+id/rdBtnPrivateType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:checked="true"
+                        android:padding="@dimen/margin_20"
+                        android:text="Private"/>
+                </RadioGroup>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Challenge Amount"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page"
+                    android:textSize="@dimen/drawer_text_size"/>
+
+                <RadioGroup
+                    android:id="@+id/rdGrpChallengeAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/rdBtn5"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:checked="true"
+                        android:drawableRight="@drawable/iq_add_icon"
+                        android:text="5"/>
+
+                    <RadioButton
+                        android:id="@+id/rdBtn10"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_12"
+                        android:drawableRight="@drawable/iq_add_icon"
+                        android:text="10"/>
+
+                    <RadioButton
+                        android:id="@+id/rdBtn15"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:drawableRight="@drawable/iq_add_icon"
+                        android:text="15"/>
+
+                    <RadioButton
+                        android:id="@+id/rdBtn20"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:typeface="monospace"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:drawableRight="@drawable/iq_add_icon"
+                        android:text="20"/>
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Maximum Players"
+                        android:textSize="@dimen/drawer_text_size"/>
+
+                    <EditText
+                        android:id="@+id/edtMaxPlayers"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:typeface="monospace"
+                        android:gravity="center"
+                        android:maxLength="2"
+                        android:layout_marginLeft="@dimen/margin_30dp"
+                        android:layout_marginStart="@dimen/margin_30dp"
+                        android:imeOptions="actionDone"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/drawer_text_size" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginLeft="@dimen/left_right_margin_for_challenge_page"
+                    android:layout_marginRight="@dimen/left_right_margin_for_challenge_page">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Validity  (in Hrs)"
+                        android:textSize="@dimen/drawer_text_size"/>
+
+                    <EditText
+                        android:id="@+id/edtValidity"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:typeface="monospace"
+                        android:gravity="center"
+                        android:layout_gravity="end"
+                        android:maxLength="2"
+                        android:layout_marginLeft="@dimen/margin_45dp"
+                        android:layout_marginStart="@dimen/margin_45dp"
+                        android:imeOptions="actionDone"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/drawer_text_size" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txvCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:minWidth="180dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    android:layout_marginBottom="@dimen/margin_30dp"
+                    android:background="@drawable/red_gradient_rounded_bg"
+                    android:elevation="@dimen/padding_5"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_45"
+                    android:paddingRight="@dimen/padding_45"
+                    android:text="Create"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/form_textsize"
+                    android:typeface="sans"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+
+
+    </ScrollView>
+</RelativeLayout>

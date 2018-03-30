@@ -21,3 +21,7 @@
 -dontwarn org.apache.http.**
 
 -dontwarn com.squareup.picasso.**
+
+-keepclassmembers class com.paytm.pgsdk.PaytmWebView$PaytmJavaScriptInterface {
+   public *;
+}

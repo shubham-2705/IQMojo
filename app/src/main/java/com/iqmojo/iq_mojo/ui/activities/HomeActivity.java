@@ -1,8 +1,7 @@
 package com.iqmojo.iq_mojo.ui.activities;
 
-import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,18 +11,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,20 +27,23 @@ import com.iqmojo.R;
 import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
+import com.iqmojo.iq_mojo.models.response.TabModel;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.ui.adapters.MenuAdapter;
+import com.iqmojo.iq_mojo.ui.fragments.ChallengeListBaseFragment;
 import com.iqmojo.iq_mojo.ui.fragments.ContestsFragment;
-import com.iqmojo.iq_mojo.ui.fragments.FaqFragment;
+import com.iqmojo.iq_mojo.ui.fragments.ChallengeListFragment;
 import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
 import com.iqmojo.iq_mojo.ui.fragments.WinnerFragment;
-import com.iqmojo.iq_mojo.utils.FontHelper;
 import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
@@ -58,15 +57,32 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
     ViewPager viewPager;
     TabLayout tabs;
     private ListView listView;
+    private static ArrayList<TabModel> tabModelArrayList = new ArrayList<>();
     private MenuAdapter menuAdapter;
     private int active_position = 0;
     private TextView txvUserEmail, txvCoins, txvUserName;
     private CircleImageView imvProfilePic;
     DuoDrawerLayout drawerLayout;
     DuoDrawerToggle drawerToggle;
-    long backpress_time=System.currentTimeMillis();
-    private static int[] tab_list = {AppConstants.HomeTabKeys.HOME, AppConstants.HomeTabKeys.WINNER,
-            AppConstants.HomeTabKeys.CONTEST, AppConstants.HomeTabKeys.FAQ};
+    private HashMap<Integer,Fragment> fragmentHashMap=new HashMap<>();
+    long backpress_time = System.currentTimeMillis();
+
+    private static Integer[] keys=new Integer[]{1,2,3,4}; // first fragment is fixed i.e home
+    private static Fragment[] values=new Fragment[]{new ChallengeListBaseFragment(),new ContestsFragment(),new WinnerFragment(),new WinnerFragment()};
+
+    private static Map<Integer,String> myMap;
+    {
+        fragmentHashMap=mapFromArrays(keys, values);
+    }
+
+    public static <K,V> HashMap<K,V> mapFromArrays(K[] keys, V[]values){
+        HashMap<K, V> result=new HashMap<K, V>();
+        for(int i=0;i<keys.length;i++){
+            result.put(keys[i], values[i]);
+        }
+        return result;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,7 +132,7 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
                 final View view = sbar.getView();
                 final TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.snackbar_textsize));
-                tv.setTextColor(ContextCompat.getColor(this,R.color.white));
+                tv.setTextColor(ContextCompat.getColor(this, R.color.white));
                 sbar.getView().setBackgroundColor(ContextCompat.getColor(HomeActivity.this, R.color.grey_text_color));
                 sbar.show();
             }
@@ -129,17 +145,26 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         txvCoins = (TextView) mToolbar.findViewById(R.id.txvCoins);
+        LinearLayout llyCoins = (LinearLayout) mToolbar.findViewById(R.id.llyCoins);
+        llyCoins.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MyAccountDashboardActivity.class);
+                intent.putExtra(AppConstants.SCREEN_NO, 1);
+                startActivity(intent);
+            }
+        });
 
         mToolbar.setLogo(R.drawable.iqmojo_toolbar);
 
         txvCoins.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
-    /**
-     * Called if InstanceID token is updated. This may occur if the security of
-     * the previous token had been compromised. Note that this is called when the InstanceID token
-     * is initially generated so this is where you would retrieve the token.
-     */
-    // [START refresh_token]
+        /**
+         * Called if InstanceID token is updated. This may occur if the security of
+         * the previous token had been compromised. Note that this is called when the InstanceID token
+         * is initially generated so this is where you would retrieve the token.
+         */
+        // [START refresh_token]
         drawerLayout = (DuoDrawerLayout) findViewById(R.id.drawer);
         drawerToggle = new DuoDrawerToggle(this, drawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
@@ -216,47 +241,56 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
         txvUserEmail = (TextView) findViewById(R.id.txvUserEmail);
         txvUserName = (TextView) findViewById(R.id.txvUserName);
         imvProfilePic = (CircleImageView) findViewById(R.id.imvProfilePic);
+
+        if (getIntent().getParcelableArrayListExtra(AppConstants.KEY_TAB_LIST) != null)
+            tabModelArrayList = getIntent().getParcelableArrayListExtra(AppConstants.KEY_TAB_LIST);
+
         setupViewPager(viewPager);
+        viewPager.setOffscreenPageLimit(2);
 
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         setupTabIcons();
 
-
     }
 
     public void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new HomeFragment(), "ONE");
-        adapter.addFrag(new WinnerFragment(), "TWO");
-        adapter.addFrag(new ContestsFragment(), "THREE");
-        adapter.addFrag(new FaqFragment(), "Four");
+        adapter.addFrag(new HomeFragment(), "");
+        for (TabModel tabModel : tabModelArrayList) {
+            if (tabModel.getTabAction().equalsIgnoreCase("app"))
+                adapter.addFrag(fragmentHashMap.get(tabModel.getTabId()), "");
+            else {
+                // load webview fragment
+            }
+        }
         viewPager.setAdapter(adapter);
     }
 
 
     private void setupTabIcons() {
 
+        getHomeTab();
 
-        for (int aTab_list : tab_list) {
+        for (TabModel tabModel : tabModelArrayList) {
             View tabOne = (View) LayoutInflater.from(this).inflate(R.layout.custom_tab_layout, null);
             TextView textView = (TextView) tabOne.findViewById(R.id.singleTabText);
             ImageView imageView = (ImageView) tabOne.findViewById(R.id.imvIcon);
 
-            textView.setText(getResources().getStringArray(R.array.pager_)[aTab_list]);
-            String mDrawableName = "pager_" + aTab_list + "_inactive";
+            textView.setText(tabModel.getDisplayName());
+            String mDrawableName = "pager_" + tabModel.getTabId() + "_inactive";
             int id = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
             imageView.setImageResource(id);
 
-            if (aTab_list == active_position) {
-                textView.setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimaryDark));
-                String mDrawable = "pager_" + aTab_list + "_active";
-                int _id = getResources().getIdentifier(mDrawable, "drawable", getPackageName());
-                imageView.setImageResource(_id);
-            }
+//            if (tabModel.getTabId() == active_position) {
+//                textView.setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimaryDark));
+//                String mDrawable = "pager_" + tabModel.getTabId() + "_active";
+//                int _id = getResources().getIdentifier(mDrawable, "drawable", getPackageName());
+//                imageView.setImageResource(_id);
+//            }
 
-            tabs.getTabAt(aTab_list).setCustomView(tabOne);
+            tabs.getTabAt(tabModel.getTabId()).setCustomView(tabOne);
 
         }
 
@@ -307,6 +341,20 @@ public class HomeActivity extends BaseActivity implements DrawerLayout.DrawerLis
 //        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_tab_call, 0, 0);
 //        tabs.getTabAt(1).setCustomView(tabTwo);
 
+    }
+
+    private void getHomeTab(){
+        View tabOne = (View) LayoutInflater.from(this).inflate(R.layout.custom_tab_layout, null);
+        TextView textView = (TextView) tabOne.findViewById(R.id.singleTabText);
+        ImageView imageView = (ImageView) tabOne.findViewById(R.id.imvIcon);
+
+        textView.setText("Home");
+        textView.setTextColor(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimaryDark));
+        String mDrawableName = "pager_" + "0" + "_active";
+        int id = getResources().getIdentifier(mDrawableName, "drawable", getPackageName());
+        imageView.setImageResource(id);
+
+        tabs.getTabAt(0).setCustomView(tabOne);
     }
 
 

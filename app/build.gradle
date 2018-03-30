@@ -10,16 +10,18 @@ repositories {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.iqmojo"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2.1"
+        archivesBaseName = "iqmojo-$versionName"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     signingConfigs {
         release {
             storeFile file("${RELEASE_SIGNING_STORE_KEYSTORE}")
@@ -65,7 +67,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.apache.httpcomponents:httpcore:4.4.4'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:support-v4:26.0.1'
     compile 'nl.psdcompany:duo-navigation-drawer:2.0.6'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-auth:11.0.4'
@@ -73,11 +75,21 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.0.4'
     compile 'com.google.firebase:firebase-messaging:11.0.4'
     compile 'com.google.android.gms:play-services-drive:11.0.4'
+    compile 'com.google.android.gms:play-services-analytics:11.0.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.krtkush:LinearTimer:v2.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // paytm
+    compile 'com.paytm.pgsdk:pgsdk:1.0.6'
+
     testCompile 'junit:junit:4.12'
 }
+
+
+
+
+
 
 
 

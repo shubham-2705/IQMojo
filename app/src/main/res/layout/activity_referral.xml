@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.iqmojo.iq_mojo.ui.activities.PaytmActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:background="@drawable/grey_gradient_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Refer A Friend"
+                android:typeface="serif"
+                android:padding="@dimen/margin_20"
+                android:textSize="@dimen/profile_name_text_size"
+                android:textColor="@color/dark_grey_text"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Refer and earn free coins."
+                android:typeface="monospace"
+                android:padding="@dimen/margin_20"
+                android:textSize="@dimen/form_textsize"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="@dimen/margin_60dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/fb_lly"
+                    android:layout_width="65dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/fb_bg"
+                    android:layout_height="65dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/iq_facebook"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/wtp_lly"
+                    android:layout_width="65dp"
+                    android:gravity="center"
+                    android:background="@drawable/whatsapp_bg"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="65dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/iq_whatsapp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/msg_lly"
+                    android:layout_width="65dp"
+                    android:gravity="center"
+                    android:background="@drawable/message_bg"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="65dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/iq_message"/>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_below="@+id/fb_lly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/margin_3"
+                    android:typeface="sans"
+                    android:text="Facebook"/>
+
+                <TextView
+                    android:layout_below="@+id/wtp_lly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="@dimen/margin_3"
+                    android:typeface="sans"
+                    android:text="Whatsapp"/>
+
+                <TextView
+                    android:layout_below="@+id/msg_lly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_3"
+                    android:typeface="sans"
+                    android:text="Message"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

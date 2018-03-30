@@ -105,6 +105,7 @@ public class EnterOtpActivity extends BaseActivity implements View.OnClickListen
                     IqMojoPrefrences.getInstance(context).setString(AppConstants.KEY_MOBILE, mobileNo);
 
                     Intent i = new Intent(context, HomeActivity.class);
+                    i.putParcelableArrayListExtra(AppConstants.KEY_TAB_LIST,getIntent().getParcelableArrayListExtra(AppConstants.KEY_TAB_LIST));
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
 

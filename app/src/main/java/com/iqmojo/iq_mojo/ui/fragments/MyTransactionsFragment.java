@@ -3,14 +3,12 @@ package com.iqmojo.iq_mojo.ui.fragments;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.LinearLayout;
@@ -27,11 +25,10 @@ import com.iqmojo.base.utils.ConnectivityUtils;
 import com.iqmojo.base.utils.ToastUtil;
 import com.iqmojo.iq_mojo.constants.ApiConstants;
 import com.iqmojo.iq_mojo.constants.AppConstants;
-import com.iqmojo.iq_mojo.models.response.GameListResponse;
 import com.iqmojo.iq_mojo.models.response.TransactionListItemResponse;
 import com.iqmojo.iq_mojo.models.response.TransactionListResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
-import com.iqmojo.iq_mojo.utils.TransactionListAdapter;
+import com.iqmojo.iq_mojo.ui.adapters.TransactionListAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;

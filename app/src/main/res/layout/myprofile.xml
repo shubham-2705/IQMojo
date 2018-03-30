@@ -253,7 +253,7 @@
 
 
                     <EditText
-                        android:id="@+id/editAmount"
+                        android:id="@+id/editMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
@@ -296,7 +296,7 @@
 
 
                     <EditText
-                        android:id="@+id/editIfsc"
+                        android:id="@+id/edtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"

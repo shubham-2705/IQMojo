@@ -152,29 +152,29 @@
                     android:maxWidth="300dp"
                     android:paddingLeft="@dimen/margin_30dp"
                     android:paddingRight="@dimen/margin_30dp"
-                    android:text="Paytm Cash"
+                    android:text="Pay from Wallet"
                     android:textColor="@color/dark_grey_text"
                     android:textSize="@dimen/form_textsize"
                     android:typeface="monospace" />
 
-                <TextView
-                    android:id="@+id/txv_bank"
-                    android:layout_width="@dimen/button_width"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:background="@drawable/diagonal_drawable"
-                    android:drawableLeft="@drawable/iqmojo_toolbar"
-                    android:drawablePadding="@dimen/margin_20"
-                    android:elevation="@dimen/padding_3"
-                    android:gravity="center"
-                    android:maxWidth="300dp"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:paddingLeft="@dimen/margin_30dp"
-                    android:paddingRight="@dimen/margin_30dp"
-                    android:text="@string/bankAccount"
-                    android:textColor="@color/dark_grey_text"
-                    android:textSize="@dimen/form_textsize"
-                    android:typeface="monospace" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txv_bank"-->
+                    <!--android:layout_width="@dimen/button_width"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:layout_marginTop="@dimen/margin_20"-->
+                    <!--android:background="@drawable/diagonal_drawable"-->
+                    <!--android:drawableLeft="@drawable/iqmojo_toolbar"-->
+                    <!--android:drawablePadding="@dimen/margin_20"-->
+                    <!--android:elevation="@dimen/padding_3"-->
+                    <!--android:gravity="center"-->
+                    <!--android:maxWidth="300dp"-->
+                    <!--android:layout_marginBottom="@dimen/margin_10"-->
+                    <!--android:paddingLeft="@dimen/margin_30dp"-->
+                    <!--android:paddingRight="@dimen/margin_30dp"-->
+                    <!--android:text="@string/bankAccount"-->
+                    <!--android:textColor="@color/dark_grey_text"-->
+                    <!--android:textSize="@dimen/form_textsize"-->
+                    <!--android:typeface="monospace" />-->
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

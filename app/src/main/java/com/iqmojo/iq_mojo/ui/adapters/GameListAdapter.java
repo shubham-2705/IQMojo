@@ -83,6 +83,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                     intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                     isResume = gameItemResponse.getActive() == 2;
                     intent.putExtra(AppConstants.IS_RESUME,isResume);
+                    intent.putExtra(AppConstants.EXTRA_PLAY_MODE,AppConstants.PLAY_MODE.GAME);
                     mcontext.startActivity(intent);
 
 

@@ -6,14 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.iqmojo.R;
@@ -21,12 +19,8 @@ import com.iqmojo.base.ui.activity.BaseActivity;
 import com.iqmojo.base.utils.ShowLog;
 import com.iqmojo.iq_mojo.constants.AppConstants;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
-import com.iqmojo.iq_mojo.ui.fragments.ContestsFragment;
-import com.iqmojo.iq_mojo.ui.fragments.FaqFragment;
-import com.iqmojo.iq_mojo.ui.fragments.HomeFragment;
 import com.iqmojo.iq_mojo.ui.fragments.MyPointsFragment;
 import com.iqmojo.iq_mojo.ui.fragments.MyTransactionsFragment;
-import com.iqmojo.iq_mojo.ui.fragments.WinnerFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -99,7 +99,7 @@ public class GameResultActivity extends BaseActivity {
         txvPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(GameResultActivity.this,GameEntryFeeActivity.class);
+                Intent intent=new Intent(GameResultActivity.this,CreateChallengeActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                 startActivity(intent);
             }

@@ -166,7 +166,7 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/padding_45"
                 android:paddingRight="@dimen/padding_45"
-                android:text="PLAY AGAIN"
+                android:text="CREATE CHALLENGE"
                 android:textColor="@color/white"
                 android:textSize="@dimen/form_textsize"
                 android:typeface="sans"

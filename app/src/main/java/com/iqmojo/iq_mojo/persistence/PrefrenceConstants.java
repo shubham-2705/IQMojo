@@ -14,4 +14,7 @@ public interface PrefrenceConstants {
     String MIDDLE_NAME = "middle_name";
     String LAST_NAME = "last_name";
 
+    String UTM_SOURCE = "utm_source";
+    String UTM_MEDIUM = "utm_medium";
+
 }

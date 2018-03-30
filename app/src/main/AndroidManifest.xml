@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.iqmojo">
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -19,11 +24,12 @@
 
     <application
         android:name=".base.application.BaseApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/iq_launcher"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/BaseAppTheme"
+        tools:replace="android:icon, android:theme, android:allowBackup">
         <activity
             android:name=".iq_mojo.ui.activities.SplashActivity"
             android:screenOrientation="portrait"
@@ -106,7 +112,7 @@
             android:name=".iq_mojo.utils.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
@@ -116,13 +122,50 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".iq_mojo.ui.activities.AddCoins"
+        <activity
+            android:name=".iq_mojo.ui.activities.AddCoins"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.AddCoinsDetails"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.CreateChallengeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.MyProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.WebviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".iq_mojo.ui.activities.ContactUsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".iq_mojo.ui.activities.AddCoinsDetails"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <service
+            android:name="com.google.android.gms.analytics.CampaignTrackingService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name=".iq_mojo.analytics.ManyInstallReferrerReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".iq_mojo.ui.activities.ReferralActivity"></activity>
     </application>
 
 </manifest>

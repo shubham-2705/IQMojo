@@ -1,4 +1,4 @@
-package com.iqmojo.iq_mojo.utils;
+package com.iqmojo.iq_mojo.ui.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

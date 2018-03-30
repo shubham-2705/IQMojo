@@ -65,7 +65,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
     LinearTimer linearTimer;
     TextView txvTime, txvQuestion, txvTotal, txvAttempted, txvCorrect;
     GameItemResponse gameItemResponse;
-    int gameid = 0, timer = 0, quesId = 0, quesLevel = 0, ansValue = 0, attemptedCount = 1, correctCount = 0;
+    int gameid = 0, timer = 0, quesId = 0, quesLevel = 0, ansValue = 0, attemptedCount = 1, correctCount = 0, play_mode = 0;
     LinearTimerView linearTimerView;
     ImageView imvQuestionImage, imvPause;
     CardView cardBackground;
@@ -98,15 +98,24 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             llyOptions = (LinearLayout) findViewById(R.id.llyOptions);
             setupToolbar();
 
-            if (getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null) {
+            play_mode = getIntent().getIntExtra(AppConstants.EXTRA_PLAY_MODE, 0);
+
+            if (getIntent().hasExtra(AppConstants.GAME_ITEM_OBJECT) && getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT) != null) {
                 gameItemResponse = getIntent().getParcelableExtra(AppConstants.GAME_ITEM_OBJECT);
                 gameid = gameItemResponse.getGameId();
                 txvTotal.setText(("" + gameItemResponse.getTotalQ()));
                 txvAttempted.setText("" + attemptedCount);
                 txvCorrect.setText("" + correctCount);
             }
+            if (getIntent().hasExtra(AppConstants.CHALLENGE_ITEM_OBJECT) &&  getIntent().getParcelableExtra(AppConstants.CHALLENGE_ITEM_OBJECT) != null) {
 
-            isResume = getIntent().getBooleanExtra(AppConstants.IS_RESUME, false);
+            }
+            if (getIntent().hasExtra(AppConstants.CONTEST_ITEM_OBJECT) && getIntent().getParcelableExtra(AppConstants.CONTEST_ITEM_OBJECT) != null) {
+
+            }
+
+            if (getIntent().hasExtra(AppConstants.IS_RESUME))
+                isResume = getIntent().getBooleanExtra(AppConstants.IS_RESUME, false);
 
             if (isResume)
                 resumeGame = 1;
@@ -119,7 +128,13 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                 }
             });
 
-            hitApiRequest(ApiConstants.REQUEST_TYPE.GET_QUESTION, 0);
+            if (play_mode == AppConstants.PLAY_MODE.GAME) {
+                hitApiRequest(ApiConstants.REQUEST_TYPE.START_GAME, 0);
+            } else if (play_mode == AppConstants.PLAY_MODE.CHALLENGE) {
+
+            } else if (play_mode == AppConstants.PLAY_MODE.CONTEST) {
+                hitApiRequest(ApiConstants.REQUEST_TYPE.START_CONTEST, 0);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,11 +256,11 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             String url = "";
 
             switch (reqType) {
-                case ApiConstants.REQUEST_TYPE.GET_QUESTION:
+                case ApiConstants.REQUEST_TYPE.START_GAME:
 
                     clasz = QuestionResponse.class;
 
-                    url = ApiConstants.Urls.GET_QUESTION + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid + "&resume=" + resumeGame;
+                    url = ApiConstants.Urls.START_GAME + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid + "&resume=" + resumeGame;
 
                     url = url.replace(" ", "%20");
                     Log.v("url-->> ", url);
@@ -253,11 +268,11 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                     break;
 
 
-                case ApiConstants.REQUEST_TYPE.NEXT_QUESTION:
+                case ApiConstants.REQUEST_TYPE.GAME_NEXT_QUESTION:
 
                     clasz = QuestionResponse.class;
 
-                    url = ApiConstants.Urls.NEXT_QUESTION + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid + "&preQId=" + quesId + "&ansValue=" + ansValue;
+                    url = ApiConstants.Urls.GAME_NEXT_QUESTION + "?" + "userId=" + IqMojoPrefrences.getInstance(PlayQuestionActivity.this).getInteger(AppConstants.KEY_USER_ID) + "&gameId=" + gameid + "&preQId=" + quesId + "&ansValue=" + ansValue;
 
                     url = url.replace(" ", "%20");
                     Log.v("url-->> ", url);
@@ -286,7 +301,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             if (!isSuccess) {
             } else {
                 switch (reqType) {
-                    case ApiConstants.REQUEST_TYPE.GET_QUESTION:
+                    case ApiConstants.REQUEST_TYPE.START_GAME:
                         QuestionResponse questionResponse = (QuestionResponse) responseObject;
                         try {
 
@@ -339,10 +354,10 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                             // end manpulation for diplaying options
 
                             if (questionResponse.getResumeGameInfo() != null) {
-                                attemptedCount = questionResponse.getResumeGameInfo().getCorrect() + questionResponse.getResumeGameInfo().getWrong()+1;
+                                attemptedCount = questionResponse.getResumeGameInfo().getCorrect() + questionResponse.getResumeGameInfo().getWrong() + 1;
                                 updateAttemptVariable(attemptedCount);
 
-                                correctCount=questionResponse.getResumeGameInfo().getCorrect();
+                                correctCount = questionResponse.getResumeGameInfo().getCorrect();
                                 updateCorrectVariable(questionResponse.getResumeGameInfo().getCorrect());
                             }
                             timer = questionResponse.getQuestion().getAllowTime();
@@ -379,7 +394,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
                             hideProgressDialog();
                         }
                         break;
-                    case ApiConstants.REQUEST_TYPE.NEXT_QUESTION:
+                    case ApiConstants.REQUEST_TYPE.GAME_NEXT_QUESTION:
                         try {
                             final QuestionResponse questionResponse1 = (QuestionResponse) responseObject;
 
@@ -773,7 +788,7 @@ public class PlayQuestionActivity extends BaseActivity implements LinearTimer.Ti
             linearTimer.pauseTimer();
             linearTimer.resetTimer();
         }
-        hitApiRequest(ApiConstants.REQUEST_TYPE.NEXT_QUESTION, ansId);
+        hitApiRequest(ApiConstants.REQUEST_TYPE.GAME_NEXT_QUESTION, ansId);
 
         ansValue = ansId;
 

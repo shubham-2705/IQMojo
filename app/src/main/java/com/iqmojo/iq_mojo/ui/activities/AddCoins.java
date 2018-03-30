@@ -37,10 +37,10 @@ public class AddCoins extends BaseActivity implements View.OnClickListener {
         setupToolbar();
         context = AddCoins.this;
         txv_paytm = (TextView) findViewById(R.id.txv_paytm);
-        txv_bank = (TextView) findViewById(R.id.txv_bank);
+//        txv_bank = (TextView) findViewById(R.id.txv_bank);
         text_rupees = (TextView) findViewById(R.id.text_rupees);
 
-        txv_bank.setOnClickListener(this);
+//        txv_bank.setOnClickListener(this);
         txv_paytm.setOnClickListener(this);
 
         text_name = (TextView) findViewById(R.id.text_name);
@@ -49,6 +49,11 @@ public class AddCoins extends BaseActivity implements View.OnClickListener {
 
         txvCoinsText.setText(getIntent().getStringExtra(AppConstants.ADD_COINS));
 
+        if (getIntent().getStringExtra(AppConstants.ADD_COINS).equalsIgnoreCase("Add coins")) {
+            txv_paytm.setText("Pay from Wallet");
+        } else {
+            txv_paytm.setText("Cash to Wallet");
+        }
 
         String decoded_url = null;
         try {
@@ -102,17 +107,17 @@ public class AddCoins extends BaseActivity implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.txv_bank:
-                if (txvCoinsText.getText().toString().trim().equalsIgnoreCase("Add Coins")) {
-                    Intent i = new Intent(context, AddCoinsDetails.class);
-                    startActivity(i);
-                } else {
-                    Intent i = new Intent(context, BankActivity.class);
-                    startActivity(i);
-                }
-
-
-                break;
+//            case R.id.txv_bank:
+//                if (txvCoinsText.getText().toString().trim().equalsIgnoreCase("Add Coins")) {
+//                    Intent i = new Intent(context, AddCoinsDetails.class);
+//                    startActivity(i);
+//                } else {
+//                    Intent i = new Intent(context, BankActivity.class);
+//                    startActivity(i);
+//                }
+//
+//
+//                break;
 
             case R.id.txv_paytm:
                 if (txvCoinsText.getText().toString().trim().equalsIgnoreCase("Add Coins")) {

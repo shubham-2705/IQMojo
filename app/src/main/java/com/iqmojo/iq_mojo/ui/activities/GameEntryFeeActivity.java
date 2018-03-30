@@ -118,7 +118,8 @@ public class GameEntryFeeActivity extends BaseActivity {
 
                 Intent intent = new Intent(GameEntryFeeActivity.this, PlayQuestionActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
-                intent.putExtra(AppConstants.IS_RESUME,isResume);
+                intent.putExtra(AppConstants.IS_RESUME, isResume);
+                intent.putExtra(AppConstants.EXTRA_PLAY_MODE, getIntent().getIntExtra(AppConstants.EXTRA_PLAY_MODE, 0));
                 startActivity(intent);
 
             }

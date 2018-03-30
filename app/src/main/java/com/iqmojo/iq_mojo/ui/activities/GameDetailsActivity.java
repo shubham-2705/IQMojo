@@ -95,6 +95,7 @@ public class GameDetailsActivity extends BaseActivity {
                 Intent intent = new Intent(GameDetailsActivity.this, GameEntryFeeActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                 intent.putExtra(AppConstants.IS_RESUME,false);
+                intent.putExtra(AppConstants.EXTRA_PLAY_MODE,getIntent().getIntExtra(AppConstants.EXTRA_PLAY_MODE,0));
                 startActivity(intent);
 
             }
@@ -105,6 +106,7 @@ public class GameDetailsActivity extends BaseActivity {
                 Intent intent = new Intent(GameDetailsActivity.this, PlayQuestionActivity.class);
                 intent.putExtra(AppConstants.GAME_ITEM_OBJECT, gameItemResponse);
                 intent.putExtra(AppConstants.IS_RESUME,true);
+                intent.putExtra(AppConstants.EXTRA_PLAY_MODE,getIntent().getIntExtra(AppConstants.EXTRA_PLAY_MODE,0));
                 startActivity(intent);
 
             }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginBottom="@dimen/margin_10"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:background="@color/mild_grey"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/txvCoinsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:drawableLeft="@drawable/iq_add_icon"
+            android:drawablePadding="@dimen/margin_10"
+            android:gravity="center"
+            android:paddingLeft="@dimen/padding_15"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/drawer_text_size"
+            android:typeface="monospace"
+            android:visibility="visible"
+            tools:text="50 Coins" />
+
+        <TextView
+            android:id="@+id/txvCost"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_30dp"
+            android:layout_marginRight="@dimen/margin_15"
+            android:background="@drawable/red_gradient_rounded_bg"
+            android:gravity="center"
+            android:paddingLeft="@dimen/padding_50"
+            android:paddingRight="@dimen/padding_50"
+            android:textColor="@color/white"
+            android:textSize="@dimen/form_textsize"
+            android:typeface="monospace"
+            android:visibility="visible"
+            tools:text="100" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/main_layout"
+        android:background="@color/transparent" />
+
+</RelativeLayout>

@@ -16,6 +16,16 @@
         android:background="@drawable/white_shape">
 
         <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:visibility="gone"
+            android:text="Challenge Successfully Created !"
+            android:textSize="@dimen/drawer_text_size"/>
+        <TextView
             android:id="@+id/txvResume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

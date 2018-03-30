@@ -51,18 +51,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.mobile_48)
+                .setSmallIcon(R.drawable.iqmojo_logo)
                 .setColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.mobile_48))
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.iqmojo_logo))
                 .setContentTitle(notification.getTitle())
                 .setContentText(notification.getBody())
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        notificationManager.notify(0, notificationBuilder.build());
+        int rand = (int )(Math.random() * 50 + 1);
+        if (notificationManager != null) {
+            notificationManager.notify(rand, notificationBuilder.build());
+        }
     }
 }

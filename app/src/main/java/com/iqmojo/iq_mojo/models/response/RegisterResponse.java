@@ -1,5 +1,7 @@
 package com.iqmojo.iq_mojo.models.response;
 
+import java.util.ArrayList;
+
 /**
  * Created by shubhamlamba on 09/09/17.
  */
@@ -12,6 +14,15 @@ public class RegisterResponse {
     private Long otp;
     private Long coins;
     private Boolean newUser;
+    private ArrayList<TabModel> validTab;
+
+    public ArrayList<TabModel> getValidTab() {
+        return validTab;
+    }
+
+    public void setValidTab(ArrayList<TabModel> validTab) {
+        this.validTab = validTab;
+    }
 
     public String getRespText() {
         return respText;
