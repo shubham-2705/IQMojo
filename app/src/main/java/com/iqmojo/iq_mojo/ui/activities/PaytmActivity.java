@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.iqmojo.BuildConfig;
 import com.iqmojo.R;
 import com.iqmojo.base.listeners.UpdateGsonListener;
 import com.iqmojo.base.listeners.onUpdateViewListener;
@@ -27,10 +28,15 @@ import com.iqmojo.iq_mojo.models.response.RedeemResponse;
 import com.iqmojo.iq_mojo.models.response.ResendResponse;
 import com.iqmojo.iq_mojo.persistence.IqMojoPrefrences;
 import com.iqmojo.iq_mojo.utils.CommonFunctionsUtil;
+import com.paytm.pgsdk.PaytmOrder;
+import com.paytm.pgsdk.PaytmPGService;
+import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaytmActivity extends BaseActivity implements onUpdateViewListener {
 
@@ -53,21 +59,22 @@ public class PaytmActivity extends BaseActivity implements onUpdateViewListener 
             text_rupees = (TextView) findViewById(R.id.text_rupees);
             text_rupees.setText(("" + new DecimalFormat("##,##,##0").format(IqMojoPrefrences.getInstance(this).getLong(AppConstants.KEY_COINS))));
 
-            try {
-                txvSubmit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+
+            txvSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
                         if (!TextUtils.isEmpty(editAmount.getText().toString().trim()) && Double.parseDouble(editAmount.getText().toString().trim()) > 10) {
                             hitApiRequest(ApiConstants.REQUEST_TYPE.REDEEM);
                         } else {
                             ToastUtil.showShortToast(PaytmActivity.this, "Please Enter Amount greater than 10");
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(PaytmActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                     }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
-            }
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,6 +90,7 @@ public class PaytmActivity extends BaseActivity implements onUpdateViewListener 
 
         return super.onOptionsItemSelected(item);
     }
+
     private void setupToolbar() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("");

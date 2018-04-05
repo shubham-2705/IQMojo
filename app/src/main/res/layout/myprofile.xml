@@ -130,13 +130,13 @@
                         android:layout_toRightOf="@+id/imvMobile"
                         android:gravity="start|center_vertical"
                         android:background="@null"
-                        android:maxLength="20"
+                        android:maxLength="30"
                         android:layout_marginLeft="@dimen/margin_10"
                         android:layout_marginStart="@dimen/margin_10"
                         android:imeOptions="actionNext"
                         android:hint="Display Name"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
 
@@ -181,7 +181,7 @@
                         android:imeOptions="actionNext"
                         android:hint="Gender"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View
@@ -224,7 +224,7 @@
                         android:imeOptions="actionNext"
                         android:hint="City"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View
@@ -256,7 +256,7 @@
                         android:id="@+id/editMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:typeface="monospace"
                         android:layout_marginLeft="@dimen/margin_10"
                         android:layout_marginStart="@dimen/margin_10"
@@ -268,7 +268,7 @@
                         android:imeOptions="actionNext"
                         android:hint="Registered Number"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View
@@ -307,11 +307,11 @@
                         android:layout_toRightOf="@+id/imvIfsc"
                         android:gravity="start|center_vertical"
                         android:background="@null"
-                        android:maxLength="10"
+                        android:maxLength="50"
                         android:imeOptions="actionDone"
                         android:hint="Registered Email"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View
@@ -354,7 +354,7 @@
                         android:imeOptions="actionNext"
                         android:hint="PAN card"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View
@@ -397,7 +397,7 @@
                         android:imeOptions="actionNext"
                         android:hint="Bank A/c Details"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textColorHint="@color/colorPrimaryDark"
+                        android:textColorHint="@color/grey_text_color"
                         android:textSize="@dimen/form_textsize" />
 
                     <View

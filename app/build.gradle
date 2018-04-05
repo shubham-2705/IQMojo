@@ -33,18 +33,35 @@ android {
     buildTypes {
         def ANALYTICS_ENABLED = "ANALYTICS_ENABLED"
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
             signingConfig signingConfigs.release
             buildConfigField "boolean", ANALYTICS_ENABLED, "true"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
+//            applicationIdSuffix ".debug"
+            versionNameSuffix "-debug"
             debuggable true
             buildConfigField "boolean", ANALYTICS_ENABLED, "true"
         }
     }
+    flavorDimensions 'app'
+    productFlavors {
+        def IS_PAYTM_STAGING = "IS_PAYTM_STAGING"
+        staging {
+            dimension 'app'
+            versionNameSuffix "-staging"
+            buildConfigField "boolean", IS_PAYTM_STAGING, "true"
+        }
+        production {
+            dimension 'app'
+            buildConfigField "boolean", IS_PAYTM_STAGING, "false"
+        }
+    }
+
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 
 
